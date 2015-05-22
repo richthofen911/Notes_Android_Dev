@@ -16,9 +16,17 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">REST Task</a><br>
 |&nbsp;&nbsp;|--<a href="">HttpClient close/不close for performance & set timeout</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">系统四大组件详细(Actiivty包括intent跳转的具体以及打开第三方app的方法</a><br>
+|--系统四大组件外加Intent<br>
+|&nbsp;&nbsp;|--<a href="">Activity</a><br>
+|&nbsp;&nbsp;|--<a href="">Service</a><br>
+|&nbsp;&nbsp;|--<a href="">BroadCast Receiver</a><br>
+|&nbsp;&nbsp;|--<a href="">Content Provider</a><br>
+|&nbsp;&nbsp;|--<a href="">Intent</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">硬件组件调用（Camera, sensor,</a><br>
+|--硬件组件调用<br>
+|&nbsp;&nbsp;|--<a href="">Camera</a><br>
+|&nbsp;&nbsp;|--<a href="">Sensor</a><br>
+|&nbsp;&nbsp;|--<a href="">Vibrator</a><br>
 |<br>
 |--<a href="http://www.w3schools.com">文件读写</a><br>
 |<br>
