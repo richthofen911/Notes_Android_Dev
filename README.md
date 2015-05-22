@@ -1,6 +1,6 @@
 Note_Android_Dev<br>
 |<br>
-|--<a href="http://www.w3schools.com">ADB相关/debug工具/keytool</a><br>
+|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/ADB%E7%9B%B8%E5%85%B3%26Debug%E5%B7%A5%E5%85%B7%26Keytool">ADB相关/debug工具/keytool</a><br>
 |<br>
 |--<a href="http://www.w3schools.com">UI组件调用（webview, imageview, recyclerview, button圆角样式, Fragment, notification,  Dialog, keyevent</a><br>
 |<br>
