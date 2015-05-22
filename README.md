@@ -64,6 +64,13 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">Annotations http://blog.csdn.net/u012402869/article/details/38616183</a><br>
 |<br>
 |--性能优化概述<br>
+|&nbsp;&nbsp;|--<a href="">使用缓存</a><br>
+|&nbsp;&nbsp;|--<a href="">数据存储优化</a><br>
+|&nbsp;&nbsp;|--<a href="">算法优化</a><br>
+|&nbsp;&nbsp;|--<a href="">JNI优化</a><br>
+|&nbsp;&nbsp;|--<a href="">网络通信优化</a><br>
+|&nbsp;&nbsp;|--<a href="">数据库性能优化</a><br>
+|&nbsp;&nbsp;|--<a href="">布局优化</a><br>
 |<br>
 |--自动化测试<br>
 |&nbsp;&nbsp;|--<a href="">Monkey Test</a><br>
