@@ -1,0 +1,1 @@
+keytool -list -v -keystore [keystoreName]  ,默认密码一般是android
