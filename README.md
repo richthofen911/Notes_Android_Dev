@@ -34,26 +34,47 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">上传文件</a><br>
 |<br>
 |--数据存储（数据库， Gson + Sharedpreference,<br>
+|&nbsp;&nbsp;|--<a href="">Database操作</a><br>
+|&nbsp;&nbsp;|--<a href="">使用ORM(ORMLite为例)</a><br>
+|&nbsp;&nbsp;|--<a href="">SharedPreference基本操作</a><br>
+|&nbsp;&nbsp;|--<a href="">SharedPreference + Gson技巧</a><br>
 |<br>
 |--多线程</a><br>
+|&nbsp;&nbsp;|--<a href="">AsyncTask详细解释</a><br>
+|&nbsp;&nbsp;|--<a href="">Thread, Runnable, Handler, Looper</a><br>
+|&nbsp;&nbsp;|--<a href="">线程池详解</a><br>
 |<br>
 |--Canvas/OpenGL画图<br>
 |<br>
-|--常用API， SDK(GoogleMap, Facebook)<br>
+|--常用API，SDK<br>
+|&nbsp;&nbsp;|--<a href="">Facebook SDK</a><br>
+|&nbsp;&nbsp;|--<a href="">GoogleMap api</a><br>
+|&nbsp;&nbsp;|--<a href="">WeChat SDK</a><br>
 |<br>
-|--常见错误(Manifest.xml有忘记声明的内容)<br>
+|--常见错误总结(例如Manifest.xml中有忘记声明的内容)<br>
 |<br>
-|--Bluetooth Related(Beacon sdk, 底层蓝牙操作)<br>
+|--Bluetooth Related<br>
+|&nbsp;&nbsp;|--<a href="">RECOBeacon SDK</a><br>
+|&nbsp;&nbsp;|--<a href="">AprilBrother SDK</a><br>
+|&nbsp;&nbsp;|--<a href="">底层蓝牙操作</a><br>
 |<br>
-|--常用第三方框架(Volley, ORMLite, Annotations (http://blog.csdn.net/u012402869/article/details/38616183)<br>
+|--常用框架<br>
+|&nbsp;&nbsp;|--<a href="">网络通信--Volley</a><br>
+|&nbsp;&nbsp;|--<a href="">ORM--ORMLite</a><br>
+|&nbsp;&nbsp;|--<a href="">Annotations http://blog.csdn.net/u012402869/article/details/38616183</a><br>
 |<br>
 |--性能优化概述<br>
 |<br>
-|--自动化测试(Monkey, MonkeyRunner)</a><br>
+|--自动化测试<br>
+|&nbsp;&nbsp;|--<a href="">Monkey Test</a><br>
+|&nbsp;&nbsp;|--<a href="">MonkeyRunner</a><br>
 |<br>
 |--Cross Compile & NDK<br>
 |<br>
-|--Reenginerring, Anti-Reenginerring(动态加载和代码混淆)<br>
+|--Reenginerring, Anti-Reenginerring<br>
+|&nbsp;&nbsp;|--<a href="">Reenginerring</a><br>
+|&nbsp;&nbsp;|--<a href="">Anti-Reengineering(动态加载和代码混淆)</a><br>
 |<br>
 |--第三方社区/论坛(爱开网，mob开发, 麦子学院)<br>
+|&nbsp;&nbsp;|--<a href="">Links</a><br>
 
