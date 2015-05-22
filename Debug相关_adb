@@ -11,10 +11,5 @@ adb相关
     start adbd 
     计算机连接手机 adb connect [手机IP]:5555
     把手机改会原来状态(不再tcp监听5555) setprop service.adb.tcp.port -1然后stop adbd, start adbd
+    
 tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
-
-其他debug工具
-  sdk/tools/文件夹下的UIAutomatorViewer可以看到View控件的坐标，ID等信息
-
-keytool
-  keytool -list -v -keystore [keystoreName]  ,默认密码一般是android
