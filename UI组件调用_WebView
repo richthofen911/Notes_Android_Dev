@@ -1,11 +1,11 @@
 WebView
-  **::**webview.loadUrl("http://slashdot.org/");
+  ::webview.loadUrl("http://slashdot.org/");
   
-  <b>::</b>webview.loadData(String data, String mimeType(媒体类型), String encoding);
+  ::webview.loadData(String data, String mimeType(媒体类型), String encoding);
       例: String summary = "<html><body>You scored <b>192</b> points.</body></html>"; 
           webview.loadData(summary, "text/html", null);
   
-  <b>::</b>显示progessbar
+  ::显示progessbar
       getWindow().requestFeature(Window.FEATURE_PROGRESS);
       webview.getSettings().setJavaScriptEnabled(true);//开启javascript支持
       final Activity activity = this;
@@ -21,7 +21,7 @@ WebView
       }});
       webview.loadUrl("http://developer.android.com/");
       
- <b>::</b>点击webview内链接不跳转到浏览器app
+ ::点击webview内链接不跳转到浏览器app
       webview.setWebViewClient( new WebViewClient(){
           @Override
           public boolean shouldOverrideUrlLoading(WebView view, String url){
@@ -29,4 +29,4 @@ WebView
           }
       }
       
-  <b>::</b>WebViewClient与WebChromeClient的区别http://blog.csdn.net/linghu_java/article/details/6927439
+  ::WebViewClient与WebChromeClient的区别http://blog.csdn.net/linghu_java/article/details/6927439
