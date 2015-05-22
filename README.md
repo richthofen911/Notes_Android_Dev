@@ -77,6 +77,8 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">MonkeyRunner</a><br>
 |<br>
 |--Cross Compile & NDK<br>
+|&nbsp;&nbsp;|--<a href="">交叉编译详解</a><br>
+|&nbsp;&nbsp;|--<a href="">NDK使用样例</a><br>
 |<br>
 |--Reenginerring, Anti-Reenginerring<br>
 |&nbsp;&nbsp;|--<a href="">Reenginerring</a><br>
