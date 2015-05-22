@@ -1,0 +1,27 @@
+ImageView
+imageview.setImageResourse(R.id.[imageName])  直接drawable里面的名字
+显示网络图片
+public class AsyncGetImage extends AsyncTask<String, String, Bitmap>
+{
+    @Override
+    protected Bitmap doInBackground(String... params)
+    {
+        try{
+                URL imageUrl = new URL("url of the image");
+                InputStream is = imageUrl.openConnection().getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(is);
+                return bitmap;
+        }catch (Exception e){}
+            return null;}
+
+     @Override
+     protected void onPostExecute(Bitmap newBitMap) {
+           imageview.setImageBitmap(newBitMap);
+     }
+}
+从资源中获取Bitmap图像一边对图像进行操作（例如缩放等)
+ private Bitmap getBitmapFromId(int id{
+ Resources res = getResources();
+BitmapDrawable bitDraw = new BitmapDrawable(res.openRawResource(R.drawable.lander_firing));  
+Bitmap bm = bitDraw.getBitmap();return bm;
+}
