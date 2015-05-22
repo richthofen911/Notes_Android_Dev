@@ -21,7 +21,7 @@ WebView
       }});
       webview.loadUrl("http://developer.android.com/");
       
- ::点击webview内链接不跳转到浏览器app
+  ::点击webview内链接不跳转到浏览器app
       webview.setWebViewClient( new WebViewClient(){
           @Override
           public boolean shouldOverrideUrlLoading(WebView view, String url){
