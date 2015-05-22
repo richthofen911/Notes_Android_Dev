@@ -1,0 +1,28 @@
+WebView
+  webview.loadUrl("http://slashdot.org/");
+  webview.loadData(String data, String mimeType(媒体类型), String encoding);
+      例: String summary = "<html><body>You scored <b>192</b> points.</body></html>"; 
+        webview.loadData(summary, "text/html", null);
+  显示progessbar
+      getWindow().requestFeature(Window.FEATURE_PROGRESS);
+      webview.getSettings().setJavaScriptEnabled(true);//开启javascript支持
+      final Activity activity = this;
+      webview.setWebChromeClient(new WebChromeClient() {
+      public void onProgressChanged(WebView view, int progress) {
+        // Activities and WebViews measure progress with different scales.
+      // The progress meter will automatically disappear when we reach 100%
+          activity.setProgress(progress * 1000);
+      }});
+      webview.setWebViewClient(new WebViewClient() {
+          public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+          Toast.makeText(activity, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+      }});
+      webview.loadUrl("http://developer.android.com/");
+  点击webview内链接不跳转到浏览器app
+      webview.setWebViewClient( new WebViewClient(){
+          @Override
+          public boolean shouldOverrideUrlLoading(WebView view, String url){
+              return false; // WebView handles url, return true时跳转到浏览器app
+          }
+      }
+  WebViewClient与WebChromeClient的区别http://blog.csdn.net/linghu_java/article/details/6927439
