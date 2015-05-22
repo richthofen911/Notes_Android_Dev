@@ -28,31 +28,32 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">Sensor</a><br>
 |&nbsp;&nbsp;|--<a href="">Vibrator</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">文件读写</a><br>
+|--文件读写<br>
+|&nbsp;&nbsp;|--<a href="">存储路径获取</a><br>
+|&nbsp;&nbsp;|--<a href="">写入/读取文件(读取本地图片预览例子)</a><br>
+|&nbsp;&nbsp;|--<a href="">上传文件</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">数据存储（数据库， Gson + Sharedpreference,</a><br>
+|--数据存储（数据库， Gson + Sharedpreference,<br>
 |<br>
-|--<a href="http://www.w3schools.com">多线程</a><br>
+|--多线程</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">Canvas/OpenGL画图</a><br>
+|--Canvas/OpenGL画图<br>
 |<br>
-|--<a href="http://www.w3schools.com">常用API， SDK(GoogleMap, Facebook)</a><br>
+|--常用API， SDK(GoogleMap, Facebook)<br>
 |<br>
-|--<a href="http://www.w3schools.com">常见错误（Manifest.xml有忘记声明的内容）</a><br>
+|--常见错误(Manifest.xml有忘记声明的内容)<br>
 |<br>
-|--<a href="http://www.w3schools.com">蓝牙相关（Beacon sdk, 底层蓝牙操作）</a><br>
+|--Bluetooth Related(Beacon sdk, 底层蓝牙操作)<br>
 |<br>
-|--<a href="http://www.w3schools.com">各种传感器的调用</a><br>
+|--常用第三方框架(Volley, ORMLite, Annotations (http://blog.csdn.net/u012402869/article/details/38616183)<br>
 |<br>
-|--<a href="http://www.w3schools.com">常用第三方框架（Volley, ORMLite, Annotations (http://blog.csdn.net/u012402869/article/details/38616183) </a><br>
+|--性能优化概述<br>
 |<br>
-|--<a href="http://www.w3schools.com">性能优化概述</a><br>
+|--自动化测试(Monkey, MonkeyRunner)</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">自动化测试(monkey,  monkeyrunner)</a><br>
+|--Cross Compile & NDK<br>
 |<br>
-|--<a href="http://www.w3schools.com">交叉编译与NDK</a><br>
+|--Reenginerring, Anti-Reenginerring(动态加载和代码混淆)<br>
 |<br>
-|--<a href="http://www.w3schools.com">反编译, 防反编译(动态加载和代码混淆)</a><br>
-|<br>
-|--<a href="http://www.w3schools.com">第三方社区/论坛  (爱开网， mob开发，麦子学院)</a><br>
+|--第三方社区/论坛(爱开网，mob开发, 麦子学院)<br>
 
