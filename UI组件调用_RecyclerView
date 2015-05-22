@@ -1,7 +1,9 @@
 RecyclerView(特点是可以自动回收用过的cell)
 需要
-1.<a href="https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java">ViewHolder</a>
-2.<a href="Adapter:https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/AdapterMessages.java">Adapter</a>
+1.ViewHolder    https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java
+
+2.Adapter       https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/AdapterMessages.java
+
 3.主屏幕中声明RecyclerView:
      private RecyclerView recyclerView_messages = (RecyclerView) findViewById(R.id.recyclerview_messages);
      public static AdapterMessages adapterMessages = new AdapterMessages(Dataset);
