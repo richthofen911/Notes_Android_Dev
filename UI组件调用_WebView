@@ -1,5 +1,5 @@
 WebView
-  <b>::</b>webview.loadUrl("http://slashdot.org/");
+  **::**webview.loadUrl("http://slashdot.org/");
   
   <b>::</b>webview.loadData(String data, String mimeType(媒体类型), String encoding);
       例: String summary = "<html><body>You scored <b>192</b> points.</body></html>"; 
