@@ -12,7 +12,7 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Dialog">Dialog</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_KeyEvent">KeyEvent</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">HTTP Request</a><br>
+|--HTTP Request<br>
 |&nbsp;&nbsp;|--<a href="">REST Task</a><br>
 |&nbsp;&nbsp;|--<a href="">HttpClient close/不close for performance & set timeout</a><br>
 |<br>
