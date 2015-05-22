@@ -1,0 +1,10 @@
+RecyclerView(特点是可以自动回收用过的cell)
+需要ViewHolder: https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java
+Adapter:https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/AdapterMessages.java
+主屏幕中声明RecyclerView:
+     private RecyclerView recyclerView_messages = (RecyclerView) findViewById(R.id.recyclerview_messages);
+     public static AdapterMessages adapterMessages = new AdapterMessages(Dataset);
+     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+     recyclerView_messages.setLayoutManager(linearLayoutManager);
+     recyclerView_messages.setHasFixedSize(true); //fixsize可以提高性能
+     recyclerView_messages.setAdapter(adapterMessages);
