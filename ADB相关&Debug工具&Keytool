@@ -1,0 +1,20 @@
+adb相关
+  adb log 可以在启动app之后看到launcher activity叫什么名字
+  adb pm(package manager)可以查到所有package名(进入adb shell后pm list packages)
+  adb install [appName.apk]
+  adb pull [remoteFile] [localPath(如果是pull到当前目录可以省略)],
+  adb push [localFile] [remotePath] 
+  adb shell 后 am start -n ｛包名｝/｛包名｝.{活动(activity)名称} 可以启动程序
+  无线连接手机adbd
+    手机su状态下 setprop service.adb.tcp.port 5555
+    stop adbd
+    start adbd 
+    计算机连接手机 adb connect [手机IP]:5555
+    把手机改会原来状态(不再tcp监听5555) setprop service.adb.tcp.port -1然后stop adbd, start adbd
+tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
+
+其他debug工具
+  sdk/tools/文件夹下的UIAutomatorViewer可以看到View控件的坐标，ID等信息
+
+keytool
+  keytool -list -v -keystore [keystoreName]  ,默认密码一般是android
