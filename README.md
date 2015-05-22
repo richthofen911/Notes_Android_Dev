@@ -12,7 +12,9 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Dialog">Dialog</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_KeyEvent">KeyEvent</a><br>
 |<br>
-|--<a href="http://www.w3schools.com">HTTP 请求 （REST Task, httpclient关闭(提高远程服务器性能)/不关闭(提高手机性能)的区别和优化(设置timeout)</a><br>
+|--<a href="http://www.w3schools.com">HTTP Request<br>
+|&nbsp;&nbsp;|--<a href="">REST Task</a><br>
+|&nbsp;&nbsp;|--<a href="">HttpClient close/不close for performance & set timeout</a><br>
 |<br>
 |--<a href="http://www.w3schools.com">系统四大组件详细(Actiivty包括intent跳转的具体以及打开第三方app的方法</a><br>
 |<br>
