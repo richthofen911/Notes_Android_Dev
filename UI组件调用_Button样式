@@ -1,0 +1,16 @@
+Button 样式（圆角为例）
+drawable文件夹下创建shape.xml文件
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:shape="rectangle">
+<solid android:color="@color/com_facebook_blue" />
+<corners android:radius="5dip" />
+<padding
+    android:left="10dp"
+    android:top="10dp"
+    android:right="10dp"
+    android:bottom="10dp"
+/>
+</shape>
+Button的android:background="@drawable/shape"
