@@ -1,0 +1,16 @@
+使用SharedPreferences存储数据
+文件存储数据
+SQLite数据库存储数据
+使用ContentProvider存储数据
+网络存储数据
+
+::基本使用
+  SharedPreferences demoPreferences;
+  demoPreferences = getApplication().getSharedPreferences("fileName", 0);
+  String value1 = demoPreferences.getString("key1", null); //第二个参数表示如果key如果不存在则返回的默认
+  demoPreferences.edit().putString("key2", "value2").apply(); //或使用.commit()  commit会等待写入结果，apply不会
+  
+  Operating mode. Use 0 or MODE_PRIVATE for the default operation
+  MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE to control permissions
+  MODE_MULTI_PROCESS can also be used if multiple processes are mutating the same SharedPreferences file.
+  MODE_MULTI_PROCESS is always on in apps targeting Gingerbread (Android 2.3) and below, and off by default in later versions.
