@@ -1,1 +1,16 @@
 
+::使用notification builder构建
+    NotificationCompat.Builder notifyBuilder;
+    NotificationManager notificationManager;
+    //onCreate后
+    notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    //创建并发起notification的函数
+    public void simpleNotification(){
+        notifyBuilder = new NotificationCompat.Builder(this)
+                .setContentIntent(getDefaultIntent())
+                .setContentTitle("New Messages")
+                .setContentText("You Received a New Message")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setAutoCancel(true);
+        notificationManager.notify(100, notifyBuilder.build());
+    }
