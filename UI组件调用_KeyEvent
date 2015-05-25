@@ -1,1 +1,15 @@
-
+::WebView.setOnKeyListener(new View.OnKeyListener(){
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event){
+            if ( event.getAction() == KeyEvent.ACTION_DOWN ){
+                if ( keyCode == KeyEvent.KEYCODE_BACK){
+                    Log.e("onKey", "Back button event");
+                    //DO SOMETHING
+                }
+            }
+            return false;
+        }
+  });
+  
+  
+  
