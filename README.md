@@ -9,7 +9,7 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_WebView">WebView</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_ImageView">ImageView</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_RecyclerView">RecyclerView</a><br>
-|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Button%E6%A0%B7%E5%BC%8F">Buttn样式</a><br>
+|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Button%E6%A0%B7%E5%BC%8F">Button</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Fragment">Fragment</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Notification">Notification</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Dialog">Dialog</a><br>
@@ -36,7 +36,7 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">写入/读取文件(读取本地图片预览例子)</a><br>
 |&nbsp;&nbsp;|--<a href="">上传文件</a><br>
 |<br>
-|--数据存储
+|--数据存储<br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8_SharedPreferences">SharedPreferences存储</a><br>
 |&nbsp;&nbsp;|--<a href="">Database存储</a><br>
 |&nbsp;&nbsp;|--<a href="">ContentProvider存储</a><br>
