@@ -8,4 +8,4 @@
       android:authorities="org.juetion.cp.MyContentProvider"  
       exported="true"/> 
       
-  参考链接 http://blog.csdn.net/juetion/article/details/17481039    
+  参考链接 http://blog.csdn.net/juetion/article/details/17481039
