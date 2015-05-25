@@ -1,4 +1,4 @@
-adb相关
+::adb相关
   adb log 可以在启动app之后看到launcher activity叫什么名字
   adb pm(package manager)可以查到所有package名(进入adb shell后pm list packages)
   adb install [appName.apk]
@@ -11,5 +11,9 @@ adb相关
     start adbd 
     计算机连接手机 adb connect [手机IP]:5555
     把手机改会原来状态(不再tcp监听5555) setprop service.adb.tcp.port -1然后stop adbd, start adbd
+    
+::改变/system目录挂载的权限
+  mount -o rw,remount /system    挂载为读写
+  mount -o ro,remount /system    挂载为只读
     
 tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
