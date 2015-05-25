@@ -55,6 +55,7 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">Facebook SDK</a><br>
 |&nbsp;&nbsp;|--<a href="">GoogleMap api</a><br>
 |&nbsp;&nbsp;|--<a href="">WeChat SDK</a><br>
+|&nbsp;&nbsp;|--<a href="">Firebase SDK</a><br>
 |<br>
 |--常见错误总结(例如Manifest.xml中有忘记声明的内容)<br>
 |<br>
