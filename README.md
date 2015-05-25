@@ -36,11 +36,13 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">写入/读取文件(读取本地图片预览例子)</a><br>
 |&nbsp;&nbsp;|--<a href="">上传文件</a><br>
 |<br>
-|--数据存储（数据库， Gson + Sharedpreference,<br>
-|&nbsp;&nbsp;|--<a href="">Database操作</a><br>
+|--数据存储
+|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8_SharedPreferences">SharedPreferences存储</a><br>
+|&nbsp;&nbsp;|--<a href="">Database存储</a><br>
+|&nbsp;&nbsp;|--<a href="">ContentProvider存储</a><br>
+|&nbsp;&nbsp;|--<a href="">文件存储</a><br>
+|&nbsp;&nbsp;|--<a href="">网络存储</a><br>
 |&nbsp;&nbsp;|--<a href="">使用ORM(ORMLite为例)</a><br>
-|&nbsp;&nbsp;|--<a href="">SharedPreference基本操作</a><br>
-|&nbsp;&nbsp;|--<a href="">SharedPreference + Gson技巧</a><br>
 |<br>
 |--多线程</a><br>
 |&nbsp;&nbsp;|--<a href="">AsyncTask详细解释</a><br>
