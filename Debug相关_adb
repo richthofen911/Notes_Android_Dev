@@ -1,5 +1,5 @@
 ::adb相关
-  adb log 可以在启动app之后看到launcher activity叫什么名字
+  adb logcat 可以在启动app之后看到launcher activity叫什么名字（adb logcat > filename,直接写入文件方便分析，>>表示append， > 表示overwrite）
   adb pm(package manager)可以查到所有package名(进入adb shell后pm list packages)
   adb install [appName.apk]
   adb pull [remoteFile] [localPath(如果是pull到当前目录可以省略)],
