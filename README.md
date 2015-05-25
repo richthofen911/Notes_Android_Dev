@@ -15,8 +15,8 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_Dialog">Dialog</a><br>
 |&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_KeyEvent">KeyEvent</a><br>
 |<br>
-|--HTTP Request<br>
-|&nbsp;&nbsp;|--<a href="">REST Task</a><br>
+|--网络请求<br>
+|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HTTP%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85">HTTP请求封装</a><br>
 |&nbsp;&nbsp;|--<a href="">HttpClient close/不close for performance & set timeout</a><br>
 |<br>
 |--系统四大组件外加Intent<br>
