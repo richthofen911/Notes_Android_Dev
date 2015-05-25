@@ -1,1 +1,11 @@
+::构建adapter
+  链接: https://github.com/richthofen911/StreetsTO_Release/blob/master/app/src/main/java/com/ap1/streetsto/FragmentTabAdapter.java
 
+::FragmentTransaction和FragmentManager介绍
+  http://blog.csdn.net/xyz_lmn/article/details/6927763
+  
+  FragmentTransaction: 对fragment进行添加,移除,替换,以及执行其他动作
+  FragmentManager: 实现管理activity中fragment. 通过调用activity的getFragmentManager()取得它的实例.可以做的事包括
+    1、使用findFragmentById() (用于在activity layout中提供一个UI的fragment)或findFragmentByTag()，(适用于有或没有UI的fragment)获取activity中存在的fragment
+    2、将fragment从后台堆栈中弹出, 使用 popBackStack() (模拟用户按下BACK 命令).
+    3、使用addOnBackStackChangeListener()注册一个监听后台堆栈变化的listener.
