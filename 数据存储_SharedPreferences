@@ -1,9 +1,3 @@
-使用SharedPreferences存储数据
-文件存储数据
-SQLite数据库存储数据
-使用ContentProvider存储数据
-网络存储数据
-
 ::基本使用
   SharedPreferences demoPreferences;
   demoPreferences = getApplication().getSharedPreferences("fileName", 0);
@@ -14,3 +8,15 @@ SQLite数据库存储数据
   MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE to control permissions
   MODE_MULTI_PROCESS can also be used if multiple processes are mutating the same SharedPreferences file.
   MODE_MULTI_PROCESS is always on in apps targeting Gingerbread (Android 2.3) and below, and off by default in later versions.
+
+
+::Gson + SharedPreferences的用法
+  Gson gson = new Gson();  
+  User user = gson.fromJson(response, User.class);  
+  UserUtils.saveUserInfo(gson.toJson(user));  
+  User user = gson.fromJson(UserUtils.getUserInfo(), User.class);  
+  //参考链接： http://www.2cto.com/kf/201310/253994.html
+
+
+::Gson 使用简介
+  http://blog.csdn.net/lk_blog/article/details/7685169
