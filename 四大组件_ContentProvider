@@ -1,1 +1,11 @@
+::ContentProvider主要用于对外共享数据，也就是通过ContentProvider把应用中的数据共享给其他应用访问
+  其他应用可以通过ContentProvider对指定应用中的数据进行操作(通过ContentResolver)。
+  ContentProvider分为系统的和自定义的，系统的也就是例如联系人，图片等数据。
 
+::接收数据的app要在Manifest文件中添加
+  <provider
+      android:name="提供者的名字(指那个特定的继承了ContentProvider的类)，为[提供者所在app包名.类名]"
+      android:authorities="org.juetion.cp.MyContentProvider"  
+      exported="true"/> 
+      
+  参考链接 http://blog.csdn.net/juetion/article/details/17481039    
