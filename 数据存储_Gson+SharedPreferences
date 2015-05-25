@@ -1,1 +1,8 @@
-
+在使用的时候，如果服务端返回一个User的JSON数据，那么我们可以这样：
+ 
+Gson gson = new Gson();  
+User user = gson.fromJson(response, User.class);  
+//对user的变量做一些修改，然后保存  
+UserUtils.saveUserInfo(gson.toJson(user));  
+//下次使用的时候就可以不用访问网络资源了  
+User user = gson.fromJson(UserUtils.getUserInfo(), User.class);  
