@@ -6,3 +6,10 @@ User user = gson.fromJson(response, User.class);
 UserUtils.saveUserInfo(gson.toJson(user));  
 //下次使用的时候就可以不用访问网络资源了  
 User user = gson.fromJson(UserUtils.getUserInfo(), User.class);  
+
+参考： http://www.2cto.com/kf/201310/253994.html
+
+
+Gson 使用简介
+http://blog.csdn.net/lk_blog/article/details/7685169
+
