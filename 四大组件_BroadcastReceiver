@@ -1,0 +1,57 @@
+::基本内容
+  BroadcastReceiver 用于异步接收广播Intent。主要有两大类，用于接收广播的：
+　　正常广播 Normal broadcasts（用 Context.sendBroadcast()发送）是完全异步的。它们都运行在一个未定义的顺序，通常是在同一时间。这样会更有效，但意味着receiver不能包含所要使用的结果或中止的API。
+　　有序广播 Ordered broadcasts（用 Context.sendOrderedBroadcast()发送）每次被发送到一个receiver。所谓有序，就是每个receiver执行后可以传播到下一个receiver，也可以完全中止传播--不传播给其他receiver。 而receiver运行的顺序可以通过matched intent-filter 里面的android:priority来控制，当priority优先级相同的时候，Receiver以任意的顺序运行。
+　要注意的是，即使是Normal broadcasts，系统在某些情况下可能会恢复到一次传播给一个receiver。 特别是receiver可能需要创建一个进程，为了避免系统超载，只能一次运行一个receiver。
+　Broadcast Receiver 并没有提供可视化的界面来显示广播信息。可以使用Notification和Notification Manager来实现可视化的信息的界面，显示广播信息的内容，图标及震动信息。
+　
+::LifeCycle
+  一个BroadcastReceiver 对象只有在被调用onReceive(Context, Intent)的才有效的，当从该函数返回后，该对象就无效的了，结束生命周期。
+　因此从这个特征可以看出，在所调用的onReceive(Context, Intent)函数里，不能有过于耗时的操作，不能使用线程来执行。对于耗时的操作，请start service来完成。因为当得到其他异步操作所返回的结果时，BroadcastReceiver 可能已经无效了。
+　
+::发送广播
+  构建Intent对象，可调用sendBroadcast(Intent)方法将广播发出。另外还有sendOrderedBroadcast()，sendStickyBroadcast()等方法，见API Doc。
+　　Intent intent = new Intent(String action); //或者 只是new Intent, 然后intent.setAction(String action);
+　　intent.putExtra(type, argument) //塞数据进去
+　　context.sendBroadcast(Intent); // 发送广播
+　　
+::接收广播
+  public class Receiver extends BroadcastReceiver{  
+    public void onReceive(Context context, Intent intent) {  
+        Bundle bundle = intent.getExtras();  
+        ...  
+    }  
+  }
+
+::注册Receiver的方式
+  1. 静态， 在Manifest文件中注册， 例
+    <receiver android:name=".SMSReceiver">
+　　  <intent-filter>
+　　    <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+　　  </intent-filter>
+　　</receiver>
+　　
+　2. 动态， 在activity里面调用函数来注册，和静态的内容差不多。一个形参是receiver，另一个是IntentFilter，其中里面是要接收的action。
+　  public class HelloDemo extends Activity {    
+        private BroadcastReceiver receiver;    
+        @Override 
+        protected void onStart() { 
+            super.onStart(); 
+            receiver = new CallReceiver(); 
+            registerReceiver(receiver, new IntentFilter("android.intent.action.PHONE_STATE")); 
+        } 
+        @Override 
+        protected void onStop() { 
+            unregisterReceiver(receiver); 
+            super.onStop(); 
+        } 
+    }
+    
+  一个receiver可以接收多个action的，即可以有多个intent-filter，需要在onReceive里面对intent.getAction(action name)进行判断。
+　推荐使用静态注册方式，由系统来管理receiver，而且程序里的所有receiver，可以在xml里面一目了然。而动态注册方式，隐藏在代码中，比较难发现。
+　而且动态注册，需要特别注意的是，在退出程序前要记得调用Context.unregisterReceiver()方法。一般在activity的onStart()里面进行注册, onStop()里面进行注销。
+　官方提醒，如果在Activity.onResume()里面注册了，就必须在Activity.onPause()注销。
+
+
+::Permission权限
+　　要接收某些action，需要在AndroidManifest.xml里面添加相应的permission。例如接收SMS:    
