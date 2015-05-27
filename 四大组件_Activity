@@ -1,3 +1,5 @@
+::Global Variable的用法，用于app一启动之的全局 https://github.com/richthofen911/ChatLite/blob/master/app/src/main/java/com/xtek/chatlite/GlobalVariable.java
+
 ::Task的概念
   http://www.cnblogs.com/duguguiyu/archive/2010/02/22/1671547.html
 
