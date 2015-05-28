@@ -25,3 +25,5 @@
 
 ::安卓中有枚举类Status用来描述AsyncTask的状态，包括PENDING, RUNNING和FINISHED，在获取AsyncTask声明周期的时候非常重要
 
+参考链接: http://blog.csdn.net/liuhe688/article/details/6532519
+
