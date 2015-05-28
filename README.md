@@ -3,9 +3,9 @@
 <img src="http://3.bp.blogspot.com/-0cjvEbdly7I/UTL3ky9f6rI/AAAAAAAAABA/8KInRCOQ-7U/s320/android-massacre-apples-hd-fullscreen-widescreen-desktop.jpg" alt="Kill Apple">
 
 ## Debug相关
-- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_adb">ADB</a><br>
-- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_toolsFolder">tools文件夹下调试工具</a>
-- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_keytool">keytool</a>
+* <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_adb">ADB</a><br>
+* <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_toolsFolder">tools文件夹下调试工具</a>
+* <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_keytool">keytool</a>
 <br>
 ## UI组件调用
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/UI%E7%BB%84%E4%BB%B6%E8%B0%83%E7%94%A8_WebView">WebView</a>
