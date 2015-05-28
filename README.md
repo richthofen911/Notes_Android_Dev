@@ -45,8 +45,8 @@ Note_Android_Dev<br>
 |&nbsp;&nbsp;|--<a href="">使用ORM(ORMLite为例)</a><br>
 |<br>
 |--多线程</a><br>
-|&nbsp;&nbsp;|--<a href="">AsyncTask详细解释</a><br>
-|&nbsp;&nbsp;|--<a href="">Thread, Runnable, Handler, Looper</a><br>
+|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_AsyncTask%E8%AF%A6%E8%A7%A3">AsyncTask详细解释</a><br>
+|&nbsp;&nbsp;|--<a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_Handler">Thread, Runnable, Handler, Looper</a><br>
 |&nbsp;&nbsp;|--<a href="">线程池详解</a><br>
 |<br>
 |--Canvas/OpenGL画图<br>
