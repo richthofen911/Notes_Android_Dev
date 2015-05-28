@@ -1,5 +1,7 @@
 # Note_Android_Dev
+
 <img src="http://3.bp.blogspot.com/-0cjvEbdly7I/UTL3ky9f6rI/AAAAAAAAABA/8KInRCOQ-7U/s320/android-massacre-apples-hd-fullscreen-widescreen-desktop.jpg" alt="Kill Apple">
+
 ## Debug相关
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_adb">ADB</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/Debug%E7%9B%B8%E5%85%B3_toolsFolder">tools文件夹下调试工具</a>
@@ -19,7 +21,7 @@
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HTTP%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85">HTTP请求封装</a><br>
 - <a href="">HttpClient close/不close for performance & set timeout</a><br>
 <br>
---系统四大组件外加Intent<br>
+## 系统四大组件外加Intent<br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_Activity">Activity</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_Service">Service</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_BroadcastReceiver">BroadCast Receiver</a><br>
@@ -94,3 +96,4 @@
 ## 第三方社区/论坛(爱开网，mob开发, 麦子学院)<br>
 - <a href="">Links</a><br>
 
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
