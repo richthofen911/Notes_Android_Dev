@@ -1,0 +1,35 @@
+::进程和线程的区别
+
+::Runnable和Thread区别: 
+  在java中可有两种方式实现多线程.
+  一种是继承Thread类:
+      基本: Thread类是在java.lang包中定义的。一个类只要继承了Thread类同时覆写了本类中的run()方法就可以实现多线程操作了
+      局限: 1. 一个类只能继承一个父类，这是此方法的局限。
+            2. 对于逻辑上应该是多线程共用的数据做不到实际上的共用，二十产生不同拷贝
+      实例: 
+          class MyThread extends Thread{  
+              private String name;  
+              public MyThread(String name) {  
+                  super();  
+                 this.name = name;  
+              }  
+              public void run(){  
+                  for(int i=0;i<10;i++){  
+                      System.out.println("线程开始："+this.name+",i="+i);  
+                  }  
+              }  
+          {
+          MyThread mt1=new MyThread("线程a");  
+          MyThread mt2=new MyThread("线程b");  
+          //mt1.run();  调用run方法是顺序执行而不是并行，调用start方法才是并行，具体原因见 http://zhidao.baidu.com/link?url=Vhwv1oBvTDdWmZP6isDWP2zHr2aDjbJb49zrukuODeC-YEMlUUIKuenjRzXwxzJP75FpIRWS-VpG2DkjgNkcRq
+          //mt2.run();  
+          mt1.start();  
+          mt2.start();
+            
+  一种是实现Runnable接口:
+  
+  
+  参考链接: http://developer.51cto.com/art/201203/321042.html
+
+http://blog.csdn.net/liuhe688/article/details/6407225
+
