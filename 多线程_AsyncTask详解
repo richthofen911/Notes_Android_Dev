@@ -1,0 +1,27 @@
+::线程安全 http://baike.baidu.com/link?url=GVrLlkyamkURLuJV3uBvzgW4i9PPPCIb_Oos-rMZulMfqx2lMhD3h2ldvO5urMMkH6VvAqsV47AZcqX7UEFgm_
+  安卓的UI组件不是现成安全的
+
+::public abstract class AsyncTask<Params, Progress, Result>三个泛型参数分别代表 
+  启动任务执行的输入参数（可以是多个）
+  后台任务执行的进度
+  后台计算结果的类型
+
+::主要方法
+  onPreExecute(), 在asyncTask.execute(params)被调用后立即执行，一般用来在执行后台任务前对UI做标记
+  doInBackground(Params...params) 在onPreExecute()执行后立即执行，返回值与AsyncTask类的第三个泛型参数对应，不能在此方法中更改UI组件信息
+  onProgressUpdate(Progress...values) 在调用publishProgress(Progress...values)时执行，直接将进度信息更新到UI组件
+  onPostExecute(Result result) 在doInBackground完成后被调用，一般用来通过UI显示任务结果
+  onCancelled() 用来在取消正在执行的异步任务后更改UI组件信息
+  publishProgress(Progress...values) 参数为第二个泛型参数，此方法是final修饰的，不能override，只能调用(一般在doInBackground中调用)
+
+::ProgresssBar的layout声明例子
+  <ProgressBar   
+        android:id="@+id/progress_bar"   
+        android:layout_width="fill_parent"   
+        android:layout_height="wrap_content"   
+        android:progress="0"  
+        android:max="100"  
+        style="?android:attr/progressBarStyleHorizontal"/> 
+
+::安卓中有枚举类Status用来描述AsyncTask的状态，包括PENDING, RUNNING和FINISHED，在获取AsyncTask声明周期的时候非常重要
+
