@@ -18,7 +18,7 @@
                       System.out.println("线程开始："+this.name+",i="+i);  
                   }  
               }  
-          {
+          }  
           MyThread mt1=new MyThread("线程a");  
           MyThread mt2=new MyThread("线程b");  
           //mt1.run();  调用run方法是顺序执行而不是并行，调用start方法才是并行，具体原因见 http://zhidao.baidu.com/link?url=Vhwv1oBvTDdWmZP6isDWP2zHr2aDjbJb49zrukuODeC-YEMlUUIKuenjRzXwxzJP75FpIRWS-VpG2DkjgNkcRq
