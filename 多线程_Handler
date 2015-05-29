@@ -49,8 +49,112 @@
           new Thread(mt2).start();  
   
 ::Handler
-  Android系统中UI组件不是线程安全的，如果要更新UI，必须在主线程中更新，不可以在子线程中执行更新的操作。所以要
-  在子线程中通知主线程，让主线程做更新UI操作。通知主线程需要使用到Handler对象。
+  基本: Android系统中UI组件不是线程安全的，如果要更新UI，必须在主线程中更新，不可以在子线程中执行更新的操作。
+        但是复杂的任务处理工作需要交给子线程去完成，所以要在子线程中用Handler对象通知主线程，让主线程做更新UI操作。
+  实例: 
+        public class MainActivity extends Activity implements View.OnClickListener {  
+            private static final int COMPLETED = 0;  
+            private TextView stateText;  
+            private Button btn;  
+      
+            private Handler handler = new Handler() {  
+                @Override  
+                public void handleMessage(Message msg) {  
+                    if (msg.what == COMPLETED) {  
+                        stateText.setText("completed");  
+                    }  
+                }  
+            };  
+      
+            @Override  
+            public void onCreate(Bundle savedInstanceState) {  
+                super.onCreate(savedInstanceState);  
+                setContentView(R.layout.main);  
+                stateText = (TextView) findViewById(R.id.tv);  
+                btn = (Button) findViewById(R.id.btn);  
+                btn.setOnClickListener(this);  
+            }  
+  
+            @Override  
+            public void onClick(View v) {  
+                new WorkThread().start();  
+            }  
+      
+            //工作线程  
+            private class WorkThread extends Thread {  
+                @Override  
+                public void run() {  
+                    //......处理耗时操作  
+              
+                    //处理完成后给handler发送消息  
+                    Message msg = new Message();  
+                    msg.what = COMPLETED;  
+                    handler.sendMessage(msg);  
+                }  
+            }  
+        } 
+        
+::Looper
+  Android通过Looper和Handler来实现消息循环机制。Android的消息循环是针对线程的，每个线程都可以有一个自己的消息队列和消息循环。
+  Looper负责管理线程的消息队列和消息循环。通过Looper.myLooper()得到当前线程的Looper对象，通过Looper.getMainLooper()得到当前进程的主线程的Looper对象。
+  特定线程的消息只能分发给本线程，不能跨线程和跨进程通讯。但是创建的工作线程默认是没有消息队列和消息循环的，
+  如果想让工作线程具有消息队列和消息循环，就需要在线程中先调用Looper.prepare()来创建消息队列，然后调用Looper.loop()进入消息循环\
+  实例:
+      class WorkThread extends Thread {  
+          public Handler mHandler;  
+  
+          public void run() {  
+              Looper.prepare();  
+              mHandler = new Handler() {  
+                  public void handleMessage(Message msg) {  
+                      // ...处理收到的消息  
+                  }  
+              };  
+              Looper.loop();  
+          }  
+      }  
+      //这样这个工作线程就具有消息处理机制了
+      //为什么前边的handler的实例中没有看到Looper.prepare()和Looper.loop()的调用呢？
+        因为Activity是一个UI线程，运行在主线程中，Android系统会在Activity启动时默认为其创建一个消息队列和消息循环。
+
+::Looper，MessageQueue和Handler
+  Handler的作用是把消加特定的Looper所管理的消息队列中，并分发和处理该消队列中的消息。构造Handler的时候可以指定一个
+  Looper对象，如果不指定则利用当前线程的Looper对象创建。
+  Handler的两个构造方法:
+  1. public Handler(Looper looper) {  
+        mLooper = looper;  
+        mQueue = looper.mQueue;  
+        mCallback = null;  
+    }
+    
+  2. public Handler() {  
+        if (FIND_POTENTIAL_LEAKS) {  
+            final Class<? extends Handler> klass = getClass();  
+            if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &&  
+                    (klass.getModifiers() & Modifier.STATIC) == 0) {  
+                Log.w(TAG, "The following Handler class should be static or leaks might occur: " +  
+                    klass.getCanonicalName());  
+            }  
+        }  
+  
+        mLooper = Looper.myLooper();  
+        if (mLooper == null) {  
+            throw new RuntimeException(  
+                "Can't create handler inside thread that has not called Looper.prepare()");  
+        }  
+        mQueue = mLooper.mQueue;  
+        mCallback = null;  
+    }   
+    
+  关系图: http://hi.csdn.net/attachment/201105/10/0_130499718434db.gif
+      一个Activity中可以创建出多个工作线程，如果这些线程把他们消息放入Activity主线程的消息队列中，
+      那么消息就会在主线程中处理了。因为主线程一般负责视图组件的更新操作，对于不是线程安全的视图组件来说，
+      这种方式能够很好的实现视图的更新。
+  那么子线程如何把消息放入主线程的消息队列中？
+      只要Handler对象以主线程的Looper创建，那么当调用Handler的sendMessage方法，系统就会把消息主线程的消息队列，并且将会在调用handleMessage方法时处理主线程消息队列中的消息。
+  另外: Handler对象管理的Looper对象是线程安全的，不管是添加消息到消息队列还是从消息队列中读取消息都是同步保护的，所以不会出现数据不一致现象。
+
+
   
   
   参考链接: http://www.jb51.net/article/37465.htm
