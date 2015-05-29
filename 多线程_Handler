@@ -5,7 +5,7 @@
   一种是继承Thread类:
       基本: Thread类是在java.lang包中定义的。一个类只要继承了Thread类同时覆写了本类中的run()方法就可以实多线程操作了
       局限: 1. 一个类只能继承一个父类，这是此方法的局限。
-            2. 对于逻辑上应该是多线程共用的数据做不到实际上的共用，二十产生不同拷贝
+            2. 对于逻辑上应该是多线程共用的数据做不到实际上的共用，而是产生不同拷贝
       实例: 
           class MyThread extends Thread{  
               private String name;  
@@ -26,10 +26,34 @@
           mt1.start();  
           mt2.start();
             
-  一种是实现Runnable接口:
+  一种是实现Runnable接口(较多用的方法):
+      基本: implements Runnable接口，override run()方法
+      实例:
+          class MyThread implements Runnable{  
+              private String name;  
+              public MyThread(String name) {  
+                  this.name = name;  
+              }
+              public void run(){  
+                  for(int i=0;i<100;i++){  
+                      System.out.println("线程开始："+this.name+",i="+i);  
+                  }  
+              }  
+          }
+          implements Runnable的类中没有start()方法，只有Thread类中才有，
+          Thread类有一个构造方法：public Thread(Runnable targer)
+          此构造方法接受Runnable的子类实例，也就是说可以通过Thread类来启动Runnable实现的多线程。
+          MyThread mt1=new MyThread("线程a");  
+          MyThread mt2=new MyThread("线程b");  
+          new Thread(mt1).start();  
+          new Thread(mt2).start();  
+  
+::Handler
+  Android系统中UI组件不是线程安全的，如果要更新UI，必须在主线程中更新，不可以在子线程中执行更新的操作。所以要
+  在子线程中通知主线程，让主线程做更新UI操作。通知主线程需要使用到Handler对象。
   
   
-  参考链接: http://developer.51cto.com/art/201203/321042.html
+  参考链接: http://www.jb51.net/article/37465.htm
 
 http://blog.csdn.net/liuhe688/article/details/6407225
 
