@@ -49,7 +49,11 @@
 ## 多线程
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_AsyncTask%E8%AF%A6%E8%A7%A3">AsyncTask详细解释</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_Handler">Thread, Runnable, Handler, Looper</a><br>
-- <a href="">线程池详解</a><br>
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_%E7%BA%BF%E7%A8%8B%E6%B1%A0">线程池详解</a><br>
+
+## 进程间通信
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1_AIDL">AIDL(Android Interface Definition Language)</a><br>
+
 
 ## Canvas/OpenGL画图
 
