@@ -104,7 +104,8 @@
                     //处理完成后给handler发送消息  
                     Message msg = new Message();  
                     msg.what = COMPLETED;  
-                    handler.sendMessage(msg);  
+                    handler.sendMessage(msg);
+                    //还有一个常用的方法sendMessageDelayed(message, delayedTimeInMilliSeconds)
                 }  
             }  
         } 
