@@ -1,6 +1,8 @@
 ::adb相关
   adb logcat 可以在启动app之后看到launcher activity叫什么名字（adb logcat > filename,直接写入文件方便分析，>>表示append， > 表示overwrite）
       logcat *:E 可以只显error级别以上的
+      logcat *:E ActivityManager:S AndroidRuntime:S NotificationService:S WindowManager:S ActivityThread:S 
+      //上面一行意为屏蔽ActivityManager, AndroidRuntime, NotificationService, WindowManager, ActivityThread发出的任何信息，对于*显示E级别以上的信息
       在app中显示log  http://fonter.iteye.com/blog/477112
   adb pm(package manager)可以查到所有package名(进入adb shell后pm list packages)
   adb install [appName.apk]
