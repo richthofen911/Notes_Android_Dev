@@ -25,6 +25,20 @@
           //mt2.run();  
           mt1.start();  
           mt2.start();
+          
+      注意:
+          Handler mHandler=new Handler(); 
+          mHandler.post(new Runnable(){ 
+              @Override public void run() {
+                  // TODO Auto-generated method stub 
+              } 
+          });
+          通过调用handler的post方法，把Runnable对象（一般是Runnable的子类）传过去, handler会在looper中
+          调用这个Runnable的Run方法执行。Runnable是一个接口，不是一个线程，一般线程会实现Runnable。
+          所以如果使用的匿名内部类是运行在UI主线程的，如果使用实现这个Runnable接口的线程类，则是运行在对应线程的。
+      
+      HandlerThread类，顾名思义就是可以处理消息循环的线程，是一个拥有Looper的线程，可以处理消息循环。
+          与其说Handler和一个线程绑定，不如说Handler是和Looper一一对应的。
             
   一种是实现Runnable接口(较多用的方法):
       基本: implements Runnable接口，override run()方法
