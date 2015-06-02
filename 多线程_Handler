@@ -3,7 +3,7 @@
 ::Runnable和Thread区别: 
   在java中可有两种方式实现多线程.
   一种是继承Thread类:
-      基本: Thread类是在java.lang包中定义的。一个类只要继承了Thread类同时覆写了本类中的run()方法就可以实多线程操作了
+      基本: Thread类是在java.lang包中定义的。一个类只要继承了Thread类同时覆写了本类中的run()方法即可实现多线程操作了
       局限: 1. 一个类只能继承一个父类，这是此方法的局限。
             2. 对于逻辑上应该是多线程共用的数据做不到实际上的共用，而是产生不同拷贝
       实例: 
@@ -33,9 +33,9 @@
                   // TODO Auto-generated method stub 
               } 
           });
-          通过调用handler的post方法，把Runnable对象（一般是实现Runnable接口中run方法的匿名类）传过去, handler会在looper中
-          调用这个Runnable的Run方法执行。Runnable是一个接口，不是一个线程，一般线程会实现Runnable。
-          所以如果使用的匿名内部类是运行在UI主线程的，如果使用实现这个Runnable接口的线程类，则是运行在对应线程的。
+          通过调用handler的post方法，把Runnable对象（一般是实现Runnable接口中run方法的匿名类）传过去, handler
+          会在looper中调用这个Runnable的Run方法执行。Runnable是一个接口，不是一个线程，一般线程会实现Runnable。
+          所以如果使用的匿名内部类是运行在UI主线程的，若使用实现这个Runnable接口的线程类，则是运行在对应线程的。
       
       HandlerThread类，顾名思义就是可以处理消息循环的线程，是一个拥有Looper的线程，可以处理消息循环。
           与其说Handler和一个线程绑定，不如说Handler是和Looper一一对应的。
@@ -111,10 +111,12 @@
         } 
         
 ::Looper
-  Android通过Looper和Handler来实现消息循环机制。Android的消息循环是针对线程的，每个线程都可以有一个自己的消息队列和消息循环。
-  Looper负责管理线程的消息队列和消息循环。通过Looper.myLooper()得到当前线程的Looper对象，通过Looper.getMainLooper()得到当前进程的主线程的Looper对象。
+  Android通过Looper和Handler来实现消息循环机制。Android的消息循环是针对线程的，每个线程都可以有一个自己的
+  消息队列和消息循环。Looper负责管理线程的消息队列和消息循环。通过Looper.myLooper()得到当前线程的Looper对象，
+  通过Looper.getMainLooper()得到当前进程的主线程的Looper对象。
   特定线程的消息只能分发给本线程，不能跨线程和跨进程通讯。但是创建的工作线程默认是没有消息队列和消息循环的，
-  如果想让工作线程具有消息队列和消息循环，就需要在线程中先调用Looper.prepare()来创建消息队列，然后调用Looper.loop()进入消息循环\
+  如果想让工作线程具有消息队列和消息循环，就需要在线程中先调用Looper.prepare()来创建消息队列，然后调用
+  Looper.loop()进入消息循环
   实例:
       class WorkThread extends Thread {  
           public Handler mHandler;  
@@ -131,11 +133,12 @@
       }  
       //这样这个工作线程就具有消息处理机制了
       //为什么前边的handler的实例中没有看到Looper.prepare()和Looper.loop()的调用呢？
-        因为Activity是一个UI线程，运行在主线程中，Android系统会在Activity启动时默认为其创建一个消息队列和消息循环。
+        因为Activity是一个UI线程，运行在主线程中，Android系统会在Activity启动时默认为其创建一个消息队列和
+        消息循环。
 
 ::Looper，MessageQueue和Handler
-  Handler的作用是把消加特定的Looper所管理的消息队列中，并分发和处理该消队列中的消息。构造Handler的时候可以指定一个
-  Looper对象，如果不指定则利用当前线程的Looper对象创建。
+  Handler的作用是把消加特定的Looper所管理的消息队列中，并分发和处理该消队列中的消息。构造Handler的时候可以
+  指定一个Looper对象，如果不指定则利用当前线程的Looper对象创建。
   Handler的两个构造方法:
   1. public Handler(Looper looper) {  
         mLooper = looper;  
@@ -167,8 +170,10 @@
       那么消息就会在主线程中处理了。因为主线程一般负责视图组件的更新操作，对于不是线程安全的视图组件来说，
       这种方式能够很好的实现视图的更新。
   那么子线程如何把消息放入主线程的消息队列中？
-      只要Handler对象以主线程的Looper创建，那么当调用Handler的sendMessage方法，系统就会把消息主线程的消息队列，并且将会在调用handleMessage方法时处理主线程消息队列中的消息。
-  另外: Handler对象管理的Looper对象是线程安全的，不管是添加消息到消息队列还是从消息队列中读取消息都是同步保护的，所以不会出现数据不一致现象。
+      只要Handler对象以主线程的Looper创建，那么当调用Handler的sendMessage方法，系统就会把消息主线程的
+      消息队列，并且将会在调用handleMessage方法时处理主线程消息队列中的消息。
+  另外: Handler对象管理的Looper对象是线程安全的，不管是添加消息到消息队列还是从消息队列中读取消息都是
+      同步保护的，所以不会出现数据不一致现象。
 
 
   
