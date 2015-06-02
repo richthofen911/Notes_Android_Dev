@@ -2,6 +2,51 @@
     http://www.iteye.com/topic/366591
     
 ::Executor简单使用实例
+    public class MainActivity extends Activity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.main);
+            loadImage3("http://www.baidu.com/img/baidu_logo.gif", R.id.imageView1);
+            loadImage3("http://www.chinatelecom.com.cn/images/logo_new.gif", R.id.imageView2);
+            loadImage3("http://cache.soso.com/30d/img/web/logo.gif", R.id.imageView3);
+        }
+
+        private Handler handler = new Handler();
+
+        private ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+        // 引入线程池来管理多线程
+        private void loadImage3(final String url, final int id) {
+            executorService.submit(new Runnable() {
+                public void run() {
+                    try {
+                        final Drawable drawable = Drawable.createFromStream(new URL(url).openStream(), "image.png");
+                        // 模拟网络延时
+                        SystemClock.sleep(2000);
+                        handler.post(new Runnable() {
+                            public void run() {
+                            ((ImageView) MainActivity.this.findViewById(id)).setImageDrawable(drawable);
+                                                }
+                        });
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                }
+            });
+        }
+    }    
+        
+
+
+
+
+
+
+
+
+
+
     http://www.eoeandroid.com/thread-210082-1-1.html
 
 ::多种线程池类别及实例
