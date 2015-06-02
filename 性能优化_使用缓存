@@ -1,0 +1,22 @@
+::Java中内存管理分为四大类
+  强引用HardReference: HardReference对象是即使虚拟机内存吃紧抛出OOM也不会导致这一引用的对象被回收
+  弱引用WeakReference: WeakReference适合于一些数量不多，但体积稍大的对象，在这四个引用中，最容易被垃圾回收
+  软引用SoftReference: SoftReference不会被快速回收，但当内存短缺面临Java VM崩溃抛出OOM前时，软引用将会强制回收内存
+  虚引用PhantomReference: 虚引用一般没有实际意义，仅仅观察GC的活动状态
+
+  对于一组数据，可以通过HashMap的方式来添加一组SoftReference对象来临时保留一些数据，同时对于需要反复通过网络获取的
+  不经常改变的内容，可以通过本地的文件系统或数据库来存储缓存。ListView列表的内容就可以用缓存
+  
+  用Map集合缓存软引用的Bitmap对象的样例
+  Map<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
+  Bitmap bitmap = BitmapFactory.decodeStream(InputStream);
+  SoftReference<Bitmap> bitmapToBeCached = new SoftReference<Bitmap>(bitmap);
+  imageCache.put("1", bitmapToBeCached);
+  //从缓存中取软引用的Bitmap对象
+  SoftReference<Bitmap> bitmapcacheRetrieved = imageCache.get("1");
+  //取出Bitmap对象，如果由于内存不足Bitmap被回收，将取得空
+  Bitmap bitmapRetrieved = bitmapcacheRetrieved.get();
+  如果程序中需要从网上加载大量的图片 考虑采用在sdcard上建立临时文件夹缓存这些图片
+  
+::应用实例(和ExecutorService)协同
+  http://www.eoeandroid.com/thread-210082-1-1.html
