@@ -1,0 +1,41 @@
+::概述
+  Android支持外部存储，外部存储可以通过物理介质提供(如SD卡)，也可以通过将内部存储中的一部分封装而成，
+  设备可以有多个外部存储实例。
+  
+  外部存储权限历史:
+    Android 1.0开始，写操作受权限WRITE_EXTERNAL_STORAGE保护。
+    Android 4.1开始，读操作受权限READ_EXTERNAL_STORAGE保护。
+    从Android 4.4开始，应用可以管理在它外部存储上的特定包名目录，而不用获取WRITE_EXTERNAL_STORAGE权限。比如
+    一个包名为com.example.foo的应用，可以自由访问外存上的Android/data/com.example.foo/目录。
+
+　　外部存储对数据提供的保护较少，所以系统不应该存储敏感数据在外部存储上。特别地，配置和log文件应该存储在
+　　内部存储中，这样它们可以被有效地保护。
+　　对于多用户的情况，一般每个用户都会有自己独立的外部存储，应用仅对当前用户的外部存储有访问权限。
+
+::Environment API中的目录
+  getDataDirectory()：用户数据目录。
+　getDownloadCacheDirectory()：下载缓存内容目录。
+　getExternalStorageDirectory()：主要的外部存储目录。但是这个目录很可能当前不能访问，比如这个目录被用户
+　  的PC挂载，或者从设备中移除，或者其他问题发生，你可以通过getExternalStorageState()来获取当前状态。为了
+　  不污染用户的根命名空间，一般不会直接使用这个外部存储的根目录。任何应用私有的文件的应该被放置在
+　  Context.getExternalFilesDir返回的目录下，在应用被卸载的时候，系统会清理的就是这个目录。
+　getExternalStoragePublicDirectory(String)：另一些共享文件应该被放置在这个api返回的目录中。写这个路径需要
+　  WRITE_EXTERNAL_STORAGE权限，读需要 READ_EXTERNAL_STORAGE权限，写权限默认包含了读权限。这个方法接收一个参数，
+　  表明目录所放的文件的类型，传入的参数是Environment类中的DIRECTORY_XXX静态变量，比如DIRECTORY_DCIM等。
+　getExternalFilesDir(String)或者getExternalCacheDir()：从Android 4.4开始，如果只需要存储一些内部数据，
+　  可以考虑使用这两个，它们不需要获取权限。
+　getRootDirectory()：得到Android的根目录。
+　isExternalStorageEmulated()：设备的外存是否是用内存模拟的，是则返回true。(API Level 11)
+  isExternalStorageRemovable()：设备的外存是否是可以拆卸的，比如SD卡，是则返回true。(API Level 9)
+  
+::Context API中的目录  
+  　getExternalFilesDir(String type)：获取应用在外部存储上的目录。
+　　  和Environment类的getExternalStoragePublicDirectory(String type)方法类似，
+　　  返回包含参数指定的特定类型文件的子目录。
+　  getExternalCacheDir()是应用的在外部存储上的缓存目录。
+　  从Android 4.4这两个方法不用读写权限，但只针对于本应用，如访问其他应用的相关目录，还是需要声明读写权限。
+　　Android 4.4之前的版本要访问的话还是要声明读写权限的，如未在manifest中写权限，上面两个get方法都会返回null。
+　　
+　　getFilesDir() 
+　　getCacheDir()
+　　以上两个方法都是返回内存上的目录
