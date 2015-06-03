@@ -75,8 +75,8 @@
 - <a href="">ORM--ORMLite</a><br>
 - <a href="">Annotations http://blog.csdn.net/u012402869/article/details/38616183</a><br>
 
-## 性能优化概述
-- <a href="">使用缓存</a><br>
+## 性能优化
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96_%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98">使用缓存</a><br>
 - <a href="">数据存储优化</a><br>
 - <a href="">算法优化</a><br>
 - <a href="">JNI优化</a><br>
