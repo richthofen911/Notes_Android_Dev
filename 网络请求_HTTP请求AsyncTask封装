@@ -19,8 +19,8 @@ import java.lang.ref.WeakReference;
         params.setSoTimeout(httpParameters, 30000);
 */
 
-public class RestTask extends AsyncTask<HttpUriRequest, Void, Object> {
-    private static final String TAG = "RestTask";
+public class HTTPTask extends AsyncTask<HttpUriRequest, Void, Object> {
+    private static final String TAG = "HTTPTask";
 
     private String taskName = "";
     private String cookie = "";
@@ -34,14 +34,14 @@ public class RestTask extends AsyncTask<HttpUriRequest, Void, Object> {
         void onRequestError(Exception error);
     }
 
-    public RestTask() {
+    public HTTPTask() {
         this(new DefaultHttpClient());
         HttpParams params = mClient.getParams();
         HttpConnectionParams.setTcpNoDelay(params, true);
         mClient.setParams(params);
     }
 
-    public RestTask(AbstractHttpClient client) {
+    public HTTPTask(AbstractHttpClient client) {
         mClient = client;
     }
 
@@ -107,8 +107,8 @@ public class RestTask extends AsyncTask<HttpUriRequest, Void, Object> {
 ::调用实现
   https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ActivityRegister.java
   大体步骤
-    1. Activity继承RestTask.ResponseCallback借口
+    1. Activity继承HTTPTask.ResponseCallback借口
     2. 新建HttpPost/HttpGet 并添加NamePair参数
-    3. 实例化RestTask restTask
-    4. restTask.setResponseCallback(参数);
-    5. restTask.execute(httpPost);
+    3. 实例化HTTPTask hTTPTask
+    4. hTTPTask.setResponseCallback(参数);
+    5. hTTPTask.execute(httpPost);
