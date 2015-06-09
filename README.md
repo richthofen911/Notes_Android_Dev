@@ -34,7 +34,7 @@
 - <a href="">Vibrator</a><br>
 
 ## 文件读写
-- <a href="">存储路径获取</a><br>
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99_%E8%AF%BB%E5%8F%96%E7%9B%AE%E5%BD%95">存储路径获取</a><br>
 - <a href="">写入/读取文件(读取本地图片预览例子)</a><br>
 - <a href="">上传文件</a><br>
 
