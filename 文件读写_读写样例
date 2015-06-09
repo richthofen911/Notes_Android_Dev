@@ -90,5 +90,17 @@
         mExternalStorageAvailable = mExternalStorageWriteable = false;
     }
 
+---------------------------------------------------------------------------
+::读取assets文件夹下的文件
+  添加assets目录： XXX\src\main\assets  
+  1. 获取资源的输入流
+        资源文件 sample.txt 位于 $PROJECT_HOME/assets/ 目录下，可以在 Activity 中通过
+        Context.getAssets().open(“sample.txt”)方法获取输入流。
+        注意：如果资源文件是文本文件则需要考虑文件的编码和换行符。建议使用UTF-8和Unix换行符。
+  
+  2. WebView 加载assets目录下的html文件
+    资源文件 sample.html 位于 $PROJECT_HOME/assets/ 目录下，可以通过以下代码
+    WebView.loadUrl(“file:///android_asset/sample.html”);
+    加载html文件。      
   
   
