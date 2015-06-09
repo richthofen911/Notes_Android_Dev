@@ -1,0 +1,94 @@
+::概述
+  File类：操作一个文件（读写，创建文件或者目录）是通过File类来完成的，和java中完全一致
+
+::-----------------------内部存储(即使用context)提供的接口----------------------------------
+  创建/写文件:
+    法一: File file = newFile(context.getFilesDir(), filename);
+  
+    法二:  Android提供的封装过的方法，openFileOutput()
+        String filename = "myfile";
+        String content = "Hello world!";
+        FileOutputStream outputStream;
+        try{
+        //0 or MODE_PRIVATE for the default operation, MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE to control permissions.
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE); 
+            outputStream.write(content.getBytes());
+            outputStream.close();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    
+  删除文件:    
+    if(Context.deleteFile(filename)) {
+        Log.e(TAG, "delete file "+ filename + " sucessfully“);
+    } else {
+        Log.e(TAG, "failed to deletefile " + filename);
+    }    
+
+  创建/获取目录:
+    File workDir = Context.getDir(dirName, Context.MODE_PRIVATE);
+    Log.e(TAG, "workdir "+ workDir.getAbsolutePath();
+    
+  读文件:
+    public String readFile(String fileName) throws IOException{   
+      String res="";   
+      try{   
+          FileInputStream fin = openFileInput(fileName);   
+          int length = fin.available();   
+          byte [] buffer = new byte[length];   
+          fin.read(buffer);       
+          res = EncodingUtils.getString(buffer, "UTF-8");   
+          fin.close();       
+      }   
+      catch(Exception e){   
+          e.printStackTrace();   
+      }   
+      return res;   
+    }     
+    
+::----------------------外部存储(Environment提供的接口）
+  外部存储中的文件是可以被用户或者其他应用程序修改的，有两种类型的文件（或者目录）：
+  1. 公共文件Public files：文件是可以被自由访问，且文件的数据对其他应用或者用户来说都是由意义的，当应用被卸载之后
+     其卸载前创建的文件仍然保留。比如camera应用，生成的照片大家都能访问，而且camera不在了，照片仍然在。
+     创建public文件方法: 
+    public File getAlbumStorageDir(String albumName) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), albumName);
+        if(!file.mkdirs()) {
+            Log.e(LOG_TAG, "Directory not created");
+        }
+        return file;
+    }
+     
+  2. 私有文件Private files：其实由于是外部存储的原因即是是这种类型的文件也能被其他程序访问，只不过一个应用私有的
+    文件对其他应用其实是没有访问价值的（恶意程序除外）。外部存储上，应用私有文件的价值在于卸载之后，这些文件也会
+    被删除。类似于内部存储。
+    创建应用私有文件的方法是Context.getExternalFilesDir()
+    
+    public File getAlbumStorageDir(Context context, String albumName) {
+      // Get the directory for the app's private pictures directory.
+        File file = newFile(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), albumName);
+        if(!file.mkdirs()) {
+            Log.e(LOG_TAG, "Directory not created");
+        }
+        returnfile;
+    }
+    
+    在使用外部存储之前，你必须要先检查外部存储的当前状态，以判断是否可用。
+    boolean mExternalStorageAvailable = false;
+    boolean mExternalStorageWriteable = false;
+    String state = Environment.getExternalStorageState();
+    if(Environment.MEDIA_MOUNTED.equals(state)) {
+        // We can read and write the media
+        mExternalStorageAvailable = mExternalStorageWriteable = true;
+    } else if(Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+        // We can only read the media
+      mExternalStorageAvailable = true;
+      mExternalStorageWriteable = false;
+    } else{
+        // Something else is wrong. It may be one of many other states, but all we need
+        //  to know is we can neither read nor write
+        mExternalStorageAvailable = mExternalStorageWriteable = false;
+    }
+
+  
+  
