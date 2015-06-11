@@ -1,12 +1,19 @@
-::Service和其他的应用组件一样，运行在进程的主线程中。这就是说如果service需要很多耗时或者阻塞的操作，需要在其子线程中实现
-  在Android系统自身维护中，Service具有较高优先级
+::Service和其他的应用组件一样，运行在进程的主线程中。这就是说如果service需要很多耗时或者阻塞的操作，需要在其
+  子线程中实现在Android系统自身维护中，Service具有较高优先级
 
 ::两种启动方式: 
-    startService(多用于单个app内部自己的service, 用于实现应用程序自己的一些耗时任务，比如查询升级信息，并不占用应用程序比如Activity所属线程，而是单开线程后台执行)
-    bindService(用于android系统内部的应用程序之间。它可以通过自己定义并暴露出来的接口进行程序操作。客户端建立一个到服务对象的连接，并通过那个连接来调用服务。连接以调用Context.bindService()方法建立，以调用 Context.unbindService()关闭。多个客户端可以绑定至同一个服务。如果服务此时还没有加载，bindService()会先加载它, 可被其他应用程序复用，比如天气预报服务，其他应用程序不需要再写这样的服务，调用已有的即可)
+    startService(多用于单个app内部自己的service, 用于实现应用程序自己的一些耗时任务，比如查询升级信息，并不占
+    用应用程序比如Activity所属线程，而是单开线程后台执行)
+    bindService(用于android系统内部的应用程序之间。它可以通过自己定义并暴露出来的接口进行程序操作。客户端建立
+    一个到服务对象的连接，并通过那个连接来调用服务。连接以调用Context.bindService()方法建立，以调用 
+    Context.unbindService()关闭。多个客户端可以绑定至同一个服务。如果服务此时还没有加载，bindService()会先
+    加载它, 可被其他应用程序复用，比如天气预报服务，其他应用程序不需要再写这样的服务，调用已有的即可
   区别: 
-    startService 调用者和服务之间没有联系，即使调用者退出了，服务依然在进行onCreate()->onStartCommand()->startService()->onDestroy()，注意其中没有onStart()，因为被onStartCommand()方法给取代了，onStart方法不推荐使用了
-    bindService 调用者和绑定者绑在一起，调用者一旦退出服务也就终止了onCreate()->onBind()->onUnbind()->onDestroy()
+    startService 调用者和服务之间没有联系，即使调用者退出了，服务依然在进行
+    onCreate()->onStartCommand()->startService()->onDestroy()，
+    注意其中没有onStart()，因为被onStartCommand()方法给取代了，onStart方法不推荐使用了
+    bindService 调用者和绑定者绑在一起，调用者一旦退出服务也就终止了
+    onCreate()->onBind()->onUnbind()->onDestroy()
     
     参考链接: http://www.cnblogs.com/onlylittlegod/archive/2011/05/15/2046652.html
               http://www.cnblogs.com/pepcod/archive/2013/02/11/2937403.html
@@ -16,12 +23,17 @@
   :startService:
     context.startService()->onCreate()- >onStart()->Service running
     context.stopService() | ->onDestroy() ->Service stop
-　　如果Service还没有运行，则android先调用onCreate()然后调用onStart()；如果Service已经运行，则只调用onStart()，所以一个Service的onStart方法可能会重复调用多次。
-　　stopService的时候直接onDestroy，如果是调用者自己直接退出而没有调用stopService的话，Service会一直在后台运行。该Service的调用者再启动起来后可以通过stopService关闭Service。
+　　如果Service还没有运行，则android先调用onCreate()然后调用onStart()；如果Service已经运行，则只调用onStart()
+　　所以一个Service的onStart方法可能会重复调用多次。
+　　stopService的时候直接onDestroy，如果是调用者自己直接退出而没有调用stopService的话，Service会一直在后台
+　　运行。该Service的调用者再启动起来后可以通过stopService关闭Service。
 　　
 　:bindService:
 　  context.bindService()->onCreate()->onBind()->Service running
 　　Service.onUnbind() -> onDestroy() ->Service stop
-　　onBind将返回给客户端一个IBind接口实例，IBind允许客户端回调服务的方法，比如得到Service运行的状态或其他操作。这个时候把调用者（Context，例如Activity）会和Service绑定在一起，Context退出了，Srevice就会调用onUnbind->onDestroy相应退出
-　　所以调用bindService的生命周期为：onCreate --> onBind(只一次，不可多次绑定) --> onUnbind --> onDestory。
-　　在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。　
+　　onBind将返回给客户端一个IBind接口实例，IBind允许客户端回调服务的方法，比如得到Service运行的状态或其他操作
+　　这个时候把调用者（Context，例如Activity）会和Service绑定在一起，Context退出了，Srevice就会调用
+　　onUnbind->onDestroy相应退出。所以调用bindService的生命周期为：
+　　onCreate --> onBind(只一次，不可多次绑定) --> onUnbind --> onDestory。
+　　在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，
+　　其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。　
