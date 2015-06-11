@@ -1,16 +1,44 @@
-Button 样式（圆角为例）
-drawable文件夹下创建shape.xml文件
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:shape="rectangle">
-<solid android:color="@color/com_facebook_blue" />
-<corners android:radius="5dip" />
-<padding
-    android:left="10dp"
-    android:top="10dp"
-    android:right="10dp"
-    android:bottom="10dp"
-/>
-</shape>
-Button的android:background="@drawable/shape"
+::Button 样式（圆角为例）
+    drawable文件夹下创建shape.xml文件
+    <?xml version="1.0" encoding="utf-8"?>
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/com_facebook_blue" />
+    <corners android:radius="5dip" />
+    <padding
+       android:left="10dp"
+       android:top="10dp"
+       android:right="10dp"
+       android:bottom="10dp"
+    />
+    </shape>
+    Button的android:background="@drawable/shape"
+    
+::RadioGroup
+     <RadioGroup 
+        android:id="@+id/radioGroup" 
+        android:contentDescription="性别" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content">     
+        <RadioButton android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:id="@+id/radioMale" 
+            android:text="男"
+            android:checked="true"/>
+        <RadioButton 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:id="@+id/radioFemale" 
+            android:text="女"/>    
+  </RadioGroup>
+  
+  RadioGroup group = (RadioGroup)this.findViewById(R.id.radioGroup);
+  group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(RadioGroup arg0, int arg1) {
+        if(arg0 == R.id.aRadioButtonId){
+            do something
+        }
+    }
+  });
