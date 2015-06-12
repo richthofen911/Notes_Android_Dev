@@ -23,5 +23,10 @@
 ::某些数据库位置
   电话相关 /data/data/com.android.providers.contacts/databases/contacts2.db
   短信相关 /data/data/com.android.providers.telephony/databases/mmssms.db
+  
+::编译-打包jar-转换dex
+  javac file1.java, file2.java
+  jar cvf outputName.jar file1.class
+  dx --dex --output=outputName.dex jarFile.jar
     
 tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
