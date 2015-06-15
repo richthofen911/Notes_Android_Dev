@@ -1,0 +1,173 @@
+::概述
+  Dalvik VM与JVM的最大的区别之一就是Dalvik VM是基于寄存器的，也就是说在smali里的所有操作都必须经过寄存器来
+  进行：本地寄存器用v开头数字结尾的符号来表示，如v0、v1、v2、...参数寄存器则使用p开头数字结尾的符号来表示
+  如p0、p1、p2、...特别注意的是，p0不一定是函数中的第一个参数，在非static函数中，p0代指“this”，p1表示函数
+  的第一个参数，p2代表函数中的第二个参数…而在static函数中p0才对应第一个参数（因为Java的static方法中
+  没有this方法）。本地寄存器没有限制，理论上是可以任意使用
+  例子:
+    const/4 v0, 0x0  
+    iput-boolean v0, p0, Lcom/disney/WMW/WMWActivity;->isRunning:Z
+  
+  解释:第一句使用v0本地寄存器，并把值0x0存到v0中，然后第二句用iput-boolean这个指令把v0中的值存放到
+  com.disney.WMW.WMWActivity.isRunning这个成员变量中。即相当于：this.isRunning = false;
+  （非static函数中p0代表的是“this”，在这里就是com.disney.WMW.WMWActivity实例）  
+  
+::成员变量
+  例子:
+    1 ]# static fields
+    2 ] .field private static final PREFS_INSTALLATION_ID:Ljava/lang/String; = "installationId"
+    3 ] //...
+    4 ] 
+    5 ]
+    6 ] # instance fields
+    7 ] .field private _activityPackageName:Ljava/lang/String;
+    8 ] //...
+    
+    上面定义的static fields和instance fields均为成员变量，格式是：
+      .field public/private [static] [final] varName:<类型>
+    static fields和instance fields是有区别的，也很明显，那就是static fields是static的，而instance则不是。
+    根据这个区别来获取这些不同的成员变量时也有不同的指令。一般来说，
+    获取的指令有：iget、sget、iget-boolean、sget-boolean、iget-object、sget-object等
+    操作的指令有：iput、sput、iput-boolean、sput-boolean、iput-object、sput-object等。
+    没有“-object”后缀的表示操作的成员变量对象是基本数据类型，带“-object”表示操作的成员变量是对象类型，
+    特别地，boolean类型则使用带“-boolean”的指令操作。
+    (1)获取static fields的指令类似是：
+      sget-object v0, Lcom/disney/WMW/WMWActivity;->PREFS_INSTALLATION_ID:Ljava/lang/String;
+      这里sget-object就是用来获取变量值并保存到紧接着的参数的寄存器中，此处把上面出现的
+      PREFS_INSTALLATION_ID这个String成员变量获取并放到v0这个寄存器中。
+      注意：前面需要该变量所属的类的类型(s)，后面需要加一个冒号和该成员变量的类型，中间是“->”表示所属关系。
+      
+    (2)获取instance fields的指令与static fields的基本一样，只是由于不是static变量，不能仅仅指出该变量所在类的
+    类型，还需要该变量所在类的实例。例子：  
+      iget-object v0, p0, Lcom/disney/WMW/WMWActivity;->_view:Lcom/disney/common/WMWView;  
+      可以看到iget-object指令比sget-object多了一个参数，就是该变量所在类的实例，在这里就是p0即“this”
+    
+    (3)获取array的还有aget和aget-object，指令使用和上述类似。
+    
+    (4)put指令的使用和get指令是统一的，例子
+    const/4 v3, 0x0  
+    sput-object v3, Lcom/disney/WMW/WMWActivity;->globalIapHandler:Lcom/disney/config/GlobalPurchaseHandler;  
+    相当于：this.globalIapHandler = null;（null = 0x0）
+    
+    .local v0, wait:Landroid/os/Message;  
+    const/4 v1, 0x2  
+    iput v1, v0, Landroid/os/Message;->what:I  
+    相当于：wait.what = 0x2;（wait是Message的实例）
+    
+::函数调用
+  smali中的函数和成员变量一样也分为两种类型，但是不是成员变量中的static和instance之分，而是direct和virtual之分
+  具体区别：简而言之，direct method就是private函数，其余的public和protected函数都属于virtual method
+  所以在调用函数时，
+  有:
+    invoke-direct
+      例: invoke-direct {p0}, Lcom/disney/WMW/WMWActivity;->getGlobalIapHandler()Lcom/disney/config/GlobalPurchaseHandler;  
+      这里GlobalPurchaseHandler getGlobalIapHandler()就是定义在WMWActivity中的一个private函数，
+      如果修改smali时错用invoke-virtual或invoke-static将在回编译后程序运行时引发一个常见的VerifyError
+      （更多错误汇总可参照APK反编译之番外三：常见错误汇总
+    invoke-virtual
+      例: sget-object v0, Lcom/disney/WMW/WMWActivity;->shareHandler:Landroid/os/Handler;  
+          invoke-virtual {v0, v3}, Landroid/os/Handler;->removeCallbacksAndMessages(Ljava/lang/Object;)V 
+          主要搞清楚v0是shareHandler:Landroid/os/Handler，
+                    v3是传递给removeCallbackAndMessage方法的Ljava/lang/Object参数就可以了
+                    
+  另外还有:
+    invoke-static 就是调用static函数的，因为是static函数，所以比起其他调用少一个参数，
+      例1：invoke-static {}, Lcom/disney/WMW/UnlockHelper;->unlockCrankypack()Z 
+            这里注意到invoke-static后面有一对大括号“{}”，其实是调用该方法的实例+参数列表
+            由于这个方法既不需参数也是static的，所以{}内为空
+      例2：const-string v0, "fmodex"  
+           invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V<span style="font-family: Verdana, sans-serif; "> </span>        
+            这个是调用static void System.loadLibrary(String)来加载NDK编译的so库用的方法，
+            同样也是这里v0就是参数"fmodex"了
+    invoke-super
+      调用父类方法用的指令，在onCreate、onDestroy等方法都能看到
+  以及
+    invoke-interface等几种不同的指令。
+  还有
+    invoke-XXX/range 指令的，这是参数>=5个的时候调用的，此时不能直接使用之前的指令，而要在后面加上“/range”，
+    使用方法也有所不同:
+      invoke-static/range {v0 .. v5}, Lcn/game189/sms/SMS;->checkFee(Ljava/lang/String;Landroid/app/Activity;Lcn/game189/sms/SMSListener;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Z  
+      这个是电信SDK中的付费接口，需传递6个参数，大括号内的参数须用省略形式，且须连续（未求证是否需要从v0开始）
+
+::取函数返回结果
+  在Java代码中调用函数和返回函数结果是一条语句完成的，而在smali里则需要分开来完成，在使用上述指令后，
+  如果调用的函数返回非void，那么还需要用到move-result(返回基本数据类型)和move-result-object(返回对象)指令
+  例1：
+  const/4 v2, 0x0  
+  invoke-virtual {p0, v2}, Lcom/disney/WMW/WMWActivity;->getPreferences(I)Landroid/content/SharedPreferences;  
+  move-result-object v1
+  v1保存的就是调用getPreferences(int)方法返回的SharedPreferences实例
+  例2：
+  invoke-virtual {v2}, Ljava/lang/String;->length()I  
+  move-result v2
+  v2保存的是调用String.length()返回的整型
+
+::smali中函数实体分析
+  没有什么特别的地方，只是在植入代码时有一点需要特别注意，举例说明：
+  .method protected onDestroy()V
+    .locals 0
+ 
+    .prologue
+    .line 277
+    invoke-super {p0}, Lcom/disney/common/BaseActivity;->onDestroy()V
+ 
+    .line 279
+    return-void
+  .end method
+  这是onDestroy()函数，它的作用大家都知道。首先看到函数内第一句：.local 0，这句话很重要，标明了你在这个函数
+  中最少要用到的本地寄存器的个数。在这里，由于只需要调用一个父类的onDestroy()处理，所以只需要用到p0，所以
+  使用到的本地寄存器数为0。如果不清楚这个规则，很容易在植入代码后忘记修改.local 的值，那么回编译后运行时
+  将会得到一个VerifyError错误，而且极难发现问题所在。例如往onDestroy()增加一句：this.existed = true;
+  那么应该改为（注意修改.local的值为1——使用到了v0这一个本地寄存器），如下:
+  .method protected onDestroy()V
+    .locals 1
+ 
+    .prologue
+    .line 277
+    const/4 v0, 0x1
+ 
+    iput-boolean v0, p0, Lcom/disney/WMW/WMWActivity;->exited:Z
+ 
+    invoke-super {p0}, Lcom/disney/common/BaseActivity;->onDestroy()V
+ 
+    .line 279
+    return-void
+  .end method
+  
+  另外注意.line这个标识，它是标注了该代码在原Java文件中的行数，也很有用，使用eclipse开发时，遇到错误崩溃时
+  在catLog有提示哪个文件哪一行崩溃的,Dalvik VM运行到.line XX时就将这个值存起来，如果在这一行运行时出错
+  就往catLog输出这个值，这样就能看到具体是哪一行的问题了。jd-gui这个工具也是通过分析这些信息将smali代码还原
+  成我们喜闻乐见的Java代码的。当然，它不是必须的，去掉也没有关系，只不过为了方便调试还是保留一下。
+  
+::Smali详细语法参考链接 https://code.google.com/p/smali/wiki/TypesMethodsAndFields  
+
+::对应数据类型表示
+  B---byte
+  C---char
+  D---double
+  F---float
+  I---int
+  J---long
+  S---short
+  V---void
+  Z---boolean
+  [XXX---array
+  Lxxx/yyy---object;
+  
+  对于最后两项，数组的表示方式是：在基本类型前加上前中括号“[”，例如int数组和float数组分别表示为：[I、[F
+  对象的表示则以L作为开头，格式是LpackageName/objectName;（必须有个分号跟在最后），例如String对象在smali中为
+  Ljava/lang/String; 其中java/lang对应java.lang包，String就是定义在该包中的一个对象。
+  类里面的内部类在smali中表示方法：LpackageName/objectName$subObjectName; 也就是在内部类前加“$”符号
+  
+::函数定义
+  Func-Name (Para-Type1Para-Type2Para-Type3...)Return-Type    参数与参数之间没有任何分隔符
+  例子:
+     foo ()V  是 void foo()
+     
+     foo (III)Z  是 boolean foo(int, int, int)
+
+     foo (Z[I[ILjava/lang/String;J)Ljava/lang/String;  是String foo (boolean, int[], int[], String, long)
+
+::$的使用规则
+
+参考链接: http://blog.csdn.net/lpohvbe/article/details/7981386
