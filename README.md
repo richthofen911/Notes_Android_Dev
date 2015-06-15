@@ -93,6 +93,7 @@
 - <a href="">NDK使用样例</a><br>
 
 ## Reenginerring, Anti-Reenginerring
+- <a href="">Samli 基础语法和应用(dex重新签名改magic value)</a><br>
 - <a href="">Reenginerring</a><br>
 - <a href="">Anti-Reengineering(动态加载和代码混淆)</a><br>
 - <a href="">Java反射机制及应用</a><br>
