@@ -1,4 +1,7 @@
 RecyclerView(特点是可以自动回收用过的cell)
+RecyclerView与ListView的原理差不多，本质上都是以适配器为核心。只不过ListView缓存的是view，viewHolder附着在view上，
+而RecyclerView缓存的是viewHolder，view包含在viewHolder内
+
 需要
 1.ViewHolder    https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java
 
