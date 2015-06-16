@@ -1,0 +1,79 @@
+::HttpURLConnection连接URL
+    1)创建一个URL对象 //URL类主要用来定位资源的locator并打开连接
+      URL url = new URL(http://www.baidu.com);
+    2)利用HttpURLConnection对象从网络中获取网页数据
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    3)设置连接超时
+      conn.setConnectTimeout(6*1000);
+    4)对响应码进行判断
+      if (conn.getResponseCode() != 200)    //从Internet获取网页,发送请求,将网页以流的形式读回来
+          throw new RuntimeException("请求url失败");
+    5)得到网络返回的输入流
+      InputStream inputStream = conn.getInputStream();
+      String result = readData(inputStream, "GBK"); //文件流输入出文件用outStream.write
+      conn.disconnect();
+  总结:
+  --要设置连接超时,如果网络不好,Android系统在超过默认时间会收回资源中断操作.
+  --在Android中对文件流的操作和JAVA SE上面是一样的.
+  --在对大文件的操作时,要将文件写到SDCard上面,不要直接写到手机内存上.
+  --操作大文件是,要一边从网络上读,一边往SDCard上面写,减少手机内存的使用.这点很重要,面试经常会被问到.
+  --对文件流操作完,要记得及时关闭.
+
+
+::向Internet发送请求参数
+  步骤：
+    1)创建URL对象
+      URL realUrl = new URL(requestUrl);
+    2)通过HttpURLConnection对象,向网络地址发送请求
+      HttpURLConnection conn = (HttpURLConnection) realUrl.openConnection();
+    3)设置容许输出
+      conn.setDoOutput(true);
+    4)设置不使用缓存
+      conn.setUseCaches(false);
+    5)设置使用POST的方式发送
+      conn.setRequestMethod("POST");
+    6)设置维持长连接
+      conn.setRequestProperty("Connection", "Keep-Alive");
+    7)设置文件字符集
+      conn.setRequestProperty("Charset", "UTF-8");
+    8)设置文件长度
+      conn.setRequestProperty("Content-Length", String.valueOf(data.length));
+    9)设置文件类型
+      conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+    10)以流的方式输出.
+  总结:
+  --发送POST请求必须设置允许输出
+  --不要使用缓存,容易出现问题.
+  --在开始用HttpURLConnection对象的setRequestProperty()设置,就是生成HTML文件头.
+  --HttpURLConnection默认使用Get方法，如果要使用Post方法，则需要使用setRequestMethod方法。
+
+::Post方式发送请求样例
+  URL url = new URL(“http://www.google.com”);
+  HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+  conn.setDoOutput(true);
+  conn.setDoInput(true);
+  conn.setRequestMethod(“POST”);
+  // Post请求不能使用缓存
+  conn.setUseCaches(false);
+  conn.setInstanceFollowRedirects(true);
+  // 设置Content-type
+  conn.setRequestProperty(“Content-Type”,“application/x-www-form-urlencoded”);
+  // 在调用getOutputStream时会隐式调用conn.connect()
+  OutputStream outputStream = (conn.getOutputStream();
+  String content = “name=” + URLEncoder.encode(“Jake”,“gb2312”) + 
+                  "&userpass=" + URLEncoder.encode(userPass, "UTF-8"); ;
+  outputStream.writeBytes(content);
+  outputStream.flush(); //立即刷新
+  outputStream.close(); //关闭输出流，必须不能少
+  // 连接完成之后可以关闭这个连接
+  conn.disconnect();
+  
+::读取网页内容
+  // 示例代码：读取网页上的内容
+  InputStreamReader isr = new InputStreamReader(conn.getInputStream());
+  BufferedReader br = new BufferedReader(isr);
+  String line = null;
+  while(((line = br.readLine()) != null)) { … }
+  // 关闭连接
+  isr.close();
+  conn.disconnect();
