@@ -21,6 +21,8 @@
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HTTP%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85">HTTP请求封装</a><br>
 - <a href="">HttpClient close/不close for performance & set timeout</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HttpURLConnection">用HttpURLConnection代替HttpClient</a><br>
+- <a href="http://topmanopensource.iteye.com/blog/1605238">HTTP实现文件上传</a><br>
+
 - 
 ## 系统四大组件外加Intent
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_Activity">Activity</a><br>
