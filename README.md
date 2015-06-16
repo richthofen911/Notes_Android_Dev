@@ -20,7 +20,8 @@
 ## 网络请求
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HTTP%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85">HTTP请求封装</a><br>
 - <a href="">HttpClient close/不close for performance & set timeout</a><br>
-
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82_HttpURLConnection">用HttpURLConnection代替HttpClient</a><br>
+- 
 ## 系统四大组件外加Intent
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_Activity">Activity</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6_Service">Service</a><br>
@@ -92,8 +93,8 @@
 - <a href="">交叉编译详解</a><br>
 - <a href="">NDK使用样例</a><br>
 
-## Reenginerring, Anti-Reenginerring
-- <a href="">Samli 基础语法和应用(dex重新签名改magic value)</a><br>
+## 逆向相关
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E9%80%86%E5%90%91%E7%9B%B8%E5%85%B3_Smali%E8%AF%AD%E6%B3%95%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8">Samli 基础语法和应用(dex重新签名改magic value)</a><br>
 - <a href="">Reenginerring</a><br>
 - <a href="">Anti-Reengineering(动态加载和代码混淆)</a><br>
 - <a href="">Java反射机制及应用</a><br>
