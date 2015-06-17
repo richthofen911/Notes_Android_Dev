@@ -30,5 +30,33 @@
   dx --dex --output=outputName.dex jarFile.jar
   adb shell登录后有dex2oat工具
   
-    
+::获取手机上安装app信息
+  基本代码：
+  PackageManager packageManager = this.getPackageManager();  
+  List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(0); 
+  通过以上方法，可以得到手机中安装的所有应用程序，既包括了手动安装的apk包的信息，也包括了系统预装的应用软件的信息，
+  要区分这两类软件可使用以下方法:
+    a.从packageInfoList获取的packageInfo，再通过packageInfo.applicationInfo获取applicationInfo。
+    b.判断(applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)的值，大于0表示获取的为预装的应用，反之为手动安装的
+  样例方法:
+    public static List<PackageInfo> getAllApps(Context context) {  
+      List<PackageInfo> apps = new ArrayList<PackageInfo>();  
+      PackageManager pManager = context.getPackageManager();  
+      //获取手机内所有应用  
+      List<PackageInfo> paklist = pManager.getInstalledPackages(0);  
+      for (int i = 0; i < paklist.size(); i++) {  
+          PackageInfo pak = (PackageInfo) paklist.get(i);  
+          //判断是否为非系统预装的应用程序  
+          if ((pak.applicationInfo.flags & pak.applicationInfo.FLAG_SYSTEM) <= 0) {  
+              // customs applications  
+              apps.add(pak);  
+          }  
+      }  
+      return apps;  
+    }
+  
+  获取图片名，应用名，包名等更多信息：见参考链接
+  参考链接 http://blog.csdn.net/feng88724/article/details/6198446  
+
+
 tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
