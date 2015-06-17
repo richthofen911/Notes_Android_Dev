@@ -1,1 +1,40 @@
+::获取数据库中短信
+    public void getSmsFromPhone(Uri inbox, TextView textView) {
+        ContentResolver contentResolver = getContentResolver();
+        String[] projection = new String[] {"_id", "address", "date", "type", "body"};
+        //type==1 means it is a received message, type==2 means it is a message sent from the user
+        //address means number
+        //String where = " date >  " + (System.currentTimeMillis() - 10 * 60 * 1000);
+        Cursor cur = contentResolver.query(inbox, projection, null, null, "date desc");
+
+        if (cur == null){
+            Log.e("cursor is null", "");
+            return;
+        }else{
+            //cur.getString(cur.getColumnIndex("address"));
+            while (cur.moveToNext()) {
+                String number = cur.getString(1);
+                String body = cur.getString(4);
+
+                textView.append(number + " " + body + "\n");
+            }
+            cur.close();
+        }
+    }
+
+::要实时读取新接收的短信可以用handler或者
+
+
+
+
+
+
+
+
+
+
+
+
 http://blog.csdn.net/mad1989/article/details/22426415
+
+
