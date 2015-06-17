@@ -56,7 +56,12 @@
     }
   
   获取图片名，应用名，包名等更多信息：见参考链接
-  参考链接 http://blog.csdn.net/feng88724/article/details/6198446  
+  参考链接 http://blog.csdn.net/feng88724/article/details/6198446 
+
+::SharedUserId的应用
+  http://my.oschina.net/zhoulc/blog/119282
+  http://www.blogjava.net/easywu/archive/2011/10/19/361554.html
+  
 
 
 tcpdump抓取网络请求 http://www.trinea.cn/android/tcpdump_wireshark/
