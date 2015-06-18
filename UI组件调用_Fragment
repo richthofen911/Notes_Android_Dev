@@ -10,4 +10,6 @@
     2、将fragment从后台堆栈中弹出, 使用 popBackStack() (模拟用户按下BACK 命令).
     3、使用addOnBackStackChangeListener()注册一个监听后台堆栈变化的listener.
     
-::调用fragment在调用getActivity()方法时，fragment必须和activity关联（attached to an activity），否则将会返回一个null    
+::调用fragment在调用getActivity()方法时，fragment必须和activity关联（attached to an activity），否则将会返回一个null
+
+::fragment中创建AlertDialog时context参数只要getActivity()就可以，不要getActivity().getApplicationContext()
