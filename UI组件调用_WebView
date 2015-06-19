@@ -34,8 +34,20 @@
   http://blog.csdn.net/moubenmao_jun/article/details/9076917
   http://blog.csdn.net/t12x3456/article/details/13745553
   
-::启动某个浏览器
-  http://www.cnblogs.com/freshman45/archive/2011/08/18/android-browser.html
+::intent启动浏览器
+    启动不指定浏览器（选择器选择）
+        Uri uri = Uri.parse(url);  
+        Intent it = new Intent(Intent.ACTION_VIEW, url);   
+        startActivity(it);
+    
+    启动指定浏览器
+        Intent intent = new Intent();
+        Uri u = Uri.parse(url);  
+        intent.setData(u);  
+        intent.setAction( Intent.ACTION_VIEW);  
+        intent.setClassName("com.android.browser","com.android.browser.BrowserActivity");  
+        startActivity(intent); 
+  
   
 ::直接存在本地显示
   http://blog.csdn.net/windone0109/article/details/5380941
