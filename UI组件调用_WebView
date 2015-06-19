@@ -26,7 +26,7 @@
           public boolean shouldOverrideUrlLoading(WebView view, String url){
               return false; // WebView handles url, return true时跳转到浏览器app
           }
-      }
+      });
       
 ::WebViewClient与WebChromeClient的区别http://blog.csdn.net/linghu_java/article/details/6927439
 
