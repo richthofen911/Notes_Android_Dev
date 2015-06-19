@@ -34,5 +34,9 @@
   http://blog.csdn.net/moubenmao_jun/article/details/9076917
   http://blog.csdn.net/t12x3456/article/details/13745553
   
+::直接存在本地显示
+  http://wenku.baidu.com/view/e4505b90dd88d0d233d46aba.html
+  简化版: 在main文件夹下新建asset文件夹，webview.loadUrl("file:///android_asset/test.html"); (不考虑解码之类)
+  
 ::使用javascript调用本地代码
   http://www.cnblogs.com/lee0oo0/archive/2012/08/01/2617953.html
