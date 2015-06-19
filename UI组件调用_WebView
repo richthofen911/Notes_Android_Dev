@@ -35,6 +35,7 @@
   http://blog.csdn.net/t12x3456/article/details/13745553
   
 ::直接存在本地显示
+  http://blog.csdn.net/windone0109/article/details/5380941
   http://wenku.baidu.com/view/e4505b90dd88d0d233d46aba.html
   简化版: 在main文件夹下新建asset文件夹，webview.loadUrl("file:///android_asset/test.html"); (不考虑解码之类)
   
