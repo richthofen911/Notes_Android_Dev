@@ -26,7 +26,7 @@
   
 ::编译-->打包jar-->转换dex-->转换oat
   javac file1.java, file2.java
-  jar cvf outputName.jar file1.class
+  jar cvf outputName.jar file1.class  //要把class文件跟java文件放在同一级，当前目录切到src/main/java/这一级
   dx --dex --output=outputName.dex jarFile.jar
   adb shell登录后有dex2oat工具
   
