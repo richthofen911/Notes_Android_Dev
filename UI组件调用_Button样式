@@ -42,3 +42,6 @@
         }
     }
   });
+
+::通过SpannableString在同一个控件上设置不同字体的text
+    http://blog.csdn.net/harvic880925/article/details/38984705
