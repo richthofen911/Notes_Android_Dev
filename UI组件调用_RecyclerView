@@ -14,3 +14,22 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
      recyclerView_messages.setLayoutManager(linearLayoutManager);
      recyclerView_messages.setHasFixedSize(true); //fixsize可以提高性能
      recyclerView_messages.setAdapter(adapterMessages);
+     
+::关于添加和删除item后通知dataset变化的操作(非常重要，不然显示不正常)
+     public void addData(int pos, Item newItem){   //pos参数通常就是传dataset.size()，不用-1
+        DataStore.items.add(pos, newItem);
+        adapterMessages.notifyItemInserted(pos);
+        // 加入如下代码保证position的位置正确性
+        if (pos != DataStore.items.size() - 1) {
+            adapterMessages.notifyItemRangeChanged(pos, DataStore.items.size() - pos);
+        }
+    }
+     
+     public void deleteData(int pos){   //这里的pos参数通常来自来自for循环里i
+        DataStore.items.remove(pos);
+        MainActivity.adapterMessages.notifyItemRemoved(pos);
+        // 加入如下代码保证position的位置正确性
+        if (pos != DataStore.items.size() - 1) {
+            MainActivity.adapterMessages.notifyItemRangeChanged(pos, DataStore.items.size() - pos);
+        }
+    }
