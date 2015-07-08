@@ -59,8 +59,12 @@
 　　    “singleInstance”是其所在栈的唯一activity，它会每次都被重用。
 　    　“singleTask” 如果在栈顶，则接受intent，否则，该intent会被丢弃，但是该task仍会回到前台。 当已经存在的activity实例处理新的intent时候，会调用onNewIntent()方法，如果收到intent生成一个activity实例，那么用户可以通过back键回到上一个状态；如果是已经存在的一个activity来处理这个intent的话，用户不能通过按back键返回到这之前的状态。    
 　
-　　    
-　　
+::关于返回键和Home键对生命周期的影响
+  BACK键的顺序： onPause->onStop->onDestroy->onCreate->onStart->onResume
+  HOME键的执行顺序：onPause->onStop->onRestart->onStart->onResume
+  
+  http://blog.csdn.net/charein/article/details/39698429
+　
 ::参考链接 http://www.cnblogs.com/pepcod/archive/2013/02/11/2937403.html　　
 　　
 　　
