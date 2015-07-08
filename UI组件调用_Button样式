@@ -45,3 +45,4 @@
 
 ::通过SpannableString在同一个控件上设置不同字体的text
     http://blog.csdn.net/harvic880925/article/details/38984705
+    当继承ActionbarActivity时无效，需要继承Activity
