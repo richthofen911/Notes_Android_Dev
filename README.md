@@ -54,9 +54,14 @@
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_Handler">Thread, Runnable, Handler, Looper</a><br>
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_%E7%BA%BF%E7%A8%8B%E6%B1%A0">线程池详解</a><br>
 
+## 其他
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%85%B6%E4%BB%96_permission%E7%9B%B8%E5%85%B3">Permission相关</a><br>
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%85%B6%E4%BB%96_%E4%BC%98%E5%85%88%E7%BA%A7%E6%8A%A2%E5%8D%A0">优先级抢占</a><br>
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%85%B6%E4%BB%96_%E6%89%A7%E8%A1%8Cadbshell%E5%91%BD%E4%BB%A4">执行adb shell命令</a><br>
+- <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%85%B6%E4%BB%96_%E8%8E%B7%E5%8F%96%5C%E7%9B%91%E5%90%AC%E7%9F%AD%E4%BF%A1">监听截获短信</a><br>
+
 ## 进程间通信
 - <a href="https://github.com/richthofen911/Note_Android_Dev/blob/master/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1_AIDL">AIDL(Android Interface Definition Language)</a><br>
-
 
 ## Canvas/OpenGL画图
 
