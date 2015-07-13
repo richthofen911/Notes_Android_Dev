@@ -1,0 +1,18 @@
+http://blog.csdn.net/acnt3w/article/details/9169995
+
+大体步骤
+1. 生成服务器端的证书 keytool -genkey -alias test -keystore test.jks  
+
+2. 将keystore中的cert导出以生成客户端的验证证书  keytool -exportcert -alias test -file test.cert -keystore test.jks 
+
+3. 生成Android平台的证书。 Android 要求要BC证书，而Java的keytool本身不提供BKS格式，因此要自己手动配置。个人在配置的
+   过程遇到了文件正在使用中，保存失败的情况，我的做法是将文件备份一下，用unlocker删除后将修改好备份放到原位置就好了。
+    配置方法：
+      1. 下载 bcprov-ext-jdk15on-146.jar   http://www.bouncycastle.org/latest_releases.html
+      2. 把jar放到jdk_home/jre/lib/ext/文件夹下
+      3. 在 jdk_home\jre\lib\security\目录中找到 java.security 在内容增加一行（数字可以自己定义）
+         security.provider.11=org.bouncycastle.jce.provider.BouncyCastleProvider
+
+4. 生成android平台的证书
+   keytool -importcert -keystore test.bks -file test.cert -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider           
+      
