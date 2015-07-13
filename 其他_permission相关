@@ -1,2 +1,5 @@
 ::permission tree 和 package manager动态添加permission
   http://blog.sina.com.cn/s/blog_48d491300100zmv3.html
+  *注 permission-tree声明时android:name属性必须有至少两个.号，形如"com.google.permission"为根权限的可以，"com.google"
+  则不行，也就是说，"android.permission"无法作为根权限，即，只可能动态添加其他第三方包里的权限，不可能动态添加
+  android系统级的权限
