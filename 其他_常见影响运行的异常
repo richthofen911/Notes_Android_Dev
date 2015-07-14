@@ -1,0 +1,5 @@
+1. wifi/bluetooth等信号中断
+2. 网络中断可能会引起发出request后没有受到回应，超出系统默认时限后发生崩溃
+3. screen rotation造成当前activity被销毁重构
+4. 手机硬件问题
+5. 后台service可能因为内存不够被干掉，会报错
