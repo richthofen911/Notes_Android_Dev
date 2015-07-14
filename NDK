@@ -1,1 +1,34 @@
-http://www.cnblogs.com/flyme/p/4431762.html
+Android Studio下步骤概述
+情况1： 自己写c/c++源码再编译（linux下分隔符是: 而windows下分隔符是; 此处针对linux)
+  1. local.property声明ndk目录
+  2. cd至main目录下， 用javah编译class成头文件，可能包含多个文件
+     例: javah -d jni -classpath .:/home/admin/Programming/android-linux-sdk/platforms/android-22/android.jar:../../build/intermediates/classes/debug project.richthofen911.autoinstall.MainActivity
+        注意开头的.:
+     例2: javah -d jni -classpath ~/Programming/android-linux-sdk/platforms/android-22/android.jar:~/Programming/android-linux-sdk/extras/android/support/v7/appcompat/libs/android-support-v7-appcompat.jar:~/Programming/android-linux-sdk/extras/android/support/v7/appcompat/libs/android-support-v4.jar:../../build/intermediates/classes/debug project.richthofen911.autoinstall.MainActivity   
+  3. 在jni目录下写c/c++文件
+  4. jni目录下创建Android.mk文件，内容样例如下
+       include $(CLEAR_VARS)
+       include $(BUILD_SHARED_LIBRARY)
+       
+       LOCAL_PATH := $(class my-dir)
+       LOCAL_MODULE := callnative
+       LOCAL_SRC_FILES := hi.c
+  
+  5. jni目录下创建Application.mk文件，内容一般为
+        APP_ABI := all
+
+  6. app.gradle文件中 defaultConfig结点下添加
+     ndk {
+        moduleName "callnative"
+     }
+
+情况2：
+直接载入用ndk-build预先编译号的.so动态库
+  1. 在main目录下创建jniLibs目录（针对不同cpu架构需要再添加多个子目录）分别放入libhelloNDK.so文件
+  2. 直接在java中运行
+      String libName = "helloNDK"; //注意，此处没有前缀lib和后缀.so
+      System.loadLibrary(libName);
+     
+参考链接
+http://www.race604.com/android-studio-with-ndk/
+https://www.youtube.com/watch?v=SeKXi-viRrk
