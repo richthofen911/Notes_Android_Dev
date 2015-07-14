@@ -64,6 +64,56 @@
   HOME键的执行顺序：onPause->onStop->onRestart->onStart->onResume
   
   http://blog.csdn.net/charein/article/details/39698429
+  
+::处理screen rotation
+  发生旋转时
+   1. 调用当前的Activity的onSaveInstanceState(Bundle outState)去保存应用中的一些数据，你可以重写这个方法
+   2. 然后调用onDestroy()销毁当前的Activity
+   3. 重新调用onCreate()或onRestoreInstanceState()方法去重新创建一个Activity（也就是说，程序会重新将onCreate中的代码在执行一遍）
+  
+  1. 最简单的:强制activity方向，即禁止screen rotation的调用
+      android:screenOrientation="landscape" 或 "vertical"
+      
+  ::onSaveInstanceState()方法和noRestoreInstanceState()方法
+    这两个不声明周期的方法，不一定会被调用。当遇意外情况（例如内存不足）由系统销毁一个activity时，
+    onSaveInstanceState()会被调用。但当用户主动去销毁一个activity时，例如按back键，onSaveInstanceState()不会被调用
+    因为这种情况下，用户的行为决定不需要保存activity的状态。通常onSaveInstanceState()只时候保存一些临时状态，而
+    onPause()适合用于数据的持久化保存
+    当屏幕方向发生改变，activity会被摧毁并重新创建，如果要在被摧毁之前缓存一些数据，并在activity被重建之后恢复
+    这些数据，可以重写onSaveInstanceState()和onRestoreInstanceState()方法
+    注意：在Activity的onCreate(Bundle savedInstanceState)方法里面，该方法的参数与onRestoreInstanceState()方法中的
+    参数一致，因此在onCreate()方法中也能恢复缓存的数据。
+    样例代码
+    public class PreferencesActivity extends Activity {
+        private String name;
+        protected void onRestoreInstanceState(Bundle savedInstanceState) {
+            name = savedInstanceState.getString("name"); //被重新创建后恢复缓存的数据
+            super.onRestoreInstanceState(savedInstanceState);
+        }
+        protected void onSaveInstanceState(Bundle outState) {
+            outState.putString("name", "liming");//被摧毁前缓存一些数据
+            super.onSaveInstanceState(outState);
+        }
+    }
+    
+    捕获rotation:
+    屏幕旋转时会触发onConfigurationChanged方法，***但此方法不是仅为rotation所用，其他情况也可能触发
+    用于捕获的样例代码：
+    @Override  
+    public void onConfigurationChanged(Configuration newConfig) {  
+        super.onConfigurationChanged(newConfig);  
+        //newConfig.orientation获得当前屏幕状态是横向或者竖向  
+        //Configuration.ORIENTATION_PORTRAIT 表示竖向  
+        //Configuration.ORIENTATION_LANDSCAPE 表示横屏  
+        if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){  
+            Toast.makeText(MainActivity.this, "现在是竖屏", Toast.LENGTH_SHORT).show();  
+        }  
+        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){  
+            Toast.makeText(MainActivity.this, "现在是横屏", Toast.LENGTH_SHORT).show();  
+        }  
+    }  
+    
+    
 　
 ::参考链接 http://www.cnblogs.com/pepcod/archive/2013/02/11/2937403.html　　
 　　
