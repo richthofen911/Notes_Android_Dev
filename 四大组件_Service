@@ -37,3 +37,17 @@
 　　onCreate --> onBind(只一次，不可多次绑定) --> onUnbind --> onDestory。
 　　在Service每一次的开启关闭过程中，只有onStart可被多次调用(通过多次startService调用)，
 　　其他onCreate，onBind，onUnbind，onDestory在一个生命周期中只能被调用一次。　
+
+::Service和IntentService的区别
+  主要用于后台服务 当应用程序被挂到后台的时候，为了保证应用某些组件仍然可以工作而引入了Service这个概念，
+  要强调的是Service不是独立的进程，也不是独立的线程，它是依赖于应用程序的主线程的，在更多时候不建议在
+  Service中编写耗时的逻辑和操作，否则会引起ANR。这时需要引入IntentService，IntentService是继承Service的，
+  那么它包含了Service的全部特性，当然也包含service的生命周期，那么与service不同的是，IntentService在执
+  行onCreate操作的时候，内部开了一个线程，去执行耗时操作。异步处理服务，新开一个线程：handlerThread在线程中
+  发消息，然后接受处理完成后，会清理线程，并且关掉服务。
+  IntentService有以下特点：
+  1）创建了一个独立的工作线程来处理所有的通过onStartCommand()传递给服务的intents。
+  2）创建了一个工作队列，来逐个发送intent给onHandleIntent()。
+  3）不需要主动调用stopSelft()来结束服务。因为，在所有的intent被处理完后，系统会自动关闭服务。
+  4) 默认实现的onBind()返回null
+  5）默认实现的onStartCommand()的目的是将intent插入到工作队列中
