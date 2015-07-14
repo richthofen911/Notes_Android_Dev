@@ -5,3 +5,13 @@ http://blog.zhourunsheng.com/2011/09/%E6%8E%A2%E7%A7%98%E8%85%BE%E8%AE%AFandroid
 http://www.eoeandroid.com/blog-136532-48562.html
 http://wangleyiang.iteye.com/blog/1791947
 http://www.cnblogs.com/over140/archive/2012/03/29/2423116.html
+
+::关于动态加载apk
+  理论上可以用到的有DexClassLoader、PathClassLoader和URLClassLoader。
+  DexClassLoader：可以加载文件系统上的jar、dex、apk
+  PathClassLoader：可以加载/data/app目录下的apk，这也意味着，它只能加载已经安装的apk
+  URLClassLoader：可以加载java中的jar，但是由于dalvik不能直接识别jar，所以此方法在android中无法使用
+  
+::关于jar、dex和apk
+  dex和apk是可以直接加载的，因为它们都是或者内部有dex文件，而原始的jar是不行的，
+  必须转换成dalvik所能识别的字节码文件，转换工具可以使用android sdk中platform-tools目录下的dx
