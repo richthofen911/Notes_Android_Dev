@@ -9,3 +9,15 @@
       exported="true"/> 
       
   参考链接 http://blog.csdn.net/juetion/article/details/17481039
+  
+::ContentObserver，观察content变化的类，它实现的功能就是对特定的Uri进行监听，当监听的Uri发生变化时，能够
+  根据开发者的意思去做相应的处理，例如，用于监控数据库内容变化时有用，实际可能用在在一些应用上，比如手机银行
+  QQ，微信等，很多时候我们都需要通过发送验证码到手机上，然后把验证码填上去，然后才能成功地继续去做下面一步事情。
+  而如果每次我们都要离开当前界面，然后去查收短信，记住验证码，然后再回来输入到控件中，这感觉就会很麻烦，用户体验就会
+  很差，而像微信等一些应用，则会在手机接到短信 后，将信息中的验证码给抽出来，帮我们将其填到对应的控件中
+  
+  http://www.cnblogs.com/bastard/archive/2012/06/02/2531663.html
+  http://blog.csdn.net/mad1989/article/details/22426415
+  http://blog.sina.com.cn/s/blog_5da93c8f0100yjxp.html
+  
+  
