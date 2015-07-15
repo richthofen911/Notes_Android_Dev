@@ -1,0 +1,60 @@
+::概述
+  sqlbrite使用RxJava observables 的订阅模式来查询 ，而不是直接执行查询
+  我们不企图掩盖SQL，Cursor或者SQLiteOpenHelper的概念（这和contentprovider的思想完全相反）。
+  而是将这三个概念赋予“数据更新的通知”。当一个表格的数据因为插入，修改，或者删除而变更时，该数据的订阅者将会随之变更
+
+::函数响应式编程(Functional Reactive Programming:FRP）   
+  参考链接：http://www.jdon.com/45581
+            http://www.bkjia.com/Androidjc/959402.html
+            http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0306/2551.html
+  响应式代码的基本组成部分是Observables和Subscribers（事实上Observer才是最小的构建块，但实践中使用最多的是
+  Subscriber，因为Subscriber才是和Observables的对应的）Observable发送消息，而Subscriber则用于消费消息。
+  消息的发送是有固定模式的。Observable可以发送任意数量的消息（包括空消息），当消息被成功处理或者出错时，流程结束。
+  Observable会调用它的每个Subscriber的Subscriber.onNext()函数，并最终以Subscriber.onComplete()或者
+  Subscriber.onError()结束。这看起来像标准的观察者模式，但不同的一个关键点是：
+  Observables一般只有等到有Subscriber订阅它，才会开始发送消息（术语上讲就是热启动Observable和冷启动Observable。
+  热启动Observable任何时候都会发送消息，即使没有任何观察者监听它。冷启动Observable只有在至少有一个订阅者的时候才
+  会发送消息（我的例子中都是只有一个订阅者）。这个区别对于开始学习RxJava来说并不重要）
+  换句话说，如果没有订阅者观察它，那么将不会起什么作用。
+  FRP是更加有效率地处理事件流，而无需显式去管理状态。具体来说，FRP包括两个核心观点：
+    1.事件流，离散事件序列
+    2.属性properties, 代表模型连续的值。
+  一系列事件是导致属性值发生变化的原因。FRP非常类似于GOF的观察者模式。
+  为什么需要FRP?
+  FRP的需求来源于对于多个值发生改变，以javascript为例子，如下：
+    var a = function (b,c) { return b + c } // a = b + c
+  其中a实际代表b与c之和，如果b或c持续不断在被改变，如何触发a值也跟着变化呢？
+  也就是说，上述代码只是一种表达式，并没有指定a值的变化依赖b和c。
+  使用Reactive.js可以达到指定这种依赖关系，样例代码如下：
+    //A = B + C
+    var reactiveA = $R(function (b, c) { return b + c });
+    var reactiveB = $R.state(2);
+    var reactiveC = $R.state(1);
+    reactiveA.bindTo(reactiveB, reactiveC);
+
+    reactiveA();   //-> 3
+    reactiveB(5);  //Set reactiveB to 5
+    reactiveC(10); //Set reactiveC to 10
+    reactiveA();   //-> 15
+    
+  我们将b和c可以看成是被观察者，而a作为观察者，如果随着时间推移，b和c的值不断变化，如何将这种变化传导到a呢？
+
+我们将导致b和c被观察者发生变化的一系列事件组成事件流，可以用集合来表达事件流，那么FRP框架所要做的就是，遍历这个事件流集合，将导致b和c的变化的事件重新播放，获得a的一系列值结果。
+
+事件流被称为被观察者序列(observable sequences)，其实被观察者是一种Monads。
+当存在重复的事件流怎么办？只能选取一个，事件流如果很多，需要进行压缩，所有这些针对事件流(被观察者序列)的额外加工
+处理需要专门框架实现，RxJava和RxJS分别这样的框架，RxJava是视频巨头Netflix推出的Functional reactive框架。支持java 8
+的lambda，支持 Groovy, Clojure, Scala 和 JRuby语言。
+
+::RxJava概述
+  RxJava是由Netflix开发的响应式扩展（Reactive Extensions）的Java实现。引用MSDN上对它的定义，Reactive Extensions是
+  一个第三方库, 它结合了可观察集合和LINQ式查询以达到异步和基于事件的编程效果。Netflix将这个库托管到了Github上，
+  支持Java6以上的版本并且使它可以用于Android App开发。RxJava作为一个Functional reactive框架，可以提供了如下对
+  被观察者的集合(事件流)处理能力：进行filtering, selecting, transforming, combining 和composing 。在对被观察的
+  数据类型进行遍历中，消费者(consumer也就是被观察者自身)从生产者(producer观察者)那里拉取poll数值，然后，线程会
+  堵塞等待直到这些数值真正到达获取。反过来说，生产者(producer观察者)在数值可用时，则是将数值推送push给消费者。
+  这样的方式更加灵活，因为数值的获取可以是同步或异步。
+  
+
+
+项目链接 https://github.com/square/sqlbrite
