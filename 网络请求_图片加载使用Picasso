@@ -1,0 +1,15 @@
+Picaso 官网 http://square.github.io/picasso/
+
+安装 compile 'com.squareup.picasso:picasso:2.5.2'  或下载jar文件
+
+基础应用
+  Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+  
+  Picasso.with(context).load(url).resize(50, 50).centerCrop().into(imageView);
+  
+  Picasso.with(context).load(url).placeholder(R.drawable.user_placeholder).error(R.drawable.user_placeholder_error).into(imageView);
+  //上面方法的placeholder将resource传入通过getResource.getDrawable取资源，所以可以是张图片也可以是color id
+  
+  
+  
+
