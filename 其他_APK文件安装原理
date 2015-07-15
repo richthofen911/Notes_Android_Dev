@@ -1,0 +1,30 @@
+::概述
+    Android应用安装有如下四种方式：
+      1.系统应用安装――开机时完成，没有安装界面
+      2.网络下载应用安装――通过market应用完成，没有安装界面
+      3.ADB工具安装――没有安装界面。
+      4.第三方应用安装――通过SD卡里的APK文件安装，有安装界面，由packageinstaller.apk应用处理安装及卸载过程的界面。
+    
+    应用安装涉及到如下几个目录：        
+      system/app ---------------系统自带的应用程序，获得adb root权限才能删除
+      data/app  ---------------用户程序安装的目录。安装时把apk文件复制到此目录      
+      data/data ---------------存放应用程序的数据
+      data/dalvik-cache--------将apk中的dex文件安装到dalvik-cache目录下
+      
+    安装过程：
+      复制APK安装包到data/app目录下，解压并扫描安装包，把dex文件(Dalvik字节码)保存到dalvik-cache目录，
+      并在data/data目录下创建对应的应用数据目录。
+    卸载过程：
+      删除安装过程中在上述三个目录下创建的文件及目录。
+
+    安装应用的过程解析
+    一.开机安装，是用PackageManagerService处理各种应用的安装，卸载，管理等工作，开机时由systemServer启动此服务
+        (源文件路径：android\frameworks\base\services\java\com\android\server\PackageManagerService.java)
+        PackageManagerService服务启动的流程：
+          1.首先扫描安装“system\framework”目录下的jar包
+          2.扫描安装系统system/app的应用程序
+          3.制造商的目录下/vendor/app应用包
+          4.扫描“data\app”目录，即用户安装的第三方应用
+          5.扫描" data\app-private"目录，即安装DRM保护的APK文件（一个受保护的歌曲或受保护的视频是使用DRM保护的文件
+          
+参考链接： http://blog.csdn.net/hdhd588/article/details/6739281
