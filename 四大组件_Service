@@ -51,3 +51,27 @@
   3）不需要主动调用stopSelft()来结束服务。因为，在所有的intent被处理完后，系统会自动关闭服务。
   4) 默认实现的onBind()返回null
   5）默认实现的onStartCommand()的目的是将intent插入到工作队列中
+  
+::关于防止Service并干掉
+   1. 在manifest中设置android:persistent="true"属性，但是需要权限，对第三方应用意义不大
+   2. onStartCommand()返回值设为START_REDELIEVER_INTENT 或 START_STICKY
+   3. 提高Service的进程等级
+      Android进程分5个等级:foreground process，visible process，Service process，background process，empty process
+      当系统资源吃紧的时候，会按照进程等级从低到高的顺序，同时根据进程消耗的资源从多到少的原则来kill一些进程，
+      而service正处于第三个等级，如果能够提高service所在进程的等级，那么它被杀死的概率就会小一些，通常可以调用
+      startForeground（）方法将Service的进程等级从第三级提升到第一级foreground process
+      样例代码
+         public final void startForeground(int id, Notification notification) {
+             try {
+                 mActivityManager.setServiceForeground(
+                     new ComponentName(this, mClassName), mToken, id,
+                     notification, true);
+             } catch (RemoteException ex) {
+             }
+         }
+        可以在在onCreate（）或者onStartComman()方法中调用此方法，然后可以在onDestroy（）或者其他地方调用
+        stopForeground(boolean removeNotification)方法来stop
+    4.提高service IntentFilter的priority等级
+      intent-filter可以通过 android:priority = "1000"这个属性设置最高优先级，1000是最高值，
+      如果数字越小则优先级越低，同时实用于广播   
+        
