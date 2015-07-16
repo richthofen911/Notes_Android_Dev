@@ -1,0 +1,87 @@
+::概述: 
+  Android对SQLite数据库，提供了完全的支持，而所有创建的SQLite数据库，仅限于当前应用访问，如果其他应用需要访问，
+  则必须提供的Content Provider的支持，并且SQLite数据库会随着Android应用的卸载而被删除。SQLite是一个嵌入式的数据库引擎
+  最后是以文件的形式保存数据的。从本质上来看，SQLite的操作方式只是一种更为便捷的文件操作，当应用程序创建或打开一个
+  SQLite数据库时，其实只是打开一个文件准备读写。因为SQLite仅适用于资源有限的小型设备，所以本身就不应该把大量数据
+  存储在设备的SQLite数据库里，SQLite只适合存储一些小型的数据。为了使SQLite和其他数据库间的兼容性最大化，SQLite支持对
+  列上类型进行“类型近似”，列的类型近似指的是存储在列上的数据进行推荐类型存储。所以虽然SQLite内部只支持NULL、INTEGER、
+  REAL（浮点书）、TEXT（文本）和BLOB（大二进制对象）这五种数据类型，但实际上SQLite完全可以接受varchar(n)、char(n)、
+  decimal(p,s)、date等类型数据，只不过SQLite会在运算或保存时将它们转换为上面五种数据类型中相应的类型。大多数数据库的
+  引擎都是使用静态的、强类型的数据类型，数据的类型是由它的容器决定的，这个容器是指被存放的特定列。而SQLite使用的是
+  动态类型，在SQLite中，值的数据类型跟值本身相关，而不是与它的容器相关，所以SQLite允许把各种类型的数据保存到任何类型
+  字段中，开发者可以不用关心声明该字段说使用的数据类型。但是有一种情况例外，定义为INTEGER PRIMARY KEY的字段只能存储
+  64位整数，当向这种字段保存除整数意外的其他类型的数据时，SQLite会产生错误。
+
+::sql创建与维护
+  SQLiteOpenHelper提供了两个构造器，用于传递当前上下文对象以及SQLite数据库版本信息，在SQLiteOpenHelper的继承类的
+  构造函数中，会调用它，构造器的签名如下：
+      SQLiteOpenHelper(Context context,String name,SQLiteDatabase.CursorFactory factory,int version)
+      SQLiteOpenHelper(Context context,String name,SQLiteDatabase.CursorFactroy factory,int version,
+        DatabaseErrorHandler errorHandler)
+　　  上面的构造函数中，都是用于创建一个SQLite数据库，context为一个当前应用的上下文对象；name是数据库名称；
+　　  factory是一个允许子类在查询时使用的游标，一般不用传Null；version是数据库版本号；errorHandler是一个接口，
+　　  传递当数据库错误的时候，执行的补救方法
+　在SQLiteOpenHelper中，可进行SQLite的创建,维护,日志以及获取可读写的数据库对象，通过调用下面几个常用方法
+    String getDatabaseName() 获取数据库名。
+    SQLiteDatabase getReadableDatabase() 创建或者打开一个可读的数据库对象。
+    SQLiteDatabase getWritableDatabase() 创建或者打开一个可读/写的数据库对象。
+    abstract void onCreate(SQLiteDatabase db) 第一次调用SQLiteOpenHelper时执行，之后再次调用将不再执行，
+        一般用于完成数据库初始化的工作。
+    void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion) 当数据库版本号发生向上更新时，被执行。
+    void onDowngrade(SQLiteDatabase db,int oldVersion,int newVersion) 当数据库版本号发生向下更新时，被执行。
+  继承SQLiteOpenHelper的样例代码：
+    import android.content.Context;
+    import android.database.sqlite.SQLiteDatabase;
+    import android.database.sqlite.SQLiteOpenHelper;
+
+    public class DbOpenHelper extends SQLiteOpenHelper {
+        private static String name = "mydb.db";
+        private static int version = 1;
+
+        public DbOpenHelper(Context context) {
+            super(context, name, null, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            // 只能支持基本数据类型
+            String sql = "create table person(id integer primary key autoincrement,name varchar(64),address varchar(64))";
+            db.execSQL(sql);
+        }
+        
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // TODO Auto-generated method stub
+            String sql="alter table person add sex varchar(8)";
+            db.execSQL(sql);
+        }
+    }
+  当创建好SQLite数据库的之后，可以在/data/data/<package name>/databases目录下找到SQLite数据库文件
+
+::执行CRUD操作
+  当使用SQLiteOpenHelper的getReadableDatabase()或者getWritableDatabase()方法获取到SQLiteDatabase对象，就可以对这个数据库进行操作了。
+　1）对于熟悉SQL语句的开发者而言，其实只需要使用两个方法，即可执行所有CRUD操作：
+     1. void execSQL() 通过SQL语句执行一条非查询语句。
+     2. Cursor rawQuery() 通过SQL语句执行一条查询语句。
+     Demo代码见 http://www.cnblogs.com/plokmju/p/android_sqlite.html  
+　2）对于Android开发，还有必要了解另外一种操作SQLite的方式，使用SQLiteDatabase所提供的方法实现CRUD操作。因为
+　   Android有一个内容提供者（Content Provider），可以使用外部应用访问内部应用的数据，它传递数据的形式，大部分是与
+　   SQLiteDatabase内置方法的参数一致，如果统一使用SQLiteDatabase提供的方法操作数据库很方便，无需额外转换SQL语句
+　   主要有以下几个：
+      long insert(String table ,String nullColumnHack,ContentValues values)：插入一条数据。
+      int delete(String table ,String whereCaluse,String[] whereArgs)：根据条件，删除数据。
+      int updata(String table,ContentValues values,String whereCaluse,String[] whereArgs)：根据条件，更新数据
+      Cursor query(...)：根据条件，查询数据。提供多种重载方法，主要查询不同的条件。
+    Demo代码见 http://www.cnblogs.com/plokmju/p/android_sqlite.html  
+    
+::SQLite事务
+　SQLite的事务通过SQLiteDatabase中包含的两个方法对其进行控制：
+　  beginTransaction()，开始事务
+　  endTransaction()，结束事务
+　除此之外，SQLiteDatabase还提供了一个inTransaction()方法用来判断当前上下文是否处于事务环境中。
+　当程序执行endTransaction()方法时将会结束事务，到底是回滚事务还是提交事务取决于SQLiteDatabase是否调用了
+　setTransactionSuccessful()方法来设置事务标志，如果程序事务执行中调用该方法设置了事务成功则提交事务，
+　否则程序将回滚事务。    
+　
+::Android将数据库保存到SD卡的实现
+  http://zmywly8866.github.io/2015/03/09/android-save-database-in-sdcard.html
