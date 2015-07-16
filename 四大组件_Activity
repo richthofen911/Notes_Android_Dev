@@ -71,8 +71,8 @@
    2. 然后调用onDestroy()销毁当前的Activity
    3. 重新调用onCreate()或onRestoreInstanceState()方法去重新创建一个Activity（也就是说，程序会重新将onCreate中的代码在执行一遍）
   
-  1. 最简单的:强制activity方向，即禁止screen rotation的调用
-      android:screenOrientation="landscape" 或 "vertical"
+  1. 最简单的:强制activity方向，即禁止screen rotation的调用 在manifest文件<activity标签中
+      android:screenOrientation="Portrait"
       
   ::onSaveInstanceState()方法和noRestoreInstanceState()方法
     这两个不声明周期的方法，不一定会被调用。当遇意外情况（例如内存不足）由系统销毁一个activity时，
