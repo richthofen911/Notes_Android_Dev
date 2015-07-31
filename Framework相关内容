@@ -1,0 +1,4 @@
+::Android主要源代码
+  Linux kernel
+  bionic   -------- Android标准C运行支持库
+  bootloader -------Android 内核加载器参考
