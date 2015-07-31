@@ -11,12 +11,32 @@
   packages ---------包含Android基本应用，例如Content Provider等
   system  ----------Android 初始化进程，蓝牙工具集等
   
+::Android的Service Framework和Binder Driver
+  服务管理器Service Server:     指运行系统服务的进程，相当于System Server或Media Server
+  服务客户端Server Client:      指使用系统服务的进程
+  上下文管理器Context Manager:  是一个管理系统服务的系统进程，它管理安装在系统中的各种系统服务的位置信息Handle，这些
+                                Handle用来指定BinderIPC目的地址
+  服务框架Service Framework:    包含Service Manager，其中定义了一系列类，用于服务使用者与系统服务间的RPC操作
+  服务接口Service Interface:    它是预先定义的即口，用于在服务使用者与系统服务间。系统服务应该根据相关接实现stub函数
+                                并提供相关服务，而使用者也必须根据相关接口调用服务
+  服务使用者                    在服务客户进程中实际使用服务的模块
+  服务Service:                  由服务stub函数实现定义在服务接口中的功能，是提供实际服务功能的模块
+  服务代理Service Proxy:        执行RPC时用来对数据进行Marshalling(装配)处理对象，不同的服务接口对应不同的服务代理，
+                                它提供服务代码函数，根据服务接口中定义的函数，对数据分别进行不同的Marshalling处理
+  服务stub:                     RPC执时用来对数据进行UnMarshalling(拆卸)处理的对象，该对象随接口不同而不同。它对接
+                                收到的数据进行UnMarshalling处理后，调用相关的服务stub函数
+  Binder Driver:                简称Binder，是Android中为支持IPC而采用的机制，它以Android版Linux内核的Device Driver
+                                形态存在
+  Binder IPC:                   Inter Process Communication
+  Binder RPC:                   (Remote Procedure Call)服务会向使用者提供基于特定服务接口的函数，服务使用者通过
+                                Binder IPC调这些函数，就像调用自身函数一样。
+                                
 ::init进程
   init进程运行过程
     init是由内核启动的第一个用户级进程
     内核启动过程  start_kernel()--->init_post()--->run_init_process() ---->init进程运行
-    正常情况下编译完Android后生成的根文系统中，init进位于最顶层目录，如果找不到或未指定，内核会到/sbin,/etc和/bin目录
-    下查找init文件，如果仍为找到，内核会终止执行init进程，并引发Kernel Panic
+    正常情况下编译完Android后生成的根文系统中，init进位于最顶层目录，如果找不到或未指定，内核会到/sbin,/etc和/bin
+    目录下查找init文件，如果仍为找到，内核会终止执行init进程，并引发Kernel Panic
     
 
 ::Zygote相关
