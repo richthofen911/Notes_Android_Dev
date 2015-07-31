@@ -2,3 +2,34 @@
   Linux kernel
   bionic   -------- Android标准C运行支持库
   bootloader -------Android 内核加载器参考
+  build  -----------Android的build系统
+  cts   ------------Android兼容性测试源
+  dalvik VM
+  external ---------Android使的开放源
+  frameworks -------Android框架
+  hardware ---------Android HAL(Hardware Abstraction Layer)库源
+  packages ---------包含Android基本应用，例如Content Provider等
+  system  ----------Android 初始化进程，蓝牙工具集等
+  
+::init进程
+  init进程运行过程
+    init是由内核启动的第一个用户级进程
+    内核启动过程  start_kernel()--->init_post()--->run_init_process() ---->init进程运行
+    正常情况下编译完Android后生成的根文系统中，init进位于最顶层目录，如果找不到或未指定，内核会到/sbin,/etc和/bin目录
+    下查找init文件，如果仍为找到，内核会终止执行init进程，并引发Kernel Panic
+    
+
+::Zygote相关
+  Zygote系应用一个相当重要的进程，主要功能是执行Android应用程序，在Android系统中运行新的应，如同卵子受精分裂
+  一样(Zygote的原意是受精卵，结合体)，需要跟Zygote进程(拥有应用程序运行是所需要的各种元素与条件结合）结合后才能执行
+  Zygote进程运行时，会初始化Dalvik虚拟机并启动它。应用程序每次运行都要重新初始化并启动虚拟机，该过程会耗费相当长时
+  间，因此在应用程序运行前，Zygote进程通过共享已运的虚拟机代码与内存信息，缩短应用程序运行所耗费的时间，并且会事先
+  将应用程序使用Android Framework中的类与资源加载到内存中，并组织形成所用资源的链接信息。新运行的应用程序在使用所
+  需资源时不必每次重新形成资源的链接信息，这会节省大量时间，提运行速度。
+  
+::关于Android中的PID
+  Android设备中运行的进程大致有Daemon进程以及在Dalvik虚拟机中运行的应用程序进程两大类。PID为1的进程是init进程，
+  其中还有PPID(Parent PID)为1的进程，他们就是init进程启的Daemon进程，Zygote进程就是其中之一。Zygote进程的PID为
+  30, PPID为30的进程Zygote子进程，由Zygote创建，大都是应用程序
+
+::Linux中创建进程和android中Zygote的区别  
