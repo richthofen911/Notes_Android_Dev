@@ -26,6 +26,13 @@
   间，因此在应用程序运行前，Zygote进程通过共享已运的虚拟机代码与内存信息，缩短应用程序运行所耗费的时间，并且会事先
   将应用程序使用Android Framework中的类与资源加载到内存中，并组织形成所用资源的链接信息。新运行的应用程序在使用所
   需资源时不必每次重新形成资源的链接信息，这会节省大量时间，提运行速度。
+  Zygote由Java写成，不能直接由init进程启动运行，若要运行Zygote类需要生成Davlik虚拟机，再在虚拟上装载运行ZygoteInit类
+  执行这一任务的app_precess进程。 
+  /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
+  app_process先生成一个AppRuntime对象而后分析main()函数传递进来的参数并传递给AppRuntime对象以生成并初始化虚拟机
+  再调用ZygoteInit.main()生成Zygote
+  
+  
   
 ::关于Android中的PID
   Android设备中运行的进程大致有Daemon进程以及在Dalvik虚拟机中运行的应用程序进程两大类。PID为1的进程是init进程，
@@ -33,3 +40,4 @@
   30, PPID为30的进程Zygote子进程，由Zygote创建，大都是应用程序
 
 ::Linux中创建进程和android中Zygote的区别  
+  《Android框架揭秘》p.140
