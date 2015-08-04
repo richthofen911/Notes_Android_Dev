@@ -1,1 +1,10 @@
+::Intent结构
+  http://www.cnblogs.com/skywang12345/archive/2013/03/10/3165554.html
 
+::显示intent(explicit intent)和隐式intent(implicit intent)
+  显式通过component明确指定类名，用于跳转。通常用到的API有setComponent(ComponentName)或setClass(Context, Class)等
+  
+  http://www.cnblogs.com/skywang12345/archive/2013/03/10/3165553.html
+  
+::Intent属性
+  http://www.cnblogs.com/skywang12345/archive/2013/03/10/3165552.html
