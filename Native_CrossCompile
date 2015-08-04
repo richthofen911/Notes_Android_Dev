@@ -1,0 +1,5 @@
+::易出问题
+  使用Makefile而不是Android.mk做配置文件时，语法有误可能出现dependencies找不到
+  快速解决方法：
+    1. 从NDK中找到依赖文件放到project文件夹中
+    2. 缺少ldl和lc文件，实际是缺少libc.a和libldl.a这两个文件，前者可以在NDK里找到，后者可在Android源码项目里找到
