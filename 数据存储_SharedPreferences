@@ -7,7 +7,18 @@
   Operating mode. Use 0 or MODE_PRIVATE for the default operation
   MODE_WORLD_READABLE and MODE_WORLD_WRITEABLE to control permissions
   MODE_MULTI_PROCESS can also be used if multiple processes are mutating the same SharedPreferences file.
-  MODE_MULTI_PROCESS is always on in apps targeting Gingerbread (Android 2.3) and below, and off by default in later versions.
+  MODE_MULTI_PROCESS is always on in apps targeting Gingerbread (Android 2.3) and below, and off by default in later 
+  versions.
+  
+  *注意：
+    为了保证数据写入的完整性。主要考虑的场景是如果同时要写入多条键值对，这些键值对不会逐条写入文件中，而是先打包在
+    一起，再一次性写入，即one-at-a-time。具体实现方法是在Editor实现一个hashMap来暂存要写入的数据，先把所有键值对
+    写入内存中的该hashMap中，然后再一次性写入文件中。该过程可以概括为先commitToMemory, 再writeToFile
+    所以在写入多组数据时，应该
+    1.先获取editor对象  editor = demoPreferences.edit();
+    2.editor.put***(); //此处可以put任意多次，任意type
+    3.最后editor一次性commit()或apply()
+    
 
 
 ::Gson + SharedPreferences的用法
