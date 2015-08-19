@@ -1,0 +1,13 @@
+参考链接：http://blog.csdn.net/singwhatiwanna/article/details/21829971
+
+::什么是Context
+  Context是一个抽象基类，我们通过它访问当前包的资源（getResources、getAssets）和启动其他组件
+  （Activity、Service、Broadcast）以及得到各种服务（getSystemService），当然，通过Context能得到的不仅仅只有
+  上述这些内容。对Context的理解可以来说：Context提供了一个应用的运行环境，在Context的大环境里，应用才可以访问
+  资源，才能完成和其他组件、服务的交互，Context定义了一套基本的功能接口，我们可以理解为一套规范，而Activity和
+  Service是实现这套规范的子类，这么说也许并不准确，因为这套规范实际是被ContextImpl类统一实现的，Activity和
+  Service只是继承并有选择性地重写了某些规范的实现。
+  
+::getApplication和getApplicationContext的区别
+  getApplication返回结果为Application，且不同的Activity和Service返回的Application均为同一个全局对象
+  getApplicationContext返回的也是Application对象，只不过返回类型为Context
