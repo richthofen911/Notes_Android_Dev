@@ -7,6 +7,30 @@
   资源，才能完成和其他组件、服务的交互，Context定义了一套基本的功能接口，我们可以理解为一套规范，而Activity和
   Service是实现这套规范的子类，这么说也许并不准确，因为这套规范实际是被ContextImpl类统一实现的，Activity和
   Service只是继承并有选择性地重写了某些规范的实现。
+
+::Application、Activity和Service作为Context的区别
+  1. 继承关系不同
+    android.app.Activity -> andoird.view.ContextThemeWrapper 
+      -> android.content.ContextWrapper -> android.content.Context -> java.lang.Object
+  
+    android.app.Service -> android.content.ContextWrapper -> android.content.Context -> java.lang.Object
+    
+    android.app.Application -> android.content.ContextWrapper -> android.content.Context -> java.lang.Object
+  
+  2.Context的真正实现都在ContextImpl中，也就是说Context的大部分方法调用都会转到ContextImpl中，而三者的创建均在
+    ActivityThread中完成(关于Activity的启动过程http://blog.csdn.net/singwhatiwanna/article/details/18154335）
+    
+::Context对资源的访问
+  不同的Context得到的都是同一份资源。得到资源的方式为context.getResources，而真正的实现位于ContextImpl中的
+  getResources方法，在ContextImpl中有一个成员 private Resources mResources，它就是getResources方法返回的结果
+  mResources的赋值代码为：
+    mResources = mResourcesManager.getTopLevelResources(mPackageInfo.getResDir(),
+        Display.DEFAULT_DISPLAY, null, compatInfo, activityToken);
+  对于ResourcesManager的getTopLevelResources方法，这个方法的思想是这样的：
+    在ResourcesManager中，所有的资源对象都被存储在ArrayMap中，首先根据当前的请求参数去查找资源，如果找到了
+    就返回，否则就创建一个资源对象放到ArrayMap中。有一点需要说明的是为什么会有多个资源对象，原因很简单，
+    因为res下可能存在多个适配不同设备、不同分辨率、不同系统版本的目录，按照android系统的设计，不同设备在访问
+    同一个应用的时候访问的资源可以不同
   
 ::getApplication和getApplicationContext的区别
   getApplication返回结果为Application，且不同的Activity和Service返回的Application均为同一个全局对象
