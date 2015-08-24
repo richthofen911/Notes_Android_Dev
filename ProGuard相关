@@ -1,0 +1,11 @@
+::ProGuard作用
+  ProGuard通过删除无用代码，将代码中类名、方法名、属性名用晦涩难懂的名称重命名从而达到代码混淆、压缩和优化的功能，
+  跟JavaScript的混淆压缩类似。压缩和优化使得编译后apk包更小。混淆可以保证代码在被反编译后读懂的难度很大，防逆向工程。
+
+::不能用ProGuard做混淆的类
+  1).反射用到的类
+  2).在AndroidManifest中配置的类(Activity、Service等的子类及Framework类默认不会进行混淆)
+  3).Jni中调用的类
+
+::标准proguard.cfg文件内容
+  https://github.com/richthofen911/UtilScripts/blob/master/%E6%A0%87%E5%87%86proguard.cfg%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9
