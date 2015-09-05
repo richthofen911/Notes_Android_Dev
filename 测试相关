@@ -5,3 +5,7 @@ Android Test Kit:
   
 AndroidJUnit4:
   是一个让 JUnit 4 可以直接运行在 Android 设备上的开源命令行工具。  
+  
+
+::Espress framework
+  https://code.google.com/p/android-test-kit/wiki/Espresso
