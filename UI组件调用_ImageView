@@ -1,5 +1,5 @@
 ImageView
-imageview.setImageResourse(R.id.[imageName])  直接drawable里面的名字
+imageview.setImageResourse(R.drawable.[imageName])  直接drawable里面的名字
 显示网络图片
 public class AsyncGetImage extends AsyncTask<String, String, Bitmap>
 {
