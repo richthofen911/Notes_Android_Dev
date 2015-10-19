@@ -74,4 +74,19 @@
     4.提高service IntentFilter的priority等级
       intent-filter可以通过 android:priority = "1000"这个属性设置最高优先级，1000是最高值，
       如果数字越小则优先级越低，同时实用于广播   
-        
+      
+:: 判断某个servcie是否在运行
+    private boolean isServiceRunning(String serviceClassName){
+        ActivityManager activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningServiceList = activityManager.getRunningServices(80);
+        if(runningServiceList.size() < 0)
+            return false;
+        else {
+            for(ActivityManager.RunningServiceInfo runningServiceInfo: runningServiceList){
+                if(runningServiceInfo.service.getClassName().equals(serviceClassName)){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }    
