@@ -1,0 +1,28 @@
+http://blog.csdn.net/pku_android/article/details/7425520
+
+Android中主要通过RecognizerIntent来实现语音识别，它主要包括一些常量来表示语音的模式等，如下图所示
+常量                              描述
+ACTION_RECOGNIZE_SPEECH           开启语音活动
+ACTION_WEB_SEARCH                 开启网络语音模式，结果将以网页搜索显示
+EXTRA_LANGUAGE                    设置语言库
+EXTRA_LANGUAGE_MODEL              语音识别模式
+EXTRA_MAX_RESULTS                 返回的最大结果
+EXTRA_PROMPT                      提示用户可以开始语音
+EXTRA _RESULTS                    将字符串返回到一个ArrayList中
+LANGUAGE_MODEL-FREE_FORM          在一种语言模式上自由语言
+LANGUAGE_MODEL-WEB_SEARCH         使用语言模型在Web上搜索
+RESULT_AUDIO_ERROR                返回结果时，音频遇到错误
+RESULT_CLIENT_ERROR               返回结果时，客户端遇到错误
+RESULT_NETWORK_ERROR              返回结果时，网络遇到错误
+RESULT_NO_MATCH                   没有检测到语音的错误
+RESULT_SERVER_ERROR               返回结果时，服务器遇到错误
+
+::最简单通过调用activity intent来做一次性识别
+只需要通过Intent来传递一个动作以及一些属性，然后通过startActivityForResult来开始语音：
+Intent intent= new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+       intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "开始语音");
+
+如果找不到设置，就会抛出ActivityNotFoundException，所以需要捕捉这个异常。其中如果当前手机没有连接到互联网则会显示
+连接问题     
+
