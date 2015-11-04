@@ -1,0 +1,7 @@
+::让EditText默认不获取焦点
+  在EditText结点的父结点中加上
+   android:focusable="true"  
+   android:focusableInTouchMode="true"
+   
+   
+  http://blog.csdn.net/woshicaixianfeng/article/details/7261718
