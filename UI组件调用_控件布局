@@ -1,2 +1,18 @@
 ::让控件靠底部
     http://www.cnblogs.com/zdz8207/archive/2012/12/13/2816906.html
+    
+::  android:layout_gravity 和 android:gravity 区别 
+
+    android:layout_gravity 
+        sets the gravity of the View or Layout in its parent. (即相对于父结点的位置）
+    
+    android:gravity 
+        sets the gravity of the content of the View its used on. (即内部显示内容的位置）
+        
+    所以让控件靠底部，只要
+        0. android:layout_weight="1"
+        1. 让container 的layout_gravity水平居中(central_horizontal)
+        2. 再让container 的gravity水平居中
+        3. 再把里面view的layout_gravity="bottom"
+        4. view 是当marginBottom一点
+    
