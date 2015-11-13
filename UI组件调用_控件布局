@@ -10,9 +10,9 @@
         sets the gravity of the content of the View its used on. (即内部显示内容的位置）
         
     所以让控件靠底部，只要
-        0. android:layout_weight="1"
+        0. container的android:layout_weight="1"
         1. 让container 的layout_gravity水平居中(central_horizontal)
         2. 再让container 的gravity水平居中
         3. 再把里面view的layout_gravity="bottom"
-        4. view 是当marginBottom一点
+        4. view 适当marginBottom一点
     
