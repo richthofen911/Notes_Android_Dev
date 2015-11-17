@@ -1,0 +1,11 @@
+::调整行高
+  adapterTimestamp = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, timestamps){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                View view = super.getView(position, convertView, parent);
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                params.height = 150;
+                view.setLayoutParams(params);
+                return view;
+            }
+        };
