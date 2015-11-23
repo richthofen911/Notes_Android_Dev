@@ -1,0 +1,6 @@
+1. Download dex2jar (Make sue JDK has been installed)
+    http://sourceforge.net/projects/dex2jar/files/
+    
+2. ./d2j-dex2jar.sh target.apk
+
+3. open the target folder with jd-gui (Download from http://jd.benow.ca/)
