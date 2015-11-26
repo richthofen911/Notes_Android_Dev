@@ -1,0 +1,33 @@
+------------------ some of the shell tools are available on emulators, not on physical devices
+::normal tools
+  echo
+  set
+  export
+  cd
+  pwd
+  ls
+  cmp
+  date
+  dd
+  vmstat       virtual memory statistics
+  dmesg        get kernel message
+  df           Show information about the file system on which each FILE resides, or all file systems by default.
+  
+
+::Android special
+  dalvikvm       use to run Android apps
+  svc            use to control PowerManager/Data Connectivity/Wifi/USB
+  mpdecision     Qualcomm chips have Qualcomm prorprietary userspace binary called "mpdecision" m(ake)p(oor)decision. 
+                 Instead of letting the kernel itself to decide what frequencies and how many cores to run, 
+                 this "mpdecsion" binary polls the kernel run queue statistics and decides for the whole system the 
+                 "optimal" frequency and the "optimal" number of cores to use. 
+  racoon
+  radish
+  bcc            bitcode compiler or something similar i guess
+  bootanimation  plays the bootanimation once
+  screenrecord   Android screenrecord v1.2.  Records the device's display to a .mp4 file.
+  dpm            device policy manager
+  
+  
+                 
+                 
