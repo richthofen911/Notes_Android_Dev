@@ -18,11 +18,25 @@
       ，预载优先级会高一点），直到所有符合预载规则的程序都已经载入内存，或者可用内存低于minfree里面empty app
       （A4默认是）的设置值为止……也就是说：内存释放软件不但做的是无用功，而且增加了系统读取程序数据的操作。
   
-::避免内存泄漏的tips
+::避免内存泄漏的tips  http://www.tuicool.com/articles/MrqYVbe
   1. 对于生命周期比Activity长的对象，如果需要应该使用ApplicationContext ；
   2. 在涉及到Context时先考虑ApplicationContext，当然它并不是万能的，对于有些地方则必须使用Activity的Context，
       对于Application，Service，Activity三者的Context的应用场景如下：
       
+        |Function               | Application | Service | Activity|
+        -----------------------------------------------------------
+        |start an Activity      | No1*        | No1*    | Yes     |
+        |show a Dialog          | No          | No      | Yes     |
+        |layout inflation       | Yes         | Yes     | Yes     |
+        |start a Service        | Yes         | Yes     | Yes     |
+        |bind to a Service      | Yes         | Yes     | Yes     |
+        |send a BroadCast       | Yes         | Yes     | Yes     |
+        |register BroadCast     | Yes         | Yes     | Yes     |
+        |load Resource values   | Yes         | Yes     | Yes     |
+        
+        No1表示Application和Service可以启动一个Activity，不过需要创建一个新的task任务队列。
+        而对于Dialog而言，只有在Activity中才能创建 。
+        
   3. 对于需要在静态内部类中使用非静态外部成员变量(例如Context、View)，可以在静态内部类中使用弱引用来引用外部类的
       变量来避免内存泄漏 。
   4. 对于生命周期比Activity长的内部类对象，并且内部类中使用了外部类的成员变量，可以这样做避免内存泄漏：
