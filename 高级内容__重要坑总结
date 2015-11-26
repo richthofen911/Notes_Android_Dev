@@ -1,0 +1,26 @@
+1.  类的finalize方法的调用时机由系统而定，不能准确知道调用时机，可能会导致程序在使用过程中的异常。为避免这个问题，
+      需要将与类释放资源相关的操作封装成一个共有方法供外部使用，而不是调用类的finalize方法释放与类相关的资源。
+2. TextView及其派生子类，调用 setText 方法设置一个 int 型的数据，千万要将该值转为String，否则在某些设备中它会默认
+      去查询 R文件中定义的资源。
+3. 使用友盟分享 SDK，需要执行分享的 Activity 请不要为该 Activity 设置android:process属性。
+      比如你的 App 运行在com.codingfish.test 进程，需要产生分享动作的Activity 
+      设置 android:proces=":com.codingfish.hello" ，那么新浪微博就会出现你设置的分享内容没有显示的问题。
+4. 上线之前一定要使用正式签名打包。如果直接将 Debug 签名的 Apk 投放到渠道了，很难完全替换。
+5. 在 Activity 中尽可能少的创建 Handler 对象，创建一个主线程 Handler，一个后台 HandlerThread 就可以了。
+6. 使用 BitMap 之后，一定要记得释放。
+7. 使用线程的地方尽量不要使用new Thread，而是使用 AsyncThread 。
+8. onCreate(BundlesavedInstanceState)
+    切记将 
+      super.onCreate(savedInstanceState);
+    放在一切业务的前面。
+9. 创建了四大组件一定记得要在 AndroidManifest 文件中声明（当然 BroadcastReceiver 可以动态注册）。
+10.要考虑到Activity和进程被杀掉的情况。通常情况退出Activity外，还有Activity因其他原因被杀的情况，
+    比如系统内存过低，系统配置变更，有异常等等，要考虑和测试这种情况，特别是Activity处理重要的数据时，
+    做好的数据的保存。
+11.不要用四大组件去实现接口。 因为组件的对象都比较大，实现接口比较浪费，而且让代码更不易读和理解；
+      另外更重要的是导致多方引用，可能会引发内存泄露。
+12.主线程只做UI控制和Frameworks回调相关的事。附属线程只做费时的后台操作。交互只通过Handler。
+      这样就可以避免大量的线程问题。
+13.Frameworks的回调不要做太多事情仅做必要的初始化，其他不是很重要的事情可以放到其他线程中去做，
+      或者用Handler Schedule到稍后再做。
+14.要考虑多分辨率 至少为hdpi, mdpi, ldpi准备图片和布局。元素的单位也尽可能的使用dip而不要用px
