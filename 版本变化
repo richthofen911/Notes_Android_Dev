@@ -1,0 +1,5 @@
+:: Android 6.0 Permission
+  1. 还是要在manifest里列出需要的permission
+  2. 基本的一些permission其实没影响，高危险性permission才需要check/request
+  3. settings --> apps --> YourApp --> Permissions 里可以修改默认的permission
+  4. 具体check/request            https://github.com/richthofen911/MarshmallowPermission
