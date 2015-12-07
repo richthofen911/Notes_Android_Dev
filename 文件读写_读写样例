@@ -4,6 +4,9 @@
 ::-----------------------内部存储(即使用context)提供的接口----------------------------------
   创建/写文件:
     法一: File file = newFile(context.getFilesDir(), filename);
+          BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+          bw.write(contentToWrite);
+          bw.close();
   
     法二:  Android提供的封装过的方法，openFileOutput()
         String filename = "myfile";
