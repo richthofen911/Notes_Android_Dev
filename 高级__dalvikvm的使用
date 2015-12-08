@@ -1,0 +1,2 @@
+::可以通过 dalvikvm -cp /file/path className 直接运行dex文件
+  在adb shell中没有问题，但在app中用runtime.exec() 上述命令会找不到class
