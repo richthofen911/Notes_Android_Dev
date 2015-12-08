@@ -30,6 +30,12 @@
   dx --dex --output=outputName.dex jarFile.jar
   adb shell登录后有dex2oat工具
   
+::低版本兼容编译（目前用java 8编译不能在android上运行，java 7可以）
+  javac -target 1.7 -source 1.7 xxx.java
+  
+::引入lib库的编译
+  javac -cp lib.jar xxx.java
+  
 ::获取手机上安装app信息
   基本代码：
   PackageManager packageManager = this.getPackageManager();  
