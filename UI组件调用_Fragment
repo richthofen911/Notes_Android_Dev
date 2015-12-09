@@ -13,3 +13,10 @@
 ::调用fragment在调用getActivity()方法时，fragment必须和activity关联（attached to an activity），否则将会返回一个null
 
 ::fragment中创建AlertDialog时context参数只要getActivity()就可以，不要getActivity().getApplicationContext()
+
+::Fragment的生命周期和Activity生命周期之间的关系。在Activity里动态生成Fragment，首先是Activity调用onCreate()方法，
+  但是这时候还没有加载到Fragment里的组件，当Fragment调用其onCreateView()方法后，Activity才能得到Fragment中的组件
+
+::fragment 和 activity 交互
+  数据交互 http://blog.csdn.net/a910626/article/details/46003635
+  
