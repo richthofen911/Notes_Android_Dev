@@ -1,3 +1,8 @@
+::生命周期
+  http://blog.csdn.net/lmj623565791/article/details/37970961
+  Fragment的生命周期和Activity生命周期之间的关系。在Activity里动态生成Fragment，首先是Activity调用onCreate()方法，
+  但是这时候还没有加载到Fragment里的组件，当Fragment调用其onCreateView()方法后，Activity才能得到Fragment中的组件
+
 ::构建adapter
   链接: https://github.com/richthofen911/StreetsTO_Release/blob/master/app/src/main/java/com/ap1/streetsto/FragmentTabAdapter.java
 
@@ -14,9 +19,8 @@
 
 ::fragment中创建AlertDialog时context参数只要getActivity()就可以，不要getActivity().getApplicationContext()
 
-::Fragment的生命周期和Activity生命周期之间的关系。在Activity里动态生成Fragment，首先是Activity调用onCreate()方法，
-  但是这时候还没有加载到Fragment里的组件，当Fragment调用其onCreateView()方法后，Activity才能得到Fragment中的组件
-
 ::fragment 和 activity 交互
   数据交互 http://blog.csdn.net/a910626/article/details/46003635
+  
+  http://www.cnblogs.com/TerryBlog/archive/2012/02/17/2355753.html
   
