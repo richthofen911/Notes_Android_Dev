@@ -1,3 +1,5 @@
+http://blog.csdn.net/dai_zhenliang/article/details/38554273
+
 ::生命周期
   http://blog.csdn.net/lmj623565791/article/details/37970961
   Fragment的生命周期和Activity生命周期之间的关系。在Activity里动态生成Fragment，首先是Activity调用onCreate()方法，
@@ -21,6 +23,7 @@
 
 ::fragment 和 activity 交互
   数据交互 http://blog.csdn.net/a910626/article/details/46003635
+  activity 调用 fragment中view   getFragmentManager().findFragmentById(id).getView().findViewById(id)
   
   http://www.cnblogs.com/TerryBlog/archive/2012/02/17/2355753.html
   
