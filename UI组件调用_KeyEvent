@@ -11,5 +11,15 @@
         }
   });
   
+::simulate key event
+        (Instrument cannot be executed in Main thread, so need to use a new thread)
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Instrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
+            }
+        }).start();  
+  
   
   
