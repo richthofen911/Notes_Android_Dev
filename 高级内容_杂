@@ -44,3 +44,50 @@
       2）静态内部类中使用弱引用来引用外部类的成员变量
   5. 对于不再需要使用的对象，显示的将其赋值为null，比如使用完Bitmap后先调用recycle()，再赋为null 。
   6. 保持对对象生命周期的敏感，特别注意单例、静态对象、全局性集合等的生命周期。  
+  
+:: Handler 和 AsyncTask 区别 
+  链接：https://www.zhihu.com/question/19765032/answer/28681546
+    Handler和AsyncTask：这俩类都是用来实现异步的，其中AsyncTask的集成度较高，使用简单，Handler则需要手动写Runnable
+    或者Thread的代码；另外，由于AsyncTask内部实现了一个非常简单的线程池，实际上是只适用于轻量级的异步操作的，一般不应该
+    用于网络操作。我问他Handler和AsyncTask的区别，一方面是因为他说用AsyncTask联网，因此我认为他对AsyncTask并不熟悉；
+    但更重要的是在我问他实现异步的具体手段的时候，他同时提到了Handler和AsyncTask——用这种“混搭”的使用方式来写联网框架，
+    就算不考虑AsyncTask的可用性，也显得非常怪异，这听起来更像是在“列举Android实现异步操作最常用的类”，而非“讲述实现
+    网络异步操作的具体方式”。也就是说，我听了这句话后开始怀疑他封装过联网框架这件事的真实性。但我只是怀疑，并不确定，
+    因此接着问了我想问的。图片缓存：大多数情况下，内存中使用LRUCache是最合适的。如果用HashMap来实现，不是不可以，但
+    完全没必要嘛！需要注意在合适的时候释放缓存。至于具体怎么释放，我没考虑过，但用软引用的问题在于，你很难控制缓存的大小，
+    也就是说，只有等到你的内存快要撑爆，你的图片缓存才会被回收。是不是感觉傻傻的？对于初级和中级工程师，我更倾向于考虑
+    对方的学习能力，也就是你对于自己所做过的东西是否足够了解，而非要求你那里都强，因为就像我开头说的，每个人由于经历不同，
+    擅长的方向是千差万别的，我不喜欢挑别人的软肋问。只要你学习能力强
+    http://www.open-open.com/lib/view/open1413796240122.html  
+    
+:: 面试问题
+    链接：https://www.zhihu.com/question/19765032/answer/12890628
+  1. 什么是ANR，如何避免ANR。
+      ANR也就是经常会碰到的“应用程序无响应弹框”，导致ANR出现的原因一般是因为主UI线程阻塞（Android认为5秒内主UI线程未响应
+      就阻塞了），那么解决的方法就是将耗时的，大的运算用异步线程完成，再通过Handler刷新主UI线程
+  2. 什么是FC？如何避免FC的发生，另外FC发生时如何捕获相应的uncaught exception？
+      FC就是崩溃啦，像平时常遇到的空指针，数组越界等异常都会导致FC，可以用try/catch语句捕获异常并做相应的异常处理。
+  3. Asynctask的优缺点？能否同时并发100+asynctask呢？
+      AsyncTask是Android提供的异步类，优点是封装好使用简单，过程可控，缺点就是对多个异步操作和UI更新就复杂，
+      AsyncTask底层的线程池最大并发数为128条
+  4. Handler有何作用？如何使用之（具体讲需要实现什么function？
+      Handler作用为接受子线程通知并更新主UI线程，使用需extends Handler并Override handleMessage(Message)方法，
+      该方法用来接收消息，使用Handler对象.sendMessage(Message)方法发送消息。  
+  5. 有哪些实现自定义控件的方法？
+      通过实现View或View子类，实现View(Context)，View(Context, AttributeSet)，View(Context, AttributeSet, int)构造方法，
+      通过重写onDraw()等方法实现自定义控件。
+  6. CMWAP, CMNET有何区别，网络通讯时是否要特殊处理？如何切换接入点？
+      做网络应用的时候经常需要判断用户网络类型，如果用户是CMWAP类型就需要设置代理，因为CMWAP是通过GPRS的WAP网关10.0.0.172，
+      应用程序必须支持HTTP代理协议和WAP网关协议，所以在使用WMWAP时需要设置代理，
+      httpCilent.getParams.setParament(ConnRoutePNames.DEFAULT_PROXY, new HttpHost("10.0.0.172",80));
+  7. 能否讲讲你用过的adapter？
+      主要有ArrayAdapter、SimpleAdapter、BaseAdapter
+  8. 已经发布了软件版本A，使用sqlite存储用户数据其DB version为1包含某张表T1，则其后需要发布版本B，
+      在版本A的T1表结构的基础上又增加了2个新的字段，则能否在保存用户已经安装的版本A的数据的前提下，更新安装新版本B？
+        重写SQLiteOpenHelper的onUpgrade()方法来更新数据库版本
+  9. 你怎么看待在android上面应用MVC框架，是否有必要抽象独立于activity的C(Controller)？
+      从Android结构图就可以看出Android的分层和松耦合，所以Android应用同样也可以用MVC
+      （xml布局是V，数据库，网络等死M，Activity是C），Activity是C那还需要再抽象吗。
+  
+  10. 各种基础问题--侧重考察熟练度，例如有几种在activity之间切换的方法？能否描述一下android平台的framework的层次结构？ \
+      一种是startActivity()，一种是startActivityForResult()
