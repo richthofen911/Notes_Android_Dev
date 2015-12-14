@@ -1,0 +1,6 @@
+http://developer.android.com/guide/components/loaders.html
+
+使用AsyncTask虽然可以以简短的代码实现异步操作，但如果需要让AsyncTask正常工作的话，需要注意很多条条框框。
+见 https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_AsyncTask%E8%AF%A6%E8%A7%A3
+推荐的一种进行异步操作的技术就是使用Loaders。这个方法从Android 3.0 (Honeycomb)开始引入，在android支持包中也有包含。
+
