@@ -4,3 +4,12 @@ http://developer.android.com/guide/components/loaders.html
 见 https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_AsyncTask%E8%AF%A6%E8%A7%A3
 推荐的一种进行异步操作的技术就是使用Loaders。这个方法从Android 3.0 (Honeycomb)开始引入，在android支持包中也有包含。
 
+Loaders became the preferred way to access
+  ****data of databases or content providers****** 
+They load data asynchronously and notify listeners when the results are ready.
+Google did not only introduce Loaders but also deprecated the previous way to handle a Cursor within your activities. 
+You shouldn’t use startManagingCursor() or managedQuery() in your projects anymore.
+With managed cursors queries and requeries are executed on the UI thread. This could cause the app to feel unresponsive
+or to even display an ANR error message. With Loaders your queries will no longer run on the UI thread and your app 
+remains responsive.
+
