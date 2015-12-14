@@ -1,0 +1,19 @@
+http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
+
+
+::LRUCache (Least Recently Used Cache)
+
+::Use a Disk Cache
+  memory cache is useful in speeding up access to recently viewed bitmaps, however you cannot rely on images being 
+  available in this cache. Components like GridView with larger datasets can easily fill up a memory cache. 
+  Your application could be interrupted by another task like a phone call, and while in the background it might be 
+  killed and the memory cache destroyed. Once the user resumes, your application has to process each image again.
+  so  ||
+      \/
+  A disk cache can be used in these cases to persist processed bitmaps and help decrease loading times where images 
+  are no longer available in a memory cache. Of course, fetching images from disk is slower than loading from memory 
+  and should be done in a background thread, as disk read times can be unpredictable. ( A ContentProvider might be a 
+  more appropriate place to store cached images if they are accessed more frequently, for example in an image gallery 
+  application.)
+  
+  
