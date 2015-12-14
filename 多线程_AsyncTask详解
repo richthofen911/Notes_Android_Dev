@@ -1,3 +1,11 @@
+:: **** AsyncTask 的适用和不适用之处以及常见问题 (高端！！！)
+    http://droidyue.com/blog/2014/11/08/look-into-android-dot-os-dot-networkonmainthreadexception/
+    http://droidyue.com/blog/2014/11/08/bad-smell-of-asynctask-in-android/
+    http://droidyue.com/blog/2014/10/02/the-private-modifier-in-java/
+    
+    
+
+
 ::线程安全 http://baike.baidu.com/link?url=GVrLlkyamkURLuJV3uBvzgW4i9PPPCIb_Oos-rMZulMfqx2lMhD3h2ldvO5urMMkH6VvAqsV47AZcqX7UEFgm_
   安卓的UI组件不是现成安全的, 所以如果要更新视图，必须在主线程中更新，不可以在子线程中执行更新的操作。
 
