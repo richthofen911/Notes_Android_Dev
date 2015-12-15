@@ -69,7 +69,7 @@
       FC就是崩溃啦，像平时常遇到的空指针，数组越界等异常都会导致FC，可以用try/catch语句捕获异常并做相应的异常处理。
   3. Asynctask的优缺点？能否同时并发100+asynctask呢？
       AsyncTask是Android提供的异步类，优点是封装好使用简单，过程可控，缺点就是对多个异步操作和UI更新就复杂，
-      AsyncTask底层的线程池最大并发数为128条
+      AsyncTask底层的线程池最大容数为128条，最大并发执行数为5条
   4. Handler有何作用？如何使用之（具体讲需要实现什么function？
       Handler作用为接受子线程通知并更新主UI线程，使用需extends Handler并Override handleMessage(Message)方法，
       该方法用来接收消息，使用Handler对象.sendMessage(Message)方法发送消息。  
