@@ -10,7 +10,10 @@
 ::线程安全 http://baike.baidu.com/link?url=GVrLlkyamkURLuJV3uBvzgW4i9PPPCIb_Oos-rMZulMfqx2lMhD3h2ldvO5urMMkH6VvAqsV47AZcqX7UEFgm_
   安卓的UI组件不是现成安全的, 所以如果要更新视图，必须在主线程中更新，不可以在子线程中执行更新的操作。
   
- :: AsyncTask底层的线程池最大容数为128条，最大并发执行数为5条, 当尝试去添加第129个任务时，程序就会崩溃。 
+:: 由于AsyncTask作为Activity内部类时，会隐式持有Activity的引用，而AsyncTask的生命周期又与Activity不同步，所以
+    不应在Activity内以AsyncTask内部类的方式进行网络请求。 要解决方案可以在上面的某个链接里找到
+  
+:: AsyncTask底层的线程池最大容数为128条，最大并发执行数为5条, 当尝试去添加第129个任务时，程序就会崩溃。 
 
 ::public abstract class AsyncTask<Params, Progress, Result>三个泛型参数分别代表 
   启动任务执行的输入参数（可以是多个）
