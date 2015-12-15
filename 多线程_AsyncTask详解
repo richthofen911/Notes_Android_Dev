@@ -9,6 +9,8 @@
 
 ::线程安全 http://baike.baidu.com/link?url=GVrLlkyamkURLuJV3uBvzgW4i9PPPCIb_Oos-rMZulMfqx2lMhD3h2ldvO5urMMkH6VvAqsV47AZcqX7UEFgm_
   安卓的UI组件不是现成安全的, 所以如果要更新视图，必须在主线程中更新，不可以在子线程中执行更新的操作。
+  
+ :: AsyncTask底层的线程池最大容数为128条，最大并发执行数为5条, 当尝试去添加第129个任务时，程序就会崩溃。 
 
 ::public abstract class AsyncTask<Params, Progress, Result>三个泛型参数分别代表 
   启动任务执行的输入参数（可以是多个）
