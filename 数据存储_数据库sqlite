@@ -57,6 +57,10 @@
         }
     }
   当创建好SQLite数据库的之后，可以在/data/data/<package name>/databases目录下找到SQLite数据库文件
+  
+::数据库升级的情况
+  http://flyingcat2013.blog.51cto.com/7061638/1537074
+  http://www.cnblogs.com/a284628487/p/3345820.html
 
 ::执行CRUD操作
   当使用SQLiteOpenHelper的getReadableDatabase()或者getWritableDatabase()方法获取到SQLiteDatabase对象，就可以对这个数据库进行操作了。
