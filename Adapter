@@ -1,0 +1,11 @@
+::四大Adapter
+  
+  ArrayAdapter
+    只可以显示文本
+  SimpleAdapter
+    能定义各种各样的布局出来，可以放上ImageView，Button，CheckBox之类的
+  BaseAdapter
+    可以实现复杂的列表布局，由于BaseAdapter是一个抽象类，使用该类需要自己写一个适配器继承该类，
+    正是由于继承了该类，需要我们重写一些方法，让我们可以在代码里控制列表的样式，更加灵活。
+  SimpleCursorAdapter
+    SimpleCursorAdapter是和数据库有关的东西，而sqlite数据库所要求的 自动增长的 id  必须是 _id这中形式 
