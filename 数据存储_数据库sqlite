@@ -89,3 +89,9 @@
 　
 ::Android将数据库保存到SD卡的实现
   http://zmywly8866.github.io/2015/03/09/android-save-database-in-sdcard.html
+
+::使用已有的数据库 http://blog.csdn.net/LeoLeoHan/article/details/46665367
+  1. 在res中新建raw文件夹，res\raw目录中的文件不会被压缩，这样可以直接提取该目录中的文件
+  2. 把raw文件下面的数据库文件contact.db导入到Android程序中的database目录下
+  
+  
