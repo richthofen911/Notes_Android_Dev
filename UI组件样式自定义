@@ -1,0 +1,17 @@
+::加轮廓
+  在res目录下新建一个xml文件，类型选择drawable，将自动生一个一个drawable文件，并生成一个xml文件
+  <?xml version="1.0" encoding="utf-8"?>  
+  <shape xmlns:android="http://schemas.android.com/apk/res/android" >  
+    
+      <solid android:color="#FFFFFF" />   // 加这个会显示成实心，去掉这个则只显示轮廓线条
+    
+      <stroke  
+          android:width="0.01dp"  
+          android:color="#FFFFFF" />  
+    
+      <padding  
+          android:bottom="1dp"  
+          android:left="0.5dp"  
+          android:right="0.5dp"  
+          android:top="0dp" />  
+  </shape>  
