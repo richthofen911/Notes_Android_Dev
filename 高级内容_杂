@@ -1,3 +1,14 @@
+::开机启动脚本
+  http://www.panwenbin.com/2013/05/15/android-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/
+  可以修改/system/etc/install-recovery.sh，来执行启动脚本
+  例如，开机启wifi adbd和vncserver
+  #!/system/bin/sh
+  setprop service.adb.tcp.port 5555
+  stop adbd
+  start adbd
+  /data/androidvncserver &
+  
+
 ::进程分级
   Android将进程分为6个等级,它们按优先级顺序由高到低依次是:
     1. foreground app:前台程序，但事实上除了正在运行的前台程序，还包括一些系统应用，例如启动器（或者叫桌面）、
