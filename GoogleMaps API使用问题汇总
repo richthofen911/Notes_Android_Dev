@@ -1,0 +1,6 @@
+::在fragment中使用GoogleMaps
+  遇到supportMapFragment 是null的情况
+  在onViewCreated方法中调用((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+  this是OnMapReadyCallback, 在回调中把map参数赋给GoogleMap object
+  
+  api key要以meta-data形式写到manifest文件中
