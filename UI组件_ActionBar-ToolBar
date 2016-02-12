@@ -1,0 +1,18 @@
+http://blog.csdn.net/xwhnew/article/details/40624715
+http://www.101apps.co.za/index.php/articles/using-toolbars-in-your-apps.html
+http://www.cnblogs.com/ct2011/p/4493439.html
+
+::Android 5.0SDK后，由于更新了Appcombat V7库，之前的ActionBar的很多方法已经标记为不建议（Deprecated）的了。建议用ToolBar来
+  代替古老的ActionBar，其优越性简单来说就是: 多样、自由
+  
+::使用ToolBar步骤
+  1. 在AndroidMenifest.xml将ActionBar废掉，将application下android:theme元素替换为@style/Theme.AppCompat.NoActionBar就可以了
+     下面的activity中也不要再使用带有ActionBar的主题样式了，否则会报错
+  2. 在Activity的Layout里声明
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/demo_toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:title="@string/app_name" />
