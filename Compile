@@ -1,0 +1,22 @@
+::加快编译速度 https://www.aswifter.com/2015/06/14/boost-android-studio/
+  1. 使用gradle 2.4而不是2.2, 在项目根目录下的 build.grade中加入
+      task wrapper(type: Wrapper) {
+        gradleVersion = '2.4'
+      }
+      然后打开终端执行 ./gradlew wrapper，就可以下载Gradle 2.4了，下载完成后，我们需要在
+      Android Studio让我们的项目使用Gradle 2.4
+      
+  2. 使用多线程编译
+      在项目根目录中创建gradle.properties，加入以下配置
+        org.gradle.daemon=true
+        org.gradle.parallel=true
+        org.gradle.jvmargs=-Xmx1024m
+        
+  3. 打开dex增量编译
+      在项目主Module下的build.grade中的android{} block加入
+      dexOptions {
+        incremental true
+      }
+
+  
+  
