@@ -7,6 +7,8 @@
       1. 要让每个tab分布均匀，要用app:tabMode="fixed"(scorallble会居左）和app:tabGravity="fill" 不然会全挤在中间
       2. 要让Text的属性生效，要声明app:tabTextAppearance="@style/MyCustomTabTextApeparnce"
       3. 要让tab居底部而非顶部，要把TabLayout放在ViewPager下面，ViewPager的weight设为1
+    已发现问题： page position 在载入第一页的时候第二页也会在背后载出来，即index有问题  
+      
   CoordinatorLayout
 
 https://blog.leancloud.cn/3306/
