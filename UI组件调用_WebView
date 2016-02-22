@@ -3,6 +3,12 @@
 ::webview.loadData(String data, String mimeType(媒体类型), String encoding);
       例: String summary = "<html><body>You scored <b>192</b> points.</body></html>"; 
           webview.loadData(summary, "text/html", null);
+          
+  loadData主要被设计用来装载URI格式的数据，不能通过网络来加载内容。常见两个问题:
+  1.loadData不能加载图片内容。 如果要加载图片内容或者获得更强大的Web支持要使用loadDataWithBaseURL。
+  2.loadData显示乱码。 String类型的数据主要是unicode编码，而WebView一般为了节省资源使用的是UTF-8编码，所以
+    在使用loadData的时候要告诉方法怎样转码。即要告诉它要将unicode编码的内容转成UTF-8编码的内容。
+    有时在loadData的时候设置了编码方式，但是还是显示乱码，是因为还需要为WebView的text编码指定编码方式        
   
 ::显示progessbar
       getWindow().requestFeature(Window.FEATURE_PROGRESS);
