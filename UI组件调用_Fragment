@@ -31,4 +31,6 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
 
 :: 要管理fragment(A)内嵌套的fragment(A1)，要在A中调用getChildFragmentManager而不是getActivity.getFragmentManager.前者是
     A自己的manager，后者是A所隶属的activity的manager。
+    而且fragmenttransaction在commit时cannot use ft.commit(), 
+      because 'Can not perform this action after onSaveInstanceState'
   
