@@ -28,4 +28,7 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
   http://www.cnblogs.com/TerryBlog/archive/2012/02/17/2355753.html
   
 :: android 3.0 一下用 support.v4.fragment  以上用 app.fragment  
+
+:: 要管理fragment(A)内嵌套的fragment(A1)，要在A中调用getChildFragmentManager而不是getActivity.getFragmentManager.前者是
+    A自己的manager，后者是A所隶属的activity的manager。
   
