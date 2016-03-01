@@ -1,0 +1,14 @@
+::获取Manifest文件中meta-data方法
+  try {  
+      ApplicationInfo appInfo = getPackageManager().getApplicationInfo(getPackageName(),  
+              PackageManager.GET_META_DATA);  
+      String value = appInfo.metaData.getString("api_key");  
+      Log.d("Tag", " app key : " + value);  // Tag﹕ app key : AIzaSyBhBFOgVQclaa8p1JJeqaZHiCo2nfiyBBo  
+  } catch (PackageManager.NameNotFoundException e) {  
+      e.printStackTrace();  
+  }  
+  
+  *: lib module可以直接访问主module manifest文件里的meta-data 
+
+::Manifestmerger属性的使用：
+  在主程序的project.properties里加上manifestmerger.enabled=true 就可以自动合并library中的manifest
