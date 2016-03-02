@@ -16,3 +16,21 @@ http://www.cnblogs.com/ct2011/p/4493439.html
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             app:title="@string/app_name" />
+            
+::处理多个fragment使用所属activity的同一个toolbar并在viewpager的预加载作用下toolbar显示混乱的方法
+  http://blog.csdn.net/myatlantis/article/details/42643733
+  创建一个fragment，重写setUserVisibleHint方法，并自行创建onVisible(), onInvisible()方法
+  @Override
+  public void setUserVisibleHint(boolean isVisibleToUser){
+      super.setUserVisibleHint(isVisibleToUser);
+
+      if(getUserVisibleHint()){
+          isVisible = true;
+          onVisible();
+      }else {
+          isVisible = false;
+          onInvisible();
+      }
+  }
+  然后让那些需要显示的fragment继承这个fragment即可 （注*, 不需要改viewpager的setOffScreenLimit）
+
