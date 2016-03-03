@@ -1,0 +1,5 @@
+:: UI colors default name
+  http://i.stack.imgur.com/auSbY.png
+  
+:: how to change statusbar color?
+  override the corresponding value in AppTheme
