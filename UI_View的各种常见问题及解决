@@ -1,0 +1,9 @@
+http://dalufan.com/2015/10/20/android-view-issues/
+
+::ListView 在初始化时多次调用getView()
+
+::setBackgroundResource设置背景导致padding错误
+
+::android:windowSoftInputMode=”adjustResize”无效
+
+::getChildLayoutPosition获取到了已经删除的Item值
