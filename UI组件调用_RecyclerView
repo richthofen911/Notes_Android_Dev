@@ -33,3 +33,7 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
             MainActivity.adapterMessages.notifyItemRangeChanged(pos, DataStore.items.size() - pos);
         }
     }
+
+::自动滚动
+     在adapter notifyItemInserted之后
+     recyclerview.scrollToPosition(adapterChatMsgList.getItemCount() - 1);
