@@ -1,1 +1,6 @@
 ::http://developer.android.com/tools/data-binding/guide.html
+
+-- Data Binding 暂时只支持单向绑定，还不支持双向绑定
+
+-- 要实现 Observable Binding，首先得有一个实现了 android.databinding.Observable 的类，为了方便，Android 原生提供了已经封装好的
+   一个类 - BaseObservable，并且实现了监听器的注册机制。
