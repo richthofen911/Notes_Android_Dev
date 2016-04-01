@@ -1,8 +1,61 @@
 http://developer.android.com/guide/components/loaders.html
+http://www.cnblogs.com/plokmju/p/android_Loaders.html
 
 使用AsyncTask虽然可以以简短的代码实现异步操作，但如果需要让AsyncTask正常工作的话，需要注意很多条条框框。
 见 https://github.com/richthofen911/Note_Android_Dev/blob/master/%E5%A4%9A%E7%BA%BF%E7%A8%8B_AsyncTask%E8%AF%A6%E8%A7%A3
 推荐的一种进行异步操作的技术就是使用Loaders。这个方法从Android 3.0 (Honeycomb)开始引入，在android支持包中也有包含。
+
+Loaders，装载机，适用于Android3.0以及更高的版本，它提供了一套在UI的主线程中异步加载数据的框架。使用Loaders可以非常简单
+的在Activity或者Fragment中异步加载数据，一般适用于大量的数据查询，或者需要经常修改并及时展示的数据显示到UI上，这样可以
+避免查询数据的时候，造成UI主线程的卡顿。 
+Loaders有以下特点：
+1. 可以适用于Activity和Fragment。
+2. 可以提供异步的方式加载数据。
+3. 监听数据源，当数据改变的时候，将新的数据发布到UI上。
+4. Loaders使用Cursor加载数据，在更改Cursor的时候，会自动重新连接到最后配置的Cursor中读取数据，因此不需要重新查询数据。
+
+使用Loaders机制，需要多个类和接口的配合，以下是它们大致的关系：
+LoaderManager, 一个抽象类，用于管理多个Loader实例
+  |--LoaderManager.LoaderCallbacks, 一个被LoaderManager管理的回调接口，用哦于管理Loader
+  |------Loader， 一个抽象类，用来异步加载数据。被回调接口LoaderCallbacks管理
+  
+详细
+LoaderManager，装载机管理器。用于在Activity或者Fragment中管理一个或多个Loader实例。在Activity或者Fragment中，
+             可以通过getLoaderManager()方法获取LoaderManager对象，它是一个单例模式。
+             几个LoaderManager提供的方法，用于管理Loader：
+              Loader<D> initLoader(int id,Bundle bundle,LoaderCallbacks<D> callback)：初始化一个Loader，并注册回调事件。
+              Loader<D> restartLoader(int id,Bundle bundle,LoaderCallbacks<D> callback)：重启创建一个Loader并注册回调事件。
+              Loader<D> getLoader(int id)：返回给定Id的Loader，如果没有找到则返回Null。
+              void destroyLoader(int id)：根据指定Id，停止和删除Loader。
+           　通过上面几个方法的参数可以看到，都有一个id参数，这个Id是Loader的标识，因为LoaderManager可以管理一个或多个
+           　Loader，所以必须通过这个Id参数来唯一确定一个Loader。而InitLoader()、restartLoader()中的bundle参数，
+           　传递一个Bundle对象给LoaderCallbacks中的onCreateLoader()去获取，下面介绍LoaderCallbacks。
+
+LoaderCallbacks, 是LoaderManager和Loader之间的回调接口。它是一个回调接口,需要实现其定义的三个方法：
+             Loader<D> onCreateLoader(int id,Bundle bundle)：根据指定Id，初始化一个新的Loader。
+             void onLoadFinished(Loader<D> loader,D data)：当Loader被加载完毕后被调用，在其中处理Loader获取的Cursor数据。
+             void onLoaderReset(Loader<D> loader)：当Loader被销毁的时候被调用，在其中可以使Loader的数据不可用。
+           从LoaderCallbacks的声明的几个方法中可以看到，它是一个泛型的接口，需要指定Loader数据的类型。
+           如果是数据源是从一个ContentProvider中获取的，一般直接使用它的子类CursorLoader，下面介绍CursorLoader。
+
+Loader，一个抽象的类，用于执行异步加载数据，这个Loader对象可以监视数据源的改变和在内容改变后，以新数据的内容改变UI的展示
+        它是一个Loader的抽象接口，所有需要实现的Loader功能的类都需要实现这个接口，但是如果需要自己开发一个装载机的话，
+        一般并不推荐继承Loader接口，而是继承它的子类AsyncTaskLoader，这是一个以AsyncTask框架执行的异步加载。
+　　    Android中还提供了一个CursorLoader类，它是AsyncTaskLoader的子类，一个异步的加载数据的类，通过ContentResolver的
+　　    标准查询并返回一个Cursor。这个类实现了Loader的协议，以一种标准的方式查询Cursor。CursorLoader类有两个构造函数，
+　　    推荐使用第二个，因为使用第一个构造函数，需要还需要通过CursorLoader提供的一些了getXxx()方法设置对应的属性：
+         CursorLoader(Context context)
+         CursorLoader(Context context,Uri uri,String[] projection,String selection ,String[] selectionArgs,String sortOrder)
+
+其他
+在Android中，数据的展示都需要使用一个Adapter适配器，而Loader一般返回的就是一个Cursor的数据，可以使用BaseAdapter的一个子类
+SimpleCursorAdapter，它可以使用XML资源文件自定义一个布局在展示数据。它有两个构造函数，但是有一个构造函数在API Level11之后
+就不推荐使用。下面是构造函数的签名：
+　　SimpleCursorAdapter(Context context,int layout,Cursor c,String[] from,int[] to,int flags).
+最后一个参数flags是一个标识，标识当数据改变调用onContentChanged()的时候，是否通知ContentProvider数据的改变，如果无需监听
+ContentProvider的改变，则可以传0。对于SimpleCursorAdapter适配器的Cursor的改变，
+可以使用SimpleCursorAdapter.swapCursor(Cursor)方法，它会与旧的Cursor互换，并且返回旧的Cursor。
+
 
 Loaders became the preferred way to access
   ****data of databases or content providers****** 
