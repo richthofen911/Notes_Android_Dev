@@ -1,0 +1,24 @@
+:: 在App抛出uncatched异常，崩溃之前，执行特定程序
+  public class MyApplication extends Application{
+    private static final String TAG = "MyApplication";
+    
+    private Thread.UncaughtExceptionHandler uncaughtExceptionHandler = new Thread.UncaughtExceptionHandler(){
+        @Override
+        public void uncaughtException(Thread thread, final Throwable throwable){
+            // do something here, throwable.toString is the content we need to know, we can send it to a server
+            // using a httpclient
+        }
+    };
+
+    @Override
+    public void onCreate(){
+        super.onCreate();
+
+        appInitialization();
+    }
+
+    private void appInitialization(){
+        Thread.setDefaultUncaughtExceptionHandler(uncaughtExceptionHandler);
+    }
+    
+}
