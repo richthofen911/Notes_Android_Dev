@@ -15,3 +15,11 @@ http://www.cnblogs.com/over140/archive/2012/03/29/2423116.html
 ::关于jar、dex和apk
   dex和apk是可以直接加载的，因为它们都是或者内部有dex文件，而原始的jar是不行的，
   必须转换成dalvik所能识别的字节码文件，转换工具可以使用android sdk中platform-tools目录下的dx
+  
+::归类总结 ****** https://segmentfault.com/a/1190000004062866
+  基本型： 简单的动态加载模式
+  进阶型： 代理Activity模式
+  黑科技型： 动态创建Activity模式动态创建Activity模式的核心是“运行时字节码操作”，现在宿主注册一个不存在的Activity
+            ，启动插件的某个Activity时都把想要启动的Activity替换成前面注册的Activity，从而是后者能正常启动。）
+  
+  
