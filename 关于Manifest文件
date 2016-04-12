@@ -12,3 +12,5 @@
 
 ::Manifestmerger属性的使用：
   在主程序的project.properties里加上manifestmerger.enabled=true 就可以自动合并library中的manifest
+  
+  ***最终app只会有一个manifest, 如果lib中manifest使用了自定义的application，主模块中也另外自定义了application, 会造成冲突
