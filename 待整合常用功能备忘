@@ -1,3 +1,4 @@
-1. HTTP API caller
-2. UncaughtExceptionHandler
-3. 通用型PubSub框架
+0. HTTP API caller
+1. UncaughtExceptionHandler
+2. 通用型PubSub框架
+3. 远端编译lib源代码并作为提供lib的服务
