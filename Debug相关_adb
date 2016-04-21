@@ -16,6 +16,12 @@
     计算机连接手机 adb connect [手机IP]:5555
     把手机改会原来状态(不再tcp监听5555) setprop service.adb.tcp.port -1然后stop adbd, start adbd
     
+有多个手机连接时
+  adb -s xxxxxxx shell          xxxxxx来自于 adb devices 显示的device number
+
+点亮屏幕(power on)
+  input keyevent 26  
+    
 ::改变/system目录挂载的权限
   mount -o rw,remount /system    挂载为读写
   mount -o ro,remount /system    挂载为只读
