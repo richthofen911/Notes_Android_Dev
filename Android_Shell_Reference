@@ -12,7 +12,7 @@
   vmstat       virtual memory statistics
   dmesg        get kernel message
   df           Show information about the file system on which each FILE resides, or all file systems by default.
-  
+  sqlite3 can be found in build level images
 
 ::Android special
   dalvikvm       use to run Android apps
