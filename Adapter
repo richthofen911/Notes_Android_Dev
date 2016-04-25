@@ -9,3 +9,6 @@
     正是由于继承了该类，需要我们重写一些方法，让我们可以在代码里控制列表的样式，更加灵活。
   SimpleCursorAdapter
     SimpleCursorAdapter是和数据库有关的东西，而sqlite数据库所要求的 自动增长的 id  必须是 _id这中形式 
+    
+::另外，recyclerview 有巨大的问题    
+    
