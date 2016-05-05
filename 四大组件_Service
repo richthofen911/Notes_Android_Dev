@@ -92,3 +92,44 @@
     }    
     
   http://www.cnblogs.com/yejiurui/p/3429451.html  
+  
+  ::Service 调用Activity中的方法
+    use LocalBroadcastManager as follows:
+    
+    In your Service:
+      // Send an Intent with an action named "my-event". 
+      private void sendMessage() {
+        Intent intent = new Intent("my-event");
+        // add data
+        intent.putExtra("message", "data");
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+      }
+      
+    In your Activity:
+        @Override
+        public void onResume() {
+          super.onResume();
+        
+          // Register mMessageReceiver to receive messages.
+          LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+              new IntentFilter("my-event"));
+        }
+        
+        // handler for received Intents for the "my-event" event 
+        private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+            // Extract data included in the Intent
+            String message = intent.getStringExtra("message");
+            Log.d("receiver", "Got message: " + message);
+          }
+        };
+        
+        @Override
+        protected void onPause() {
+          // Unregister since the activity is not visible
+          LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+          super.onPause();
+        }
+  
+
