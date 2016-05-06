@@ -37,3 +37,5 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
 ::自动滚动
      在adapter notifyItemInserted之后
      recyclerview.scrollToPosition(adapterChatMsgList.getItemCount() - 1);
+     
+:: adapter.setIsRecyclable(false)能防止现实混乱，但会造成没法删除
