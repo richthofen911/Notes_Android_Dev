@@ -33,6 +33,12 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
             MainActivity.adapterMessages.notifyItemRangeChanged(pos, DataStore.items.size() - pos);
         }
     }
+    
+    removeall的方法
+    int oldListSize = DataStore.items.size();
+    Datastore.items.clear();
+    adapter.notifyItemRangeRemoved(0, oldListSize)
+    adapter.notifyItemRangeChanged(0, oldListSize)
 
 ::自动滚动
      在adapter notifyItemInserted之后
