@@ -1,0 +1,76 @@
+-缓存 
+    DiskLruCache
+    
+-图片加载
+    Picasso
+    Fresco
+    Android Universal Image Loader
+    Glide
+    
+-图片处理
+    Picasso-transformations  一个为Picasso提供多种图片变换的库
+    Glide-transformations
+    Android-gpuimage
+    
+-网络请求
+    AdnroidAsyncHTTP   一个Android异步HTTP库
+    AndroidAsync        异步socket, HTTP（客户端+服务器), websocket, 和socket.io库，基于NIO而不是线程
+    OkHttp
+    Retrofit
+    Volley
+    
+-数据解析
+    Gson                用于Java序列化/反序列化 JSON
+    Jackson             Java 序列化/反序列化 JSON和XML
+    Fastjson            Java上一个快速的JSON解析器/生成器
+    HtmlParser          顾名思义
+    Jsoup               最好的DOM, CSS, jQuery解析html的库
+    
+-数据库
+    OrmLite
+    Sugar               简单方式处理Android数据库
+    GreenDAO            ORM
+    ActivieAndroid      以活动记录方式为Android SQLite提供持久化
+    SQLBrite            SQLiteOpenHelper和ContentResolver的轻量封装
+    Realm               一个SQLite和ORM的替代品
+    
+-依赖注入
+    ButterKnife
+    Dagger2
+    AndroidAnnotations
+    RoboGuice
+    
+-图表
+    MPAndroidChart
+    WilliamChart
+    HelloCharts
+    
+-后台处理
+    Tape                一个轻量的，事务型的，基于文件的FIFO库
+    Android Priority Job Queue   一个专门为Android调度任务的工作队列
+
+-事件总线
+    EventBus
+    Otto
+    
+-响应式
+    RxJava, RxJavaJoin, RxAndroid, RxBinding, Agera
+    
+-Log框架
+    Logger
+    Hugo
+    Timber
+    
+-测试框架
+    Mockito             Java编写的Mocking 单元测试框架
+    Robotium            UI测试
+    Robolectric
+    
+-调试
+    Stetho              使开发者可以利用Chrome开发者工具进行调试
+    
+-性能优化
+    LeakCanary
+    ACRA                Android 应用程序崩溃报告
+    
+    
