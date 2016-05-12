@@ -1,0 +1,6 @@
+:: compile 和 provide 的区别
+   provide作用是在编译时使用，但是jar不会打包到apk中，由Android或Android上安装的服务提供需要的内容 使用场景：
+      1. 使用Android的framework-classes.jar中的一些隐藏的API。
+      2. Google的服务框架或者其他服务框架。需要在AndroidMainFest.xml中配合uses-library使用。
+   provided files('libs/xx.jar')
+   provided 'aaa:bbb:x.x.x'
