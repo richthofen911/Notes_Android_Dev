@@ -4,3 +4,29 @@
       2. Google的服务框架或者其他服务框架。需要在AndroidMainFest.xml中配合uses-library使用。
    provided files('libs/xx.jar')
    provided 'aaa:bbb:x.x.x'
+   
+:: set build output apk name
+  buildTypes {
+     release {
+         ...
+         applicationVariants.all { variant ->
+             renameAPK(variant, defaultConfig, 'release')
+         }
+     }
+     debug {
+         ...
+         applicationVariants.all { variant ->
+             renameAPK(variant, defaultConfig, 'beta')
+         }
+     }
+  }
+}
+def renameAPK(variant, defaultConfig, buildType) {
+ variant.outputs.each { output ->
+     def formattedDate = new Date().format('yyMMdd')
+
+     def file = output.packageApplication.outputFile
+     def fileName = applicationName + "_v" + defaultConfig.versionCode + "_" + formattedDate + "_" + buildType + ".apk"
+     output.packageApplication.outputFile = new File(file.parent, fileName)
+ }
+}
