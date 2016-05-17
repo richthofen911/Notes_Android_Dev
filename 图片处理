@@ -1,5 +1,14 @@
 http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
 
+::Bitmap图片在Android系统中占用的内存大小 
+  http://vjson.com/wordpress/%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97bitmap%E5%9B%BE%E7%89%87%E5%9C%A8android%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%8D%A0%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F.html
+  可以将图片在内存中的存储模型想象成一个长方体，它的长、宽、高分别表示图片的宽度、高度、颜色深度。Bitmap图片在内存中的
+  大小计算就变成了计算长方体的体积：Bitmap Memroy size = width * height * 颜色深度
+  颜色深度: 简单说就是最多支持多少种颜色。一般是用“位”来描述的。
+  一个Bitmap的宽高分别为1000X563与文章开头提到的一致，颜色深度=4，Bitmap size=2252000/1024=2199KB，是其在磁盘中的大小
+  166KB的13倍之多。为什么图片在内存中比磁盘中大？因为图片在磁盘中是经过压缩的（通过JPG,PNG这些格式存储）。图像文件占的
+  磁盘空间大小还和磁盘的文件格式有关。如：NTFS最小单位为4KB 所以图像文件大小肯定是4KB的倍数。当图片加载到内存之后，
+  就会解压缩，大小就由像素点的个数和单位像素所占字节相关。
 
 ::LRUCache (Least Recently Used Cache)
 
@@ -8,13 +17,11 @@ http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
   available in this cache. Components like GridView with larger datasets can easily fill up a memory cache. 
   Your application could be interrupted by another task like a phone call, and while in the background it might be 
   killed and the memory cache destroyed. Once the user resumes, your application has to process each image again.
-  so  ||
-      \/
-  A disk cache can be used in these cases to persist processed bitmaps and help decrease loading times where images 
-  are no longer available in a memory cache. Of course, fetching images from disk is slower than loading from memory 
-  and should be done in a background thread, as disk read times can be unpredictable. ( A ContentProvider might be a 
-  more appropriate place to store cached images if they are accessed more frequently, for example in an image gallery 
-  application.)
+  so ->  A disk cache can be used in these cases to persist processed bitmaps and help decrease loading times where 
+  images are no longer available in a memory cache. Of course, fetching images from disk is slower than loading from 
+  memory and should be done in a background thread, as disk read times can be unpredictable. ( A ContentProvider might 
+  be a more appropriate place to store cached images if they are accessed more frequently, for example in an 
+  image gallery application.)
   
 ::resize image
   最简单的按比例缩小图片做头像
@@ -29,4 +36,6 @@ http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
   Bitmap bmpNew = Bitmap.createBitmap(bmp, 0, 0, bmpWidth, bmpHeight, matrix, true);
   
   这样产生的bitmap就会以200px和长边为基准，按比例缩小
+  
+  
   
