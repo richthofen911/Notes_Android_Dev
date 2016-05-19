@@ -94,4 +94,9 @@
   1. 在res中新建raw文件夹，res\raw目录中的文件不会被压缩，这样可以直接提取该目录中的文件
   2. 把raw文件下面的数据库文件contact.db导入到Android程序中的database目录下
   
+::常用操作
+  create database:   cd to the directory, then sqlite3 <dbname>
+  create table:      CREATE TABLE <databaseName>.<tableName>(col1Name datatype PRIMARY KEY, col2Name datatype, ...);
+  
+  
   
