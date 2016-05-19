@@ -1,3 +1,4 @@
 :: 
   "java.lang.NoClassDefFoundError: Failed resolution of: Lcom/android/tools/fd/runtime/AppInfo;"
   https://www.facebook.com/javaandandroidera/posts/457050864480546
+  solution: disable instant run in android studio
