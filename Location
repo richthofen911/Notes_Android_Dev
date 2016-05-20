@@ -1,0 +1,69 @@
+基本流程：
+
+implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+
+protected synchronized void buildGoogleApiClient() {
+    mGoogleApiClient = new GoogleApiClient.Builder(this)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(LocationServices.API)
+            .build();
+}
+
+@Override
+public void onConnected(Bundle connectionHint) {
+    Log.e("GoogleApiClient", "connected");
+    requestLastLocation();
+    requestLocationUpdate();
+}
+
+@Override
+public void onConnectionFailed(@NonNull ConnectionResult result) {
+    Log.e(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+}
+
+@Override
+public void onConnectionSuspended(int cause) {
+    Log.e(TAG, "Connection suspended");
+    mGoogleApiClient.connect();
+}
+
+
+if(!mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
+
+private void requestLastLocation(){
+    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        Location lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if(lastKnownLocation != null)
+            Log.e(TAG, "onCreate: lastLocation: " + lastKnownLocation.getLatitude() + " " + lastKnownLocation.getLongitude());
+        else
+            Log.e(TAG, "onCreate: lastLocation: is null");
+    }else
+        PermissionHandler.requestPermissions(this, Constants.PERMISSION_ACCESS_FINE_LOCATION, Constants.PERMISSION_REQUEST_CODE_FINE_LOCATION);
+}
+
+private void requestLocationUpdate(){
+    LocationRequest locationRequest = new LocationRequest();
+    locationRequest.setInterval(3000);
+
+    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, locationListener);
+    else
+        PermissionHandler.requestPermissions(this, Constants.PERMISSION_ACCESS_FINE_LOCATION, Constants.PERMISSION_REQUEST_CODE_FINE_LOCATION);
+}
+
+LocationListener locationListener;
+locationListener = new LocationListener() {
+    @Override
+    public void onLocationChanged(Location location) {
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
+        float distanceToSrc = location.distanceTo(locSource);
+        String locationToDisplay = "\nLat: " + lat + "::Lng: " + lng +
+                "\nDistance to my office: " + distanceToSrc;
+        Log.e(TAG, "onLocationChanged: " + locationToDisplay);
+        tvDisplay.setText(locationToDisplay);
+    }
+};
+
