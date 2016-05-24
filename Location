@@ -67,3 +67,9 @@ locationListener = new LocationListener() {
     }
 };
 
+::关于fusedlocationapi.getlastlocation return null
+    The issue can also be caused by your device does not have "Wi-Fi & mobile network location" enabled.
+    
+    solution:
+        Settings > Personal > Location access > Wi-Fi & mobile network location
+
