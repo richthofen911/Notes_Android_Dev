@@ -1,0 +1,7 @@
+::What is it
+  An accessibility service runs in the background and receives callbacks by the system when AccessibilityEvents are fired. 
+  Such events denote some state transition in the user interface, for example, the focus has changed, a button has been clicked, etc.
+  Such a service can optionally request the capability for querying the content of the active window. Development of an 
+  accessibility service requires extending this class and implementing its abstract methods.
+  
+::特别用处--微信抢红包
