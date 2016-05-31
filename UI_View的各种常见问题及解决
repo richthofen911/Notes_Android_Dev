@@ -7,3 +7,17 @@ http://dalufan.com/2015/10/20/android-view-issues/
 ::android:windowSoftInputMode=”adjustResize”无效
 
 ::getChildLayoutPosition获取到了已经删除的Item值
+
+:: Cannot call this method while RecyclerView is computing a layout or scrolling
+protected void postAndNotifyAdapter(final Handler handler, final RecyclerView recyclerView, final RecyclerView.Adapter adapter) {
+    handler.post(new Runnable() {
+        @Override
+        public void run() {
+            if (!recyclerView.isComputingLayout()) {
+                adapter.notifyDataSetChanged();
+            } else {
+                postAndNotifyAdapter(handler, recyclerView, adapter);
+            }
+        }
+    });
+}
