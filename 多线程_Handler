@@ -1,3 +1,11 @@
+::Service中使用Handler
+  onCreate()中
+    handlerThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
+    handlerThread.start();
+    handler = new Handler(handlerThread.getLooper());
+    
+  具体要用的地方再handler.post(Runnable)
+
 ::进程和线程的区别:
   一个进程是一个独立(self contained)的运行环境，它可以被看作一个程序的运行。而线程是在进程中执行的一个任务。
   Java运行环境是一个包含了不同的类和程序的单一进程。线程可以被称为轻量级进程。线程需要较少的资源来创建和驻留
