@@ -34,3 +34,4 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
     而且fragmenttransaction在commit时cannot use ft.commit(), 
       because 'Can not perform this action after onSaveInstanceState'
   
+:: fragment考虑尽量用单例
