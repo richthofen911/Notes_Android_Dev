@@ -1,0 +1,7 @@
+http://blog.csdn.net/guolin_blog/article/details/9255575
+
+原理
+采取的方案是使用组合View的方式，先自定义一个布局继承自LinearLayout，然后在这个布局中加入下拉头和ListView
+这两个子元素，并让这两个子元素纵向排列。初始化的时候，让下拉头向上偏移出屏幕，这样我们看到的就只有ListView了。
+然后对ListView的touch事件进行监听，如果当前ListView已经滚动到顶部并且手指还在向下拉的话，那就将下拉头显示出来，
+松手后进行刷新操作，并将下拉头隐藏
