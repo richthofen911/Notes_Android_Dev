@@ -11,6 +11,7 @@ http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
   就会解压缩，大小就由像素点的个数和单位像素所占字节相关。
 
 ::LRUCache (Least Recently Used Cache)
+  http://blog.csdn.net/rj_jqd/article/details/9410867
 
 ::Use a Disk Cache
   memory cache is useful in speeding up access to recently viewed bitmaps, however you cannot rely on images being 
