@@ -21,6 +21,10 @@
 
 点亮屏幕(power on)
   input keyevent 26  
+  
+::shutdown
+  adb shell
+  reboot -p
     
 ::改变/system目录挂载的权限
   mount -o rw,remount /system    挂载为读写
