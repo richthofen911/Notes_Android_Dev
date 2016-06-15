@@ -1,0 +1,8 @@
+通用度且扩展度比较高的library，用AltBeacon. RECO和Sensoro存在一些不兼容和功能不全的问题
+AltBeacon library 同时包含了scan和advertise两部分功能的api
+
+scan
+  https://altbeacon.github.io/android-beacon-library/samples.html
+
+advertise
+  https://altbeacon.github.io/android-beacon-library/beacon-transmitter.html
