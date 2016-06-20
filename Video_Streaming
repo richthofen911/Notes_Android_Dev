@@ -1,0 +1,10 @@
+::多媒体文件发布方式
+  1. HTTP方式
+      这种方式要下载FLV视频文件到本地播放，一旦FLV视频文件下载完成，就不会消耗服务器的资源和带宽，但是拖动功能没
+      有RTMP/RTMP流媒体方式强大，很多视频网站都是用HTTP方式实现的，如：YouTube，土豆，酷6等
+
+  2. RTMP/RTMP流媒体方式
+
+::搭建流媒体服务器
+  http://www.cnblogs.com/MikeZhang/archive/2012/09/09/vlcStreamingServer20120909.html
+
