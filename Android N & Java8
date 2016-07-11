@@ -1,0 +1,27 @@
+Legacy javac toolchain:
+  javac (.java --> .class) --> dx (.class --> .dex)
+
+New Jack toolchain:
+  Jack (.java --> .jack --> .dex)
+
+Configuring Gradle:
+  android {
+    ...
+    defaultConfig {
+      ...
+      jackOptions {
+        enabled true
+      }
+    }
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
+    }
+  }
+
+::important features of Java 8
+   - 针对interface 的 default方法（不强制需要override) 和static方法
+   - Lambda表达式
+   - Repeatable annotations
+   - Method References
+   - Type Annotations
