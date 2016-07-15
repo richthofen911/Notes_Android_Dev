@@ -1,4 +1,5 @@
 1. Activity.runOnUIThread
+    这个方法属于handler的一个特例
     Activity.runOnUiThread(Runnable)方法把更新ui的代码创建在Runnable中，然后在需要更新 ui时，把这个Runnable对象传给
     Activity.runOnUiThread(Runnable)。 这样Runnable对像就能在ui程序中被调用。如果当前线程是UI线程,那么行动是立即执行
     。如果当前线程不是UI线程,操作是发布到事件队列的UI 线程
