@@ -10,6 +10,13 @@ CyclicBarrier可以被重用。暂且把这个状态就叫做barrier，当调用
     此时就可以利用CyclicBarrier了：
 
 Semaphore(信号量）
+在操作系统中，信号量机制即利用pv操作来对信号量进行处理。semaphore的数据结构为一个值和一个指针，指针指向等待改信号量的
+下一个进程，值大于0时表示当前可用资源的数量，小于零时的绝对值表示等待使用该资源的进程个数。
+    p操作（wait）：申请一个单位资源，进程进入
+    v操作（signal）：释放一个单位资源，进程出来
+在JAVA中，是没有类似于PV操作、进程互斥等相关的方法的。JAVA的进程同步是通过synchronized()来实现的，需要说明的是，
+JAVA的synchronized()方法类似于操作系统概念中的互斥内存块，在JAVA中的Object类型中，都是带有一个内存锁的，在有线程获取
+该内存锁后，其它线程无法访问该内存，从而实现JAVA中简单的同步、互斥操作。
 Semaphore可以控同时访问的线程个数，通过 acquire() 获取一个许可，如果没有就等待，而 release() 释放一个许可。
 若一个工厂有5台机器，8个工人，一台机器同时只能被一个工人使用，使用完了其他工人才能继续使用。那么就可以通过Semaphore来实现
 
@@ -39,5 +46,20 @@ Semaphore可以控同时访问的线程个数，通过 acquire() 获取一个许
         忽略第一个条件。）
         大多数编程情形都会与这两个条件的其中之一冲突，使得 volatile 变量不能像 synchronized 那样普遍适用于实现线程安全
         
+
+::object.wait()/object.notify()          http://blog.csdn.net/zyplus/article/details/6672775
+  如果需要在线程间相互唤醒的话需要借助Object.wait(), Object.nofity()。
+  Obj.wait()，与Obj.notify()必须要与synchronized(Obj)一起使用，也就是wait,与notify是针对已经获取了Obj锁进行操作，从语法
+  角度来说就是Obj.wait(),Obj.notify必须在synchronized(Obj){...}语句块内。从功能上来说wait就是说线程在获取对象锁后，主动
+  释放对象锁，同时本线程休眠。直到有其它线程调用对象的notify()唤醒该线程，才能继续获取对象锁，并继续执行。相应的notify()
+  就是对对象锁的唤醒操作。但有一点需要注意的是notify()调用后，并不是马上就释放对象锁的，而是在相应的
+  synchronized(){}语句块执行结束，自动释放锁后，JVM会在wait()对象锁的线程中随机选取一线程，赋予其对象锁，唤醒线程，继续
+  执行。这样就提供了在线程间同步、唤醒的操作。Thread.sleep()与Object.wait()二者都可以暂停当前线程，释放CPU控制权，主要的
+  区别在于Object.wait()在释放CPU同时，释放了对象锁的控制。      
+  对Object.wait()，Object.notify()的应用最经典的例子，应该是三线程打印ABC的问题了吧，
+  这是一道比较经典的面试题，题目要求如下：
+        建立三个线程，A线程打印10次A，B线程打印10次B,C线程打印10次C，要求线程同时运行，交替打印10次ABC。
+  这个问题用Object的wait()，notify()就可以很方便的解决。代码如下：
     
+
 
