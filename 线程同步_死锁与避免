@@ -1,0 +1,25 @@
+:: 死锁  http://wiki.jikexueyuan.com/project/java-concurrent/deadlock.html
+   是两个或更多线程阻塞着等待其它处于死锁状态的线程所持有的锁。
+   死锁通常发生在多个线程同时但以不同的顺序请求同一组锁的时候。
+   --- 常见情况：
+   例如，如果线程 1 锁住了 A，然后尝试对 B 进行加锁，同时线程 2 已经锁住了 B，接着尝试对 A 进行加锁，这时死锁就发生了。
+         线程 1 永远得不到 B，线程 2 也永远得不到 A，并且它们永远也不会知道发生了这样的事情。为了得到彼此的对象（A 和 B），
+         它们将永远阻塞下去。这种情况就是一个死锁。
+          Thread 1  locks A, waits for B
+          Thread 2  locks B, waits for A
+          
+          
+  ---- 更复杂的情况：
+  死锁可能不止包含 2 个线程，这让检测死锁变得更加困难。下面是 4 个线程发生死锁的例子：
+    Thread 1  locks A, waits for B
+    Thread 2  locks B, waits for C
+    Thread 3  locks C, waits for D
+    Thread 4  locks D, waits for A
+    
+::检验与避免 http://wiki.jikexueyuan.com/project/java-concurrent/deadlock-prevention.html
+  三种常见方式
+  1. 加锁顺序
+  2. 加锁时限
+  3. 死锁检验
+      死锁检测是一个更好的死锁预防机制，它主要是针对那些不可能实现按序加锁并且锁超时也不可行的场景。
+  
