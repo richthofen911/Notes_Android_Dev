@@ -1,0 +1,12 @@
+Xposed框架是一款可以在不修改APK的情况下影响程序运行(修改系统)的框架服务，基于它可以制作出许多功能强大的模块，且在功能不冲突
+的情况下同时运作。例如Mock Mock GPS，微信防撤回之类的
+
+Module development tutorial 
+https://github.com/rovo89/XposedBridge/wiki/Development-tutorial
+
+Xposed 工作原理
+
+每个app都会fork一个Zygote进程，最开始的Zygote进程在系统启动时，又/init.rc脚本启动。
+这个进程由/system/bin/app_process装载所需的classes并调用初始化方法后完成启动
+在安装Xposed框架时，会在/system/bin/下放一个扩展的app_process取代原本的。
+在此框架下，Xposed能实现一个类似AOP编程的概念，在目标方法执行之前和之后执行自定义的代码
