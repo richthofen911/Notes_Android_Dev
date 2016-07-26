@@ -11,6 +11,11 @@ Xposed 工作原理
 在安装Xposed框架时，会在/system/bin/下放一个扩展的app_process取代原本的。
 在此框架下，Xposed能实现一个类似AOP编程的概念，在目标方法执行之前和之后执行自定义的代码
 
+::查看apk里的类名除了反编译之外还可以用模拟器自带的Development.apk，
+  继承自安卓重要组件（如Activity、Service等）的类名无法被混淆
 
 Demo project
 https://github.com/richthofen911/DemoXposed
+
+抓取微信朋友圈数据的实战，思路分析和代码
+https://github.com/Chion82/ChionLab/blob/master/source/_posts/use-xposed-to-crawl-wechat-moments.md
