@@ -1,0 +1,15 @@
+http://blog.csdn.net/heipacker/article/details/11846687
+
+线程的基本控制主要方法包括
+  sleep()、supend()、resume()、join()、interrupt()、stop()方法，一般情况下都会引起线程的状态发生转变。
+  
+::sleep()
+     说明：Thread.sleep()使当前线程的执行暂停一段指定时间，中断（interrupt）可以终止线程睡眠，所
+                以在任何时候都不能假设线程会睡眠指定时间。
+     注意：sleep方法声明可以抛出InterruptedException异常，当另一个线程中断了已经处于睡眠（sleep）
+           的线程时就会抛出InterruptedException异常。
+
+join()
+     说明：join方法让一个线程等待另外一个线程完成。例如有两个线程T1和T2，当在T1中执行T2.join()，
+           会导致T1暂停当前线程等待T2线程的终止。同样join方法有两个重载的方法，join的另外一个
+           重载版本允许线程等待指定时间。跟sleep方法一样，这里的时间是不精确的。
