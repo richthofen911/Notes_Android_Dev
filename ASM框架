@@ -1,0 +1,17 @@
+http://www.iteye.com/topic/1128727
+
+ASM是一个java的字节码框架，它能被用来动态生成类或者增强既有类的功能。 
+一般asm的应用场景主要在aop上，比如Spring在底层就是用了asm，但asm不仅仅是只能在aop方面发挥它强大的能力，
+比如要写一个rpc框架，可能会在序列化对象上犯难，使用java的序列化机制？有点慢；json?（比如fastjson）,但如果要序列化的对象
+很简单，没有嵌套对象，不需要深拷贝，并且不想按照json的格式来， 一般用反射实现，但是速度并不是最高
+利用ASM，一般步骤
+
+1. 先用java写出自己想要的类
+2. 用javap -verbose 反编译它
+3. 根据反编译出来的结果，配合ASM逐步手写
+  
+  
+***** 结合插件 bytecode outline 的快速实用方法 ******
+1. 用java写好自己想要的代码，
+2. 用bytecode outline看用asm怎么写，
+3. ctrl+c ，ctrl+v，ok，生成代码那块就解决了。
