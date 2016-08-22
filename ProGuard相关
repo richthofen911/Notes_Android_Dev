@@ -11,3 +11,22 @@ http://www.jianshu.com/p/0202845db617
 
 ::标准proguard.cfg文件内容
   https://github.com/richthofen911/UtilScripts/blob/master/%E6%A0%87%E5%87%86proguard.cfg%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9
+
+::常用总结
+  http://treesouth.github.io/2015/04/05/Android%E4%B8%ADProGuard%E6%B7%B7%E6%B7%86%E9%85%8D%E7%BD%AE%E5%92%8C%E6%80%BB%E7%BB%93/
+  
+::对于第三方lib，大厂发布的lib一般会有proguard说明。常见的比如gson，要-keep class packageName.ClassName{*;} 
+  ClassName可以是*， {*;}表示类里面的所有成员
+  
+::还原proguard混淆过的代码
+  ProGuard 提供了命令行和 GUI 工具来还原混淆后的代码，工具位于  <android-sdk>/tools/proguard/bin/ 目录下。
+  里面的proguardgui 为 GUI 工具，
+  1) 运行 proguardgui.bat
+  2) 从左边的菜单选择  “ReTrace”
+  3) 在上面的 mapping 文件中选择你的 mapping 文件 ，在下面输入框输入要还原的代码
+  4) 点击 “ReTrace!” 按钮
+  retrace 为命令行工具， 把 mapping 文件和 要还原的堆栈信息保存在 stacktrace 文件中，
+  然后把这两个文件复制到 retrace.bat 目录下，运行如下命令即可。
+
+
+Read more: http://blog.chengyunfeng.com/?p=545#ixzz4I5T7VAUZ
