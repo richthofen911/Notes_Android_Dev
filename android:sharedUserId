@@ -17,3 +17,16 @@ Android为我们提供了两种数据互访的方法：
     注：基于安全考虑，两个package需要有相同的签名，否则没有验证，应用程序一旦设置了shareuserid,当程序被破解，
         其它应用也可以访问我们的数据，数据不安全设置共享也就没有多大意义了。
     另外，.如果想要运行在同一个进行当中，必须设置android:process的值相同。
+    
+::关于android:sharedUserId="android.uid.system"这个系统级权限
+  http://www.eoeandroid.com/thread-329398-1-1.html?_dsign=039d0c16
+  
+  加入android:sharedUserId="android.uid.system"这个属性。通过Shared User id,拥有同一个User id的多个APK可以配置成运行
+  在同一个进程中。那么把程序的UID配成android.uid.system，也就是要让程序运行在系统进程中，这样就有权限来修改系统时间了。
+  但只是加入UID还不够，如果这时候安装APK的话发现无法安装，提示签名不符，原因是程序想要运行在系统进程中还要有目标系统的
+  platform key，就是上面第二个方法提到的platform.pk8和platform.x509.pem两个文件。用这两个key签名后apk才真正可以放入系统
+  进程中。第一个方法中加入LOCAL_CERTIFICATE := platform其实就是用这两个key来签名。
+  这也有一个问题，就是这样生成的程序只有在原始的Android系统或者是自己编译的系统中才可以用，因为这样的系统才可以拿
+  到platform.pk8和platform.x509.pem两个文件。要是别家公司做的Android上连安装都安装不了。试试原始的Android中的key来签名，
+  程序在模拟器上运行OK，不过放到G3上安装直接提示"Package ... has no signatures that match those in shared user
+  android.uid.system"，这样也是保护了系统的安全。
