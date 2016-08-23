@@ -1,0 +1,19 @@
+http://blog.csdn.net/wirelessqa/article/details/8581652
+
+当APK安装的时候，userid这个标志就会产生。APK在设备上的整个生命周期中，这个ID不再改变。不同设备上同一个应用包可能有不同
+的userid，重要的是在给定的设备上，每个应用包有自己独立的userid。
+
+作为APK身份的标识, userid对应一个Linux用户，所以不同APK(用户)间互相访问数据默认是禁止的.
+那么不同APK之间想要互相访问数据应该怎么办呢？
+Android为我们提供了两种数据互访的方法：
+ 1. 是使用Share Preference. / Content Provider
+   SharedPreferences的mode设置为world readable/writable时，即可被别的应用访问(如果里面存有明文敏感信息就也存在安全隐患）
+ 2. 是在配置文件manifest中配置相同的UserId
+   通过共享userid,拥有相同userid的用户可以配置成运行在同一进程当中，因此默认就是可以互相访问任意数据的
+  如两个应用程序的userid相同，都为wirelessqa.com,因此两个应用程序共享userid,如果1想访问2的数据怎么办呢？
+    Content content = this.createPackageContent(“com.wirelessqa.activity”,Content.CONTENT_IGNORE_SECURITY);
+    这样通过content可以获取到应用2中的资源，包括：数据库，preference，资源文件等等
+
+    注：基于安全考虑，两个package需要有相同的签名，否则没有验证，应用程序一旦设置了shareuserid,当程序被破解，
+        其它应用也可以访问我们的数据，数据不安全设置共享也就没有多大意义了。
+    另外，.如果想要运行在同一个进行当中，必须设置android:process的值相同。
