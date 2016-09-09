@@ -1,0 +1,15 @@
+Serializable的作用是为了保存对象的属性到本地文件、数据库、网络流、rmi以方便数据传输，当然这种传输可以是程序内的也可以是
+两个程序间的。而Android的Parcelable的设计初衷是因为Serializable效率过慢，为了在程序内不同组件间以及不同Android程序间(AIDL)
+高效的传输数据而设计，这些数据仅在内存中存在，Parcelable是通过IBinder通信的消息的载体。
+
+Parcelable的性能比Serializable好，在内存开销方面较小，所以在内存间数据传输时推荐使用Parcelable，如activity间传输数据
+，而Serializable可将数据持久化方便保存，所以在需要保存或网络传输数据时选择Serializable，因为android不同版本Parcelable可能不同，
+所以不推荐使用Parcelable进行数据持久化
+
+Serializable序列化不保存静态变量，可以使用Transient关键字对部分字段不进行序列化，也可以覆盖writeObject、readObject方法以实现
+序列化过程自定义
+
+1.在使用内存的时候，Parcelable 类比Serializable性能高，所以推荐使用Parcelable类。
+2.Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。
+3.Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。
+  尽管Serializable效率低点， 也不提倡用，但在这种情况下，还是建议你用Serializable 。
