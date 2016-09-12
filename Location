@@ -19,7 +19,7 @@ public static boolean isLocationEnabled(Context context) {
     }
 } 
 
-基本流程：
+::获取location的基本流程：
 
 implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 
