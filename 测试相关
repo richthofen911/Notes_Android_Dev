@@ -16,3 +16,20 @@ https://github.com/googlesamples/android-testing
 Unit Test
 https://developer.android.com/training/testing/unit-testing/index.html
 http://www.jianshu.com/p/03118c11c199
+
+::tips to ensure test coverage
+  No data: 
+      Run your test cases on blank or default data. See if proper error messages are generated.
+  Valid data set:
+      Create it to check if application is functioning as per requirements and valid input data is properly saved in 
+      database or files.
+  Invalid data set:
+      Prepare invalid data set to check application behavior for negative values, alphanumeric string inputs.
+  Illegal data format:
+      Make one data set of illegal data format. System should not accept data in invalid or illegal format. Also check 
+      proper error messages are generated.
+  Boundary Condition data set:
+      Data set containing out of range data. Identify application boundary cases and prepare data set that will cover 
+      lower as well as upper boundary conditions.
+  Dataset for performance, load and stress testing
+      This data set should be large in volume.
