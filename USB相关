@@ -1,0 +1,6 @@
+http://blog.csdn.net/caoyicheng1/article/details/21293251
+
+Android USB支持两种模式
+  1. HOST模式：      Android设备为USB总线和外设供电，数据传输是双向的
+  2. Accessory模式： Android设备作为附件，手机和电脑连接通常是这种模式，由USB Device端向总线供电，数据传输是双向。这就是为什么手机插
+                    到电脑上可以充电
