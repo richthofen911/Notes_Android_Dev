@@ -1,6 +1,15 @@
+https://github.com/matianfu/adk2012/wiki/%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E
 http://blog.csdn.net/caoyicheng1/article/details/21293251
+
+
+********** important  USB设备驱动开发之远程访问USB设备*********** 
+http://www.voidcn.com/blog/fanxiushu/             ******************这人是个大神
+http://www.mobile-open.com/2016/940174.html
 
 Android USB支持两种模式
   1. HOST模式：      Android设备为USB总线和外设供电，数据传输是双向的
-  2. Accessory模式： Android设备作为附件，手机和电脑连接通常是这种模式，由USB Device端向总线供电，数据传输是双向。这就是为什么手机插
-                    到电脑上可以充电
+                    https://developer.android.com/guide/topics/connectivity/usb/host.html
+                      
+  2. Accessory模式： AOA https://source.android.com/devices/accessories/protocol.html
+                    Android设备作为附件，手机和电脑连接通常是这种模式，电脑是Host端，电脑是Device端，
+                    由USB Device端向总线供电，数据传输是双向。这就是为什么手机插到电脑上可以充电
