@@ -18,3 +18,7 @@
 
 ::参考链接
 http://www.itnose.net/detail/6169442.html
+
+遇到的坑
+1. 从service发起notification时，需要 FLAG_ACTIVITY_NEW_TASK
+2. 从service发起notification, PendingIntent要传值时，不能用 FLAG_CANCEL_CURRENT，否则无法传
