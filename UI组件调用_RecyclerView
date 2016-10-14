@@ -34,17 +34,32 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
         }
     }
     
-    removeall的方法
-    int oldListSize = DataStore.items.size();
-    Datastore.items.clear();
-    adapter.notifyItemRangeRemoved(0, oldListSize)
-    adapter.notifyItemRangeChanged(0, oldListSize)
+::remove all的问题
+  方法一： 
+     先 int sizeBeforeClear = dataset.size();
+     然后 dataset.clear()
+     之后  adapter.notifyItemRangeRemoved(0, sizeBeforeClear)
+          adapter.notifyItemRangeChanged(0, sizeBeforeClear)
+     ***但是，此时会没有动画，recyclerview会定住不动，看起来像没删除一样，因为没有定义remove all的动画
+     所以要在更早之前针对recyclerview.setAnimation
+    
+  方法二：
+     逐条删除
+   
 
 ::自动滚动
      在adapter notifyItemInserted之后
      recyclerview.scrollToPosition(adapterChatMsgList.getItemCount() - 1);
      
-:: adapter.setIsRecyclable(false)能防止现实混乱，但会造成没法删除
+:: adapter.setIsRecyclable(false)一般不要用，会造成被删除的items浮在recyclerview上层，去不掉
 
-:: 关于swapAdapter()这个方法的坑
+:: 关于swapAdapter()这个方法的坑：两个Adapter需要是完全一样的类定义，不然会造成cannot cast
+
+:: 关于RecyclerView确没有像ListView一样提供onItemClickListener
+    网上搜索了一番有不少解决方案，但是其本质都是通过给每个item添加onClickListener来模仿一个伪onItemClickListener，
+    这种为每个item添加点击监听的解决方案不用多想也知道是浪费性能的方法。
+    这里尝试像ListView那样使用一个监听解决问题  http://blog.csdn.net/liaoinstan/article/details/51200600
+    
+    
+
      
