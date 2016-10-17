@@ -1,2 +1,36 @@
 
 http://www.cnblogs.com/qianxudetianxia/p/3645106.html
+http://null-point.iteye.com/blog/2304615
+
+
+android中的Handler和AsyncTask如何防止内存泄露
+
+Handler泄露的关键点有两个： 
+    1). 内部类 
+        内部类持有外部类Activity的引用，当Handler对象有Message在排队，则无法释放，进而导致Activity对象不能释放。 
+        解决方法
+          声明为static，则该内部类不持有外部Acitivity的引用，则不会阻塞Activity对象的释放。 
+          如果声明为static后，可在其内部声明一个弱引用（WeakReference）引用外部类。 
+          static class CustomHandlerextends Handler {  
+            // 内部声明一个弱引用，引用外部类  
+            private WeakReference<MainActivity > activityWeakReference;  
+            public MyHandler(MyActivity activity) {  
+                activityWeakReference= new WeakReference<MainActivity >(activity);  
+            }  
+            @Override  
+            public void handleMessage(Message msg) {  
+                super.handleMessage(msg);  
+                MyActivity act= activityWeakReference.get();  
+                if (activityWeakReference!= null && act!= null) {  
+                  // ... ...
+                }
+                
+    2). 生命周期和Activity不一定一致 
+        解决方案
+          在Activity onStop或者onDestroy的时候，取消掉该Handler对象的Message和Runnable。 
+          Handler的API有几个方法：removeCallbacks(Runnable r)和removeMessages(int what)等
+        
+ AsyncTask基本一样
+  1. 使用弱引用
+  2. 在Activity退出时，终止asynctask的任务
+      
