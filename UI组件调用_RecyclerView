@@ -45,7 +45,12 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
     
   方法二：
      逐条删除
-   
+     
+  方法三： 
+     int sizeBeforeClear
+     dataset.clear()
+     adapter.notifyDatasetChanged()
+     这个方法没有动画
 
 ::自动滚动
      在adapter notifyItemInserted之后
