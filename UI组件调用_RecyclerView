@@ -51,6 +51,10 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
      dataset.clear()
      adapter.notifyDatasetChanged()
      这个方法没有动画
+     
+ ::remove item时
+     handler.post()没有问题
+     但是handler.postDelayed()这个方法会出现被删除的item浮在顶层的（跟setRecyclable(false)一样）的情况
 
 ::自动滚动
      在adapter notifyItemInserted之后
