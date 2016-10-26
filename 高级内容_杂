@@ -1,3 +1,6 @@
+:: com.android.builder 包
+    DefaultManifestParser 可以用来在build时获取manifestfile里的信息
+
 ::开机启动脚本
   http://www.panwenbin.com/2013/05/15/android-%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/
   可以修改/system/etc/install-recovery.sh，来执行启动脚本
