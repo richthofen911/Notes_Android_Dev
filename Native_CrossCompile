@@ -3,3 +3,19 @@
   快速解决方法：
     1. 从NDK中找到依赖文件放到project文件夹中
     2. 缺少ldl和lc文件，实际是缺少libc.a和libldl.a这两个文件，前者可以在NDK里找到，后者可在Android源码项目里找到
+    
+::cross compile Python, steps
+  1. 从 NDK 中导出 ``standalone` 的交叉编译工具链
+      $NDK/build/tools/make-standalone-toolchain.sh --platform=android-23 --install-dir=/tmp/my-android-toolchain
+  2. cd到Python源码包目录
+      ./configure CC=arm-linux-androideabi-gcc --host=arm-linux-androideabi --build=x86_64-unknown-linux-gnu\
+      CFLAGS='-march=armv7-a -mfloat-abi=softfp' LDFLAGS='-Wl,--fix-cortex-a8'
+  3. 可能出现报错
+      1) you must specify getAddress() function or '--disable-ipv6' 
+          solution: 此处选择在./configure时加上　--disable-ipv6
+      2) configure: error: set ac_cv_file__dev_ptmx to yes/no in your CONFIG_SITE file when cross compiling
+          solution: 
+            create config.site file with the following lines
+                 ac_cv_file__dev_ptmx=no
+                 ac_cv_file__dev_ptc=no
+            then run configure script as: CONFIG_SITE=config.site ./configure....... 
