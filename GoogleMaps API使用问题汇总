@@ -3,4 +3,10 @@
   在onViewCreated方法中调用((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
   this是OnMapReadyCallback, 在回调中把map参数赋给GoogleMap object
   
-  api key要以meta-data形式写到manifest文件中
+:: api key要以meta-data形式写到manifest文件中
+
+:: map api执行顺序
+   Activity/Fragment onCreate() -> buildGoogleApiClient() -> if !isConnected, googleApiClient.connect() ->
+   -> onConnected(){requestLastLocation()} -> map.getMapSync() -> onMapReady(){setUpMap()} -> addMarkers()
+      onConnectionFailed()
+      onConnectionSuspended()
