@@ -35,3 +35,13 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
       because 'Can not perform this action after onSaveInstanceState'
   
 :: fragment考虑尽量用单例
+
+:: 使用newInstance()来实例化fragment
+    不要让客户端去调用默认的构造函数，然后手动地设置fragment的参数。而是为它们提供一个静态工厂方法。这样做比调用默认构造方法好，
+    它方便别人的调用,保证了fragment的构建过程不会出错。通过提供一个静态工厂方法避免了不小心忘记初始化fragmnet的参数或者没正确设置参数。
+    提供静态工厂而不是使用默认构造函数或者自己定义一个有参的构造函数还有至关重要一点:
+    fragmnet经常会被销毁重新实例化，Android framework只会调用fragment无参的构造函数。在系统自动实例化fragment的过程中，没有办法干预。
+    一些需要外部传入的参数来决定的初始化就没有办法完成。使用静态工厂方法，将外部传入的参数可以通过Fragment.setArgument保存在它自己身上，
+    这样我们可以在Fragment.onCreate(...)调用的时候将这些参数取出来。
+
+
