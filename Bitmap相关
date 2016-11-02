@@ -1,0 +1,1 @@
+::BitmapFactory.decodeResource()图片时，会根据设备dpi以及图片所在mipmap folder的不同而产生不同结果，慎用
