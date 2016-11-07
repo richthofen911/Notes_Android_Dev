@@ -1,0 +1,22 @@
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0504/4205.html
+
+::　利用RenderScript可以较为方便的进行简单图像处理，不用涉及较为复杂的OpenGL ES
+
+::　Renderscript基于C99 (Ed. C 语言)
+  　首先，需要在build.gradle文件中添加那两行加粗的代码：
+    defaultConfig {
+        ...
+
+        renderscriptTargetApi 18
+
+        renderscriptSupportModeEnabled true
+    }
+  　如果app的minSDK为16或者更低，你需要使用support模式，因为很多方法都是在API 17之后添加的。
+  　renderscriptTargetApi最高到23，但是你应该把它设置到能保持脚本中使用到的功能完整的最低API。如果你想在support模式下target API 21+
+  　必须使用gradle-plugin 2.1.0 和 buildToolsVersion “23.0.3” 或者以上。
+  　Renderscript使用C写的脚本并行计算图片的每一个像素。一个脚本就是一个扩展名为‘.rs’ 的文件，必须置于app/src/main/rs。
+  　Android Studio 并不会为你生成这个目录或者任何脚本。
+
+
+
+  
