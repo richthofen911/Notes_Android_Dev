@@ -18,6 +18,7 @@ http://blog.csdn.net/huachao1001/article/details/51524502
   　Renderscript使用C写的脚本并行计算图片的每一个像素。一个脚本就是一个扩展名为‘.rs’ 的文件，必须置于app/src/main/rs。
   　Android Studio 并不会为你生成这个目录或者任何脚本。
 
-
+:: RenderScript　crop图片　(让Allocation output 不等于　Allocation input)
+   http://stackoverflow.com/questions/35791902/crop-image-data-using-renderscript-launch-options
 
   
