@@ -1,0 +1,25 @@
+http://www.cnblogs.com/android-zcq/p/5126925.html
+
+在安卓工程中MVC对应关系如下:
+
+Layout->View : 对应布局文件
+Activity->Controller,View (其中activity分的并不是特别清楚)
+各种业务逻辑实体类->Model 
+
+MVP的基本概念:
+MVP 指的是Model,View,Presenter(交互器/表示器)，是从经典的模式MVC演变而来，
+它们的基本思想有相通的地方：
+  Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。
+MVP与MVC有着一个重大的区别：
+  在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中
+  View会直接从Model中读取数据而不是通过 Controller。
+  
+:: MVP的设计原则 -- 怎么实现一个MVP设计模式？
+ 1. 通常情况下将 View 与 Presenter抽象成接口。
+ 2. 一个 Activity对应(implements)一个 View (把activity当成MVP的view进行操作)
+ 3. 通常情况下，一个 View对应一个 Presenter(View持有Presenter的引用)，在业务复杂时，一个 View可对应多个Presenter.
+  
+  
+  
+
+
