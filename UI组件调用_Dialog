@@ -1,1 +1,4 @@
 参考链接    http://www.cnblogs.com/salam/archive/2010/11/15/1877512.html
+
+::如果出现AlertDialog.Builder 不显示button的情况，
+　　需要在styles设置AlertDialog的style，　比如 <style name="AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert"/>
