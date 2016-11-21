@@ -1,0 +1,35 @@
+http://i.woblog.cn/2016/07/18/use-dagger2/
+
+:: 依赖注入的好处
+  １．　依赖注入的配置独立于初始化地方，更改配置方便。
+       比如：在MVP架构中，我们写了一个TaskPresenter，但是他在TaskActivity和TaskDetailActivity中都使用了，正常情况是不是我们要在这两个地方
+            都做实例化，后期可能还有更多的界面，但是我们如果使用了依赖注入，我们只需要在这两个地方定义一个TaskPresenter的变量，然后加一个注解，
+            这样初始化在统一的地方，以后更改是不是很方便。
+  ２．　我们可以注入一些依赖的模拟实验。比如：我们的app显示的数据来自网络，但是后台接口还没有写好，但是我们对数据层进行了抽象化，那我们就可以写一个
+        本地json模拟是接口返回的数据，就可以测试了。
+  ３．　app的注入组件他不知道在什么地方，初始化完全有我们告诉他在什么地方注入
+  
+ :: Dagger中几个角色(或者说是几个注解)：
+    @Inject：这个很简单了，通常是在需要注入的地方添加这个依赖。比如：MainActivity要使用LocalManager实例，那我们就在要使用的地方定义一个成员变量
+              @Inject
+              LocationManager locationManager;
+             
+    @Module：就是真正提供依赖的类了。所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的依赖。
+             modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的app中可以有多个组成在一起的modules）。
+             所以我们这里可以定义一个AppApplication类用来提供全局依赖，可以是ApiService，Retrofit，Okhttp，LocalManager，Context等
+              @Module
+              public class AppApplicationModule {
+                  ...
+              }
+           
+    @Provides：就是写在Module中某些方法上，表示这个方法提供依赖
+              @Provides @Singleton LocationManager provideLocationManager() {
+                  return (LocationManager) application.getSystemService(LOCATION_SERVICE);
+              }
+      
+    @Component: 是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。 Components可以提供所有定义了的类型的实例。 
+              @Singleton
+              @Component(modules = AppApplicationModule.class)
+              public interface ApplicationComponent {
+                  void inject(MainActivity demoActivity);
+              }
