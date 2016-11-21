@@ -1,4 +1,5 @@
 http://i.woblog.cn/2016/07/18/use-dagger2/
+http://www.jianshu.com/p/7505d92d7748
 
 :: 依赖注入的好处
   １．　依赖注入的配置独立于初始化地方，更改配置方便。
@@ -33,3 +34,8 @@ http://i.woblog.cn/2016/07/18/use-dagger2/
               public interface ApplicationComponent {
                   void inject(MainActivity demoActivity);
               }
+
+::@Inject 和 @Provide 两种依赖生成方式的区别：
+    @Inject 用于注入可实例化的类，@Provides 可用于注入所有类
+    @Inject 可用于修饰属性和构造函数，可用于任何非 Module 类，@Provides 只可用于用于修饰非构造函数，并且该函数必须在某个Module内部
+    @Inject 修饰的函数只能是构造函数，@Provides 修饰的函数必须以 provide 开头
