@@ -1,5 +1,4 @@
-http://i.woblog.cn/2016/07/18/use-dagger2/
-http://www.jianshu.com/p/7505d92d7748
+http://codethink.me/2015/08/06/dependency-injection-with-dagger-2/
 
 :: 依赖注入的好处
   １．　依赖注入的配置独立于初始化地方，更改配置方便。
@@ -34,6 +33,14 @@ http://www.jianshu.com/p/7505d92d7748
               public interface ApplicationComponent {
                   void inject(MainActivity demoActivity);
               }
+              可以看到，Component是一个使用@Component标识的Java interface。interface的inject方法需要一个消耗依赖的类型对象作为参数。
+              modules = .... 是药剂，　消耗依赖的类型对象MainActivity是目标
+              *** 注意：这里必须是真正消耗依赖的类型MainActivity，而不可以写成其父类比如Activity。因为Dagger2在编译时生成依赖注入的代码，
+                  会到inject方法的参数类型中寻找可以注入的对象，但是实际上这些对象存在于MainActivity，而不是Activity中。如果函数声明参数为
+                  Activity，Dagger2会认为没有需要注入的对象。当真正在MainActivity中创建Component实例进行注入时，会直接执行按照Activity
+                  作为参数生成的inject方法，导致所有注入都失败　
+              
+              
 
 ::@Inject 和 @Provide 两种依赖生成方式的区别：
     @Inject 用于注入可实例化的类，@Provides 可用于注入所有类
