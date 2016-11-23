@@ -1,4 +1,5 @@
 http://codethink.me/2015/08/06/dependency-injection-with-dagger-2/
+http://gold.xitu.io/entry/578cf2612e958a00543c45a4
 
 :: 依赖注入的好处
   １．　依赖注入的配置独立于初始化地方，更改配置方便。
