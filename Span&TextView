@@ -1,2 +1,4 @@
 ::关于在单个TextView中实现多样化的styling,　要用到Span.
   详见　http://wiki.jikexueyuan.com/project/android-weekly/issue-146/custom-color-spans.html
+  
+  另，SpannableString的子类有多种style，比如实现bullet就可以用BulletSpan
