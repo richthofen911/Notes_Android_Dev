@@ -34,3 +34,17 @@
 		resultIntent.putExtra("result", "Getting Smile Back!!");
 		setResult(RESULT_OK, resultIntent);
 		finish();
+
+::关于manifest文件中intent的属性　
+　<data>部分
+ 	<data android:scheme="string"
+	      android:host="string"
+	      android:port="string"
+	      android:path="string"
+	      android:pathPattern="string"
+	      android:pathPrefix="string"
+	      android:mimeType="string" />　	
+　　对应的其实就是      <scheme>://<host>:<port>[<path>|<pathPrefix>|<pathPattern>]
+  　scheme可以是http或者file, content之类的
+   
+:: 如果intent-filter里既有MAIN和LAUNCHER，　又有VIEW和DEFAULT，安装后在正常的app列里面看不到这个app图标。  
