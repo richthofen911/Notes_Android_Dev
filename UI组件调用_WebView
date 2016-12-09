@@ -1,3 +1,6 @@
+::考虑使用custome-chrome-tab 
+  https://github.com/GoogleChrome/custom-tabs-client
+
 ::webview.loadUrl("http://slashdot.org/");
   
 ::webview.loadData(String data, String mimeType(媒体类型), String encoding);
