@@ -63,5 +63,15 @@
   http://wenku.baidu.com/view/e4505b90dd88d0d233d46aba.html
   简化版: 在main文件夹下新建asset文件夹，webview.loadUrl("file:///android_asset/test.html"); (不考虑解码之类)
   
-::使用javascript调用本地代码
+::使用Java和JavaScript调用本地代码
+  http://www.imooc.com/article/1475
   http://www.cnblogs.com/lee0oo0/archive/2012/08/01/2617953.html
+  另，如果在没有混淆的版本运行正常，在混淆后的版本的代码运行错误，并提示Uncaught TypeError: Object [object Object] has no method，
+  就是没做混淆例外处理，要在混淆文件加入如下这样的代码。
+  keepattributes *Annotation* 
+  keepattributes JavascriptInterface -keep class com.example.javajsinteractiondemo$JsInteration { *; }
+
+
+  
+  
+  
