@@ -1,0 +1,2 @@
+在manifest里activity的orientation属性设置成　"orientation:screenSize"
+然后在activity里　override onConfigChange方法
