@@ -1,4 +1,5 @@
 http://www.cnblogs.com/android-zcq/p/5126925.html
+http://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html
 
 在安卓工程中MVC对应关系如下:
 
@@ -18,6 +19,11 @@ MVP与MVC有着一个重大的区别：
  1. 通常情况下将 View 与 Presenter抽象成接口。
  2. 一个 Activity对应(implements)一个 View (把activity当成MVP的view进行操作)
  3. 通常情况下，一个 View对应一个 Presenter(View持有Presenter的引用)，在业务复杂时，一个 View可对应多个Presenter.
+ 
+ 
+::MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。
+  唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式。
+
   
   
   
