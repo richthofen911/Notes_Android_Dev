@@ -23,7 +23,10 @@ MVP与MVC有着一个重大的区别：
  
 ::MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致。
   唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式。
-
+  
+::mvp结构中的要注意的地方：  
+  如果这个事件需要Model层的帮助，那事件必须传给Presenter，否则不要传给Presenter，让View自己处理，
+  这样才不会导致类似V->P->V->P->V这种无用功
   
   
   
