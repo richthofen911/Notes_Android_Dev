@@ -11,32 +11,29 @@ http://gold.xitu.io/entry/578cf2612e958a00543c45a4
         本地json模拟是接口返回的数据，就可以测试了。
   ３．　app的注入组件他不知道在什么地方，初始化完全有我们告诉他在什么地方注入
   
- :: Dagger中几个角色(或者说是几个注解)：
-    @Inject：这个很简单了，通常是在需要注入的地方添加这个依赖。比如：MainActivity要使用LocalManager实例，那我们就在要使用的地方定义一个成员变量
-              @Inject
-              LocationManager locationManager;
+ :: Dagger中几个基本角色(或者说是几个注解)：
+    @Inject： 有三种用法，分别注在constructor, field 和 method上，前两种较常用
+              1）加在constructor上可以标记它，让Dagger2来使用，Dagger2可以在需要这个类实例的时候Inject找到这个构造函数并new出实例
+              2）加在field上则是表明这是需要依赖的变量，让Dagger2为其提供依赖
              
-    @Module：就是真正提供依赖的类了。所以我们定义一个类，用@Module注解，这样Dagger在构造类的实例的时候，就知道从哪里去找到需要的依赖。
-             modules的一个重要特征是它们设计为分区并组合在一起（比如说，在我们的app中可以有多个组成在一起的modules）。
-             所以我们这里可以定义一个AppApplication类用来提供全局依赖，可以是ApiService，Retrofit，Okhttp，LocalManager，Context等
-              @Module
-              public class AppApplicationModule {
-                  ...
-              }
+    @Module： 用Module标注的类是专门用来提供依赖的。与@Inject加在构造器上的区别是，如果提供依赖的类的构造函数无法修改，比如一些jar包里的类，
+              无法修改源代码，就需要用@Module， 它可以给不能修改源码的类提供依赖。另外，能用Inject标注的通过Module也可以提供依赖
            
-    @Provides：就是写在Module中某些方法上，表示这个方法提供依赖
+    @Provides：用来标注方法，该方法会在需要提供依赖时被调用，从而吧预先提供好的对象当做依赖，给被标注了@Inject的变量赋值。
+              主要用于标注Module中的某些方法
               @Provides @Singleton LocationManager provideLocationManager() {
                   return (LocationManager) application.getSystemService(LOCATION_SERVICE);
               }
       
-    @Component: 是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。 Components可以提供所有定义了的类型的实例。 
+    @Component:一般用来标注接口， 是@Inject和@Module的桥梁，它的主要作用就是连接这两个部分。
+              被标注了Component的接口在编译时会产生相应的类的实例来作为提供依赖方和需要依赖方之间的桥梁。 
               @Singleton
               @Component(modules = AppApplicationModule.class)
               public interface ApplicationComponent {
                   void inject(MainActivity demoActivity);
               }
               可以看到，Component是一个使用@Component标识的Java interface。interface的inject方法需要一个消耗依赖的类型对象作为参数。
-              modules = .... 是药剂，　消耗依赖的类型对象MainActivity是目标
+              modules = xxx 是药剂，　消耗依赖的类型对象MainActivity是目标
               *** 注意：这里必须是真正消耗依赖的类型MainActivity，而不可以写成其父类比如Activity。因为Dagger2在编译时生成依赖注入的代码，
                   会到inject方法的参数类型中寻找可以注入的对象，但是实际上这些对象存在于MainActivity，而不是Activity中。如果函数声明参数为
                   Activity，Dagger2会认为没有需要注入的对象。当真正在MainActivity中创建Component实例进行注入时，会直接执行按照Activity
