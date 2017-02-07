@@ -98,5 +98,11 @@
   create database:   cd to the directory, then sqlite3 <dbname>
   create table:      CREATE TABLE <databaseName>.<tableName>(col1Name datatype PRIMARY KEY, col2Name datatype, ...);
   
+::常用ORM框架
+  以SQLite为基础的OrmLite, Sugar, GreenDao
+  新兴的Realm
+  **注意，Realm要求model类继承Realm的固定类，某些情况下限制比较大，Sugar也有同样情况。
+    但是代码量上较少一些
+  
   
   
