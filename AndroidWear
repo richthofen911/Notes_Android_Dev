@@ -1,0 +1,5 @@
+https://developer.android.com/training/index.html
+
+Android Wear 2.0 起支持 standalone app
+
+AndroidWear 不支持 webkit, print, backup, appwidget, usb 相关的api
