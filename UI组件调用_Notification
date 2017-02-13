@@ -1,4 +1,3 @@
-
 ::使用notification builder构建
     NotificationCompat.Builder notifyBuilder;
     NotificationManager notificationManager;
@@ -22,3 +21,25 @@ http://www.itnose.net/detail/6169442.html
 遇到的坑
 1. 从service发起notification时，需要 FLAG_ACTIVITY_NEW_TASK
 2. 从service发起notification, PendingIntent要传值时，不能用 FLAG_CANCEL_CURRENT，否则无法传
+
+:: NotificationListenerService ，自 API lvl 18, 也就是 Android 4.3加入的类，
+    https://developer.android.com/reference/android/service/notification/NotificationListenerService.html
+    A service that receives calls from the system when new notifications are posted or removed, or their ranking changed.
+    它是通过系统调起的服务，当有应用发起通知的时候，系统会将通知的动作和信息回调给NotificationListenerService
+    
+    在继承NotificationListenerService服务实现自己逻辑之前，需要在配置文件中添加如下代码，获取权限
+    <service android:name=".NotificationListener"  
+         android:label="@string/service_name"  
+         android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">  
+        <intent-filter>  
+            <action android:name="android.service.notification.NotificationListenerService" />  
+        </intent-filter>  
+    </service>  
+    
+   该服务中有以下两个抽象方法，是需要开发者在使用该服务的时候实现的。 
+    @Override  
+    public void onNotificationPosted(StatusBarNotification sbn) {  }  
+    和
+    @Override  
+    public void onNotificationRemoved(StatusBarNotification sbn) {  }
+    
