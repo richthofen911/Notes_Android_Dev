@@ -24,3 +24,7 @@
 13.Frameworks的回调不要做太多事情仅做必要的初始化，其他不是很重要的事情可以放到其他线程中去做，
       或者用Handler Schedule到稍后再做。
 14.要考虑多分辨率 至少为hdpi, mdpi, ldpi准备图片和布局。元素的单位也尽可能的使用dip而不要用px
+
+15. Can not perform this action after onSaveInstanceState 造成的崩溃
+    http://stackoverflow.com/questions/14177781/java-lang-illegalstateexception-can-not-perform-this-action-after-onsaveinstanc
+     
