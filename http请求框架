@@ -1,0 +1,12 @@
+1. Volley 简明快速好用
+::添加volley
+  dependencies {
+    compile 'com.mcxiaoke.volley:library:1.0.+'
+  }
+  
+  This gets Volley from a http://search.maven.org/#search%7Cga%7C1%7Ccom.mcxiaoke.volley
+  
+
+2. OkHttp，　已经成为安卓官方使用的Http客户端，可以自定义扩展
+
+3. RetroFit　是基于OkHttp的更高级封装，解耦更充分，可以搭配RxJava使用，是代码逻辑更清晰
