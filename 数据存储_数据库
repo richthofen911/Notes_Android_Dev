@@ -101,8 +101,7 @@
 ::常用ORM框架
   以SQLite为基础的OrmLite, Sugar, GreenDao
   新兴的Realm
-  **注意，Realm要求model类继承Realm的固定类，某些情况下限制比较大，Sugar也有同样情况。
-    但是代码量上较少一些
-  
+  **注意，Realm要求model类继承Realm的固定类，某些情况下限制比较大(Sugar也有同样情况)，但是代码量上较少一些
+  OrmLite上手较容易，但基于反射，效率低一些，GreenDao针对安卓做了最大优化且基于generator，效率较高
   
   
