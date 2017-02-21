@@ -104,6 +104,5 @@
   **注意，Realm要求model类继承Realm的固定类，某些情况下限制比较大(Sugar也有同样情况)，但是代码量上较少一些
   OrmLite上手较容易，但基于反射，效率低一些，GreenDao针对安卓做了最大优化且基于generator，效率较高
   GreenDao的官网intro很不友好，根本没提到generator相关的，example project跟intro对不上，很茫然，还是得看其他up主的
-  介绍，比如http://www.jianshu.com/p/252555228b72
-  
+  介绍，比如　https://toutiao.io/posts/yg1kyu/preview
   
