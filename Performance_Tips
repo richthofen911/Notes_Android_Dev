@@ -16,9 +16,22 @@ http://developer.android.com/training/best-performance.html
         那么自然其他类似计算，渲染等操作的可用时间就变得少了。导致GC频繁执行的原因就是内存抖动，　即因为大量的对象被创建又在短时间内马上被释放。
         更具体得说，瞬间产生大量的对象会严重占用Young Generation的内存区域，当达到阀值，剩余空间不够的时候，也会触发GC。即使每次分配的对象占用
         了很少的内存，但是他们叠加在一起会增加Heap的压力，从而触发更多其他类型的GC。这个操作有可能会影响到帧率，并使得用户感知到性能问题。
-       　常见起因及避免
-          例如需要避免在for循环里面分配对象占用内存，需要尝试把对象的创建移到循环体之外，
-          自定义View中的onDraw方法也需要引起注意，每次屏幕发生绘制以及动画执行过程中，onDraw方法都会被调用到，避免在onDraw方法里面执行复杂的操作，
-          避免创建对象。对于那些无法避免需要创建对象的情况，我们可以考虑对象池模型，通过对象池来解决频繁创建与销毁的问题，但是这里需要注意结束使用之后，
-          需要手动释放对象池中的对象。
+       常见起因及避免
+       例如需要避免在for循环里面分配对象占用内存，需要尝试把对象的创建移到循环体之外，
+       **注意，针对这一点有更多的内容　　
+       http://stackoverflow.com/questions/16419233/best-practice-for-creating-millions-of-small-temporary-objects
+       ‘’‘
+       Note that we are speaking of objects that reached the main memory (heap). This is not always the case. A lot of 
+       objects you create does not even leave a CPU register. For instance, consider this for-loop
+          for(int i=0, i<max, i++) {
+            // stuff that implies i
+          }
+        the i variable will never escape the loop-block. Therefore the JVM will put that variable in a CPU register, 
+        egularly increment it but will never send it back to the main memory.　So, creating millions of objects are not 
+        a big deal if they are used only locally. They will be dead before being stored in Eden, so the GC won't even 
+        notice them.
+
+       自定义View中的onDraw方法也需要引起注意，每次屏幕发生绘制以及动画执行过程中，onDraw方法都会被调用到，避免在onDraw方法里面执行复杂的操作，
+       避免创建对象。对于那些无法避免需要创建对象的情况，我们可以考虑对象池模型，通过对象池来解决频繁创建与销毁的问题，但是这里需要注意结束使用之后，
+       需要手动释放对象池中的对象。
     3. Memory leak
