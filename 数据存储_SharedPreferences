@@ -31,3 +31,7 @@
 
 ::Gson 使用简介
   http://blog.csdn.net/lk_blog/article/details/7685169
+  
+::高级
+  可以直接在目录里创建xml文件，写入内容，然后用SharedPreferences的api访问。直接从服务器获取xml里面的内容然后dump到文件里，可以加快效率，
+  适合轻量级存储时的用法.
