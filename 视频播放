@@ -1,0 +1,4 @@
+1. 安卓自带简易的MediaPlayer 略
+
+2. 重点的，google开发的exoplayer2，　用于youtube, google play movie的视频播放　 https://google.github.io/ExoPlayer/guide.html
+   支持DASH文件播放，可定制化高，功能更丰富，支持自定义视频格式渲染，支持加载字幕，2.x版本提高了稳定性
