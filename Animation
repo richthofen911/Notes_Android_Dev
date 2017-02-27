@@ -1,17 +1,21 @@
 针对Animation会展开较为完整详细的笔记
+refs
+http://blog.csdn.net/yanbober/article/details/46481171
+http://blog.csdn.net/xyz_lmn/article/details/38667899
 
 Android上动画的分类
   |
   |--View Animation（出现与Android 3.0之前）
-     ｜－　Tween(补间动画，就是针对view进行旋转，平移，缩放和渐变等的动画）
-          　｜－　alpha 渐变透明动画
-            ｜－　sclae 渐变尺寸动画
-            ｜－　rotate 旋转动画
-            ｜－　translate　平移动画
-     ｜－　Frame（逐帧动画，也叫Drawable Animation，就是按帧播放的动画)
+     ｜－　Tween(补间动画，就是针对view进行旋转，平移，缩放和渐变等的动画）　文件路径是　res/anim/filename.xml
+          　 Tween Animation只能应用于View对象，而且只支持一部分属性，如支持缩放旋转而不支持背景颜色的改变。
+             ***特别注意***: 对于Tween Animation，并不改变属性的值，它只是改变了View对象绘制的位置，而没有改变View对象本身，
+                            比如，你有一个Button，坐标（100,100），Width:100,Height:100，而你有一个动画使其移动（200，200），
+                            你会发现动画过程中触发按钮点击的区域仍是(100,100)-(200,200)。 
+     ｜－　Frame（逐帧动画，也叫Drawable Animation，就是按帧播放的动画)　文件路径是　res/drawable/filename.xml
   |
-  |--Property Animation 属性动画
-      可以定义在xml文件中，它用来在设定的时间内修改对象的属性。例如背景颜色和alpha的值。这些xml文件定义的文件路径是res/animator/filename.xml
-      常用Java类： ValueAnimator, ObjectAnimator, or AnimatorSet.
-      Property Animation定义在android.animation包种。
-      Property Animation的文件可以以资源的形式引用：
+  |--Property Animation 属性动画（Android 3.0之后）　这些xml文件定义的文件路径是res/animator/filename.xml
+      相对于View Animation的进步在于
+      １．View Animation只能够作用在View上，　而属性动画动画可以设置给任何Object，包括那些还没有渲染到屏幕上的对象。
+      ２．属性动画是可扩展的，可以让你自定义任何类型和属性，比如动态改变View的背景色，就无法用View animation完成。
+      ３．实现了改变属性，即针对上面的***特别注意***，在属性动画中，按钮移动后触发点击的区域也是移动后的位置
+     总结来说，属性动画的设计不再是针对于View，也不只是视觉上的动画效果，而是不断对值进行操作的机制。 
