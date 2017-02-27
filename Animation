@@ -1,0 +1,17 @@
+针对Animation会展开较为完整详细的笔记
+
+Android上动画的分类
+  |
+  |--View Animation（出现与Android 3.0之前）
+     ｜－　Tween(补间动画，就是针对view进行旋转，平移，缩放和渐变等的动画）
+          　｜－　alpha 渐变透明动画
+            ｜－　sclae 渐变尺寸动画
+            ｜－　rotate 旋转动画
+            ｜－　translate　平移动画
+     ｜－　Frame（逐帧动画，也叫Drawable Animation，就是按帧播放的动画)
+  |
+  |--Property Animation 属性动画
+      可以定义在xml文件中，它用来在设定的时间内修改对象的属性。例如背景颜色和alpha的值。这些xml文件定义的文件路径是res/animator/filename.xml
+      常用Java类： ValueAnimator, ObjectAnimator, or AnimatorSet.
+      Property Animation定义在android.animation包种。
+      Property Animation的文件可以以资源的形式引用：
