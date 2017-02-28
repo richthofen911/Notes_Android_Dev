@@ -1,9 +1,19 @@
 针对Animation会展开较为完整详细的笔记
 refs
+http://blog.tingyun.com/web/article/detail/1004
 http://blog.csdn.net/yanbober/article/details/46481171
 http://blog.csdn.net/xyz_lmn/article/details/38667899
 http://blog.csdn.net/guolin_blog/article/details/43536355
 
+在学会如何写一个自定义控件，乃至制作动画之前，了解一个控件的绘制流程是必要的，在Android里，一个view的绘制流程顺序包括：
+　　Measure -> Layout -> Draw
+  
+   onMeasure 知道一个view要占界面的大小，然后通过onLayout知道这个控件应该放在哪个位置，最后通过onDraw方法将这个控件绘制出来
+             需要明白的一点是 ,测量所得的宽高不一定是最后展示的宽高，最后宽高确定是在onLayout方法里，layou（left，top，right，bottom）
+   onLayout  方法里主要是具体摆放子view的位置，水平摆放或者垂直摆放，所以在单纯的自定义view是不需要重写onLayout方法，不过需要注意的一点是，
+             子view的margin属性是否生效就要看parent是否在自身的onLayout方法进行处理，而view得padding属性是在onDraw方法中生效的。
+   onDraw方法，如果是直接继承的View，那么在重写onDraw的方法是时候完全可以把super.ondraw(canvas)删掉，因为它的默认实现是空
+   
 Android上动画的分类
   |
   |--View Animation（出现与Android 3.0之前）
@@ -114,6 +124,87 @@ Android上动画的分类
   FloatEvaluator是系统内置好的功能，并不需要我们自己去编写，但介绍它的实现方法是要为我们后面的功能铺路的。前面使用过了
   ValueAnimator的ofFloat()和ofInt()方法，分别用于对浮点型和整型的数据进行动画操作的，但实际上ValueAnimator中还有一个ofObject()方法，
   是用于对任意对象进行动画操作的。但是相比于浮点型或整型数据，对象的动画操作明显要更复杂一些，因为系统将完全无法知道如何从初始对象过度到结束对象，
-  因此这个时候我们就需要实现一个自己的TypeEvaluator来告知系统如何进行过度
+  因此这个时候我们就需要实现一个自己的TypeEvaluator来告知系统如何进行过度。
+  一般来说先定义一个Point类，构造器很简单，　Point(float x, float y), 方法就是getX(), getY()
+  然后implements TypeEvaluator
+   public class PointEvaluator implements TypeEvaluator{  
+      @Override  
+      public Object evaluate(float fraction, Object startValue, Object endValue) {  
+          Point startPoint = (Point) startValue;  
+          Point endPoint = (Point) endValue;  
+          float x = startPoint.getX() + fraction * (endPoint.getX() - startPoint.getX());  
+          float y = startPoint.getY() + fraction * (endPoint.getY() - startPoint.getY());  
+          Point point = new Point(x, y);  
+          return point;  
+       }  
+    }  
+  
+  这样我们就将PointEvaluator编写完成了，接下来我们就可以非常轻松地对Point对象进行动画操作了，比如说我们有两个Point对象，]
+  现在需要将Point1通过动画平滑过度到Point2，就可以这样写：
+   Point point1 = new Point(0, 0);  
+   Point point2 = new Point(300, 300);  
+   ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(), point1, point2);  
+   anim.setDuration(5000);  
+   anim.start();  
+   这里需要注意的是，ofObject()方法要求多传入一个TypeEvaluator参数，这里只需要传入刚才定义好的PointEvaluator的实例就可以了。
+   
+   掌握了这些知识之后，我们就可以来尝试一下如何通过对Point对象进行动画操作，从而实现整个自定义View的动画效果。
+   新建一个MyAnimView继承自View，代码如下所示：
+     public class MyAnimView extends View {  
+        public static final float RADIUS = 50f;  
+        private Point currentPoint;  
+        private Paint mPaint;  
+
+        public MyAnimView(Context context, AttributeSet attrs) {  
+            super(context, attrs);  
+            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);  
+            mPaint.setColor(Color.BLUE);  
+        }  
+
+        @Override  
+        protected void onDraw(Canvas canvas) {  
+            if (currentPoint == null) {  
+                currentPoint = new Point(RADIUS, RADIUS);  
+                drawCircle(canvas);  
+                startAnimation();  
+            } else 
+                drawCircle(canvas);  
+        }  
+
+        private void drawCircle(Canvas canvas) {  
+            float x = currentPoint.getX();  
+            float y = currentPoint.getY();  
+            canvas.drawCircle(x, y, RADIUS, mPaint);  
+        }  
+
+        private void startAnimation() {  
+            Point startPoint = new Point(RADIUS, RADIUS);  
+            Point endPoint = new Point(getWidth() - RADIUS, getHeight() - RADIUS);  
+            ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);  
+            anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {  
+                @Override  
+                public void onAnimationUpdate(ValueAnimator animation) {  
+                    currentPoint = (Point) animation.getAnimatedValue();  
+                    invalidate();  
+                }  
+            });  
+            anim.setDuration(5000);  
+            anim.start();  
+        }  
+    }  
     
+    利用xml给自定义view的属性赋值：
+    　　需要在values/attrs.xml 文件里定义一个name为自己定义view名字的declare-styleable，　形如
+    　　<resources>
+            <declare-styleable name="SketchView">
+                <attr name="radius" format="dimension"/>    
+            </declare-styleable>
+        </resources>
+        这样就可以在layout文件的xml里对自定义的view使用自己定义的属性了
+        <net.callofdroidy.net.MyView
+          ...
+          app:radius="20dp"
+          ... />
+       要用上这个属性，则需要MyView使用带dfStyleAttr这个参数的构造器
+       
     
