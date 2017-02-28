@@ -2,6 +2,7 @@
 refs
 http://blog.csdn.net/yanbober/article/details/46481171
 http://blog.csdn.net/xyz_lmn/article/details/38667899
+http://blog.csdn.net/guolin_blog/article/details/43536355
 
 Android上动画的分类
   |
@@ -19,3 +20,100 @@ Android上动画的分类
       ２．属性动画是可扩展的，可以让你自定义任何类型和属性，比如动态改变View的背景色，就无法用View animation完成。
       ３．实现了改变属性，即针对上面的***特别注意***，在属性动画中，按钮移动后触发点击的区域也是移动后的位置
      总结来说，属性动画的设计不再是针对于View，也不只是视觉上的动画效果，而是不断对值进行操作的机制。 
+     ValueAnimator是整个属性动画机制当中最核心的一个类，对象初始值和结束值之间的动画过渡就是由ValueAnimator这个类来负责计算的。
+     它的内部使用一种时间循环的机制来计算值与值之间的动画过渡，我们只需要将初始值和结束值提供给ValueAnimator，并且告诉它动画所需运行的时长，
+     ValueAnimator就会自动帮我们完成从初始值平滑地过渡到结束值这样的效果。除此之外，ValueAnimator还负责管理动画的播放次数、播放模式、以及对
+     动画设置监听器等,　可以方便的实现对一个对象的单一变化操作，比如alpha变化，旋转，沿X轴或Y轴平移之类的
+     **组合动画**，　要实现复杂的动画，就需要用到组合动画，借助AnimatorSet这个类。这个类提供了一个play()方法，
+                  　如果向这个方法中传入一个Animator对象(通常是ValueAnimator或ObjectAnimator)将会返回一个AnimatorSet.Builder的实例，
+                     AnimatorSet.Builder中包括以下四个方法：
+                      after(Animator anim)   将现有动画插入到传入的动画之后执行
+                      after(long delay)   将现有动画延迟指定毫秒后执行
+                      before(Animator anim)   将现有动画插入到传入的动画之前执行
+                      with(Animator anim)   将现有动画和传入的动画同时执行
+                   
+      Animator监听器，通常用于添加一些逻辑处理。Animator类(ValueAnimator, ObjectAnimator, AnimatorSet)中提供了一个addListener()方法，
+      接收一个AnimatorListner, 监听　onStart, onEnd, onCancel, onRepeat
+      
+      ***用XML编写***
+      属性动画像补间动画一样，也可以通过xml实现。通过XML来编写动画可能会比通过代码来编写动画要繁琐一些，
+      但是在重用方面将会变得非常轻松，比如某个将通用的动画编写到XML里面，可以在各个界面当中轻松去重用它。
+      在res/animator/ 文件夹下，一共可以使用三种标签：
+        <animator>  对应代码中的ValueAnimator
+        <objectAnimator>  对应代码中的ObjectAnimator
+        <set>  对应代码中的AnimatorSet
+        
+        例１ObjectAnimator的使用
+        　<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"  
+            android:valueFrom="1"  
+            android:valueTo="0"  
+            android:valueType="floatType"  
+            android:propertyName="alpha"/>  
+            
+        例２　组合动画
+          <set xmlns:android="http://schemas.android.com/apk/res/android"  
+                android:ordering="sequentially" >  
+
+                <objectAnimator  
+                    android:duration="2000"  
+                    android:propertyName="translationX"  
+                    android:valueFrom="-500"  
+                    android:valueTo="0"  
+                    android:valueType="floatType" >  
+                </objectAnimator>  
+
+                <set android:ordering="together" >  
+                    <objectAnimator  
+                        android:duration="3000"  
+                        android:propertyName="rotation"  
+                        android:valueFrom="0"  
+                        android:valueTo="360"  
+                        android:valueType="floatType" >  
+                    </objectAnimator>  
+
+                    <set android:ordering="sequentially" >  
+                        <objectAnimator  
+                            android:duration="1500"  
+                            android:propertyName="alpha"  
+                            android:valueFrom="1"  
+                            android:valueTo="0"  
+                            android:valueType="floatType" >  
+                        </objectAnimator>  
+                        <objectAnimator  
+                            android:duration="1500"  
+                            android:propertyName="alpha"  
+                            android:valueFrom="0"  
+                            android:valueTo="1"  
+                            android:valueType="floatType" >  
+                        </objectAnimator>  
+                    </set>  
+                </set>  
+            </set>  
+
+ 加载xml动画
+  Animator animator = AnimatorInflater.loadAnimator(context, R.animator.anim_file);  
+  animator.setTarget(view);  
+  animator.start();  
+        
+
+::ValueAnimator的高级用法
+  比如说有一个自定义的View，在这个View当中有一个Point对象用于管理坐标，然后在onDraw()方法当中就是根据这个Point对象的坐标值来进行绘制的。
+  也就是说，如果我们可以对Point对象进行动画操作，那么整个自定义View的动画效果就有了，那么这就要用到高级一些的方法。在此之前，还需要掌握
+  另外一个知识点，就是TypeEvaluator接口的用法。TypeEvaluator简单来说就是告诉动画系统如何从初始值过度到结束值。在上面的ValueAnimator.ofFloat()
+  方法就是实现了初始值与结束值之间的平滑过度，那么这个平滑过度是怎么做到的呢？其实就是系统内置了一个FloatEvaluator，
+  它通过计算告知动画系统如何从初始值过度到结束值。FloatEvaluator的代码实现：
+    public class FloatEvaluator implements TypeEvaluator {  
+        public Object evaluate(float fraction, Object startValue, Object endValue) {  
+            float startFloat = ((Number) startValue).floatValue();  
+            return startFloat + fraction * (((Number) endValue).floatValue() - startFloat);  
+        }  
+    }  
+    第一个参数fraction非常重要，这个参数用于表示动画的完成度的，根据它来计算当前动画的值应该是多少
+    代码的逻辑就很清晰了，用结束值减去初始值，算出它们之间的差值，然后乘以fraction这个系数，再加上初始值，得到当前动画的值
+    
+  FloatEvaluator是系统内置好的功能，并不需要我们自己去编写，但介绍它的实现方法是要为我们后面的功能铺路的。前面使用过了
+  ValueAnimator的ofFloat()和ofInt()方法，分别用于对浮点型和整型的数据进行动画操作的，但实际上ValueAnimator中还有一个ofObject()方法，
+  是用于对任意对象进行动画操作的。但是相比于浮点型或整型数据，对象的动画操作明显要更复杂一些，因为系统将完全无法知道如何从初始对象过度到结束对象，
+  因此这个时候我们就需要实现一个自己的TypeEvaluator来告知系统如何进行过度
+    
+    
