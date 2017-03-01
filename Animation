@@ -207,4 +207,31 @@ Android上动画的分类
           ... />
        要用上这个属性，则需要MyView使用带dfStyleAttr这个参数的构造器
        
-    
+ 
+   Interpolator（插值器)的用法
+      主要作用是控制动画的变化速率，比如实现一种非现行运动的动画效果。从Android 1.0版本开始就一直存在Interpolator接口了，而之前的补间动画
+      当然也是支持这个功能的。只不过在属性动画中新增了一个TimeInterpolator接口，这个接口是用于兼容之前的Interpolator的，这使得所有过去的
+      Interpolator实现类都可以直接拿过来放到属性动画当中使用。TimeInterpolator接口已经有非常多的实现类了，这些都是Android系统内置好的
+      并且我们可以直接使用的Interpolator。每个Interpolator都有它各自的实现效果，比如说AccelerateInterpolator就是一个加速运动的
+      Interpolator，而DecelerateInterpolator就是一个减速运动的Interpolator。系统自带的AccelerateD ateInterpolator源码如下
+        
+        public class AccelerateDecelerateInterpolator implements Interpolator, NativeInterpolatorFactory {  
+            public AccelerateDecelerateInterpolator() {  
+            }  
+
+            @SuppressWarnings({"UnusedDeclaration"})  
+            public AccelerateDecelerateInterpolator(Context context, AttributeSet attrs) {  
+            }  
+
+            public float getInterpolation(float input) {  
+                return (float)(Math.cos((input + 1) * Math.PI) / 2.0f) + 0.5f;  //主要逻辑就在这里了。三角函数刚好能让值实现周期变化
+            }  
+
+            /** @hide */  
+            @Override  
+            public long createNativeInterpolator() {  
+                return NativeInterpolatorFactoryHelper.createAccelerateDecelerateInterpolator();  
+            }  
+        }  
+      
+      
