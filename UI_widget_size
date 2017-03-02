@@ -1,6 +1,0 @@
-::获取textview高度
-  tv.measure(0, 0)  // must call measure() first to make sure the view has been drawed
-  tv.getMeasuredHeight()   int in px
-
-::get textsize inside textview
-  tv.getTextSize()
