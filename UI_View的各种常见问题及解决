@@ -21,3 +21,13 @@ protected void postAndNotifyAdapter(final Handler handler, final RecyclerView re
         }
     });
 }
+
+::List里实现分组（通常来说，比如按姓氏首字母分组）　　 http://blog.csdn.net/guolin_blog/article/details/9033553
+  用到SectionIndexer,　这是一个接口，可以自定义子类来实现，但是通常过于麻烦，系统有自带的AlphabetIndexer，　足矣
+  AlphabetIndexer的构造函数需要传入三个参数。
+  第一个参数是cursor，　就是把我们从数据库中查出的游标传进去，
+  第二个参数是sortedColumnIndex整型，　就是指明我们是使用哪一列进行排序的，
+  第三个参数是alphabet字符串，　是指定字母表排序规则，比如："ABCDEFGHIJKLMNOPQRSTUVWXYZ"。
+  有了AlphabetIndexer，我们就可以通过它的getPositionForSection和getSectionForPosition方法，找出当前位置所在的分组，
+  和当前分组所在的位置，从而实现类似于系统联系人的分组导航和挤压动画效果。更详细内容见链接
+    
