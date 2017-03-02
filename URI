@@ -1,2 +1,4 @@
 http://blog.csdn.net/sunny09290/article/details/7514963
+就安卓平台而言，URI分为三个部分： scheme, authority(有分为host和port) 和 path, 即　scheme://host:port/path
+实际的例子比如content://com.example.project:2000/folder/subfolder/etc
 
