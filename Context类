@@ -35,3 +35,4 @@
 ::getApplication和getApplicationContext的区别
   getApplication返回结果为Application，且不同的Activity和Service返回的Application均为同一个全局对象
   getApplicationContext返回的也是Application对象，只不过返回类型为Context
+  此外，在有些类中调用不了getApplication，只能调用getApplicationContext
