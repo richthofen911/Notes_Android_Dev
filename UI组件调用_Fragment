@@ -44,5 +44,7 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
     fragmnet经常会被销毁重新实例化，Android framework只会调用fragment无参的构造函数。在系统自动实例化fragment的过程中，没有办法干预。
     一些需要外部传入的参数来决定的初始化就没有办法完成。使用静态工厂方法，将外部传入的参数可以通过Fragment.setArgument保存在它自己身上，
     这样我们可以在Fragment.onCreate(...)调用的时候将这些参数取出来。
+    
+ :: fragment的生命周期可能会被打断，尤其是在用viewpager翻页的时候   
 
 
