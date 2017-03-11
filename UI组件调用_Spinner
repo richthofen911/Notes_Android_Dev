@@ -1,4 +1,4 @@
-::实例
+::常用的一种是简单的以xml里的数据为数据源，另一种是结合数据库
  -------------layout声明---------
   <TextView 
       android:id="@+id/spinnerText"  
