@@ -69,6 +69,7 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
     这种为每个item添加点击监听的解决方案不用多想也知道是浪费性能的方法。
     这里尝试像ListView那样使用一个监听解决问题  http://blog.csdn.net/liaoinstan/article/details/51200600
     
-    
+:: 关于computingLayout的时候不能notifyItemInserted 
+   always! use! a Handler!
 
      
