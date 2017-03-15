@@ -71,5 +71,11 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
     
 :: 关于computingLayout的时候不能notifyItemInserted 
    always! use! a Handler!
-
+   
+:: item插入顺序
+     默认是从上往下，新item出现在线面
+      LinearLayoutManager
+          setStackFromEnd=true　是从下往上，新item出现在下面，　
+          setReverseLayout＝true　　　也是从下往上，但新item出现在上面
+     
      
