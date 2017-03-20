@@ -9,6 +9,14 @@
       3. 要让tab居底部而非顶部，要把TabLayout放在ViewPager下面，ViewPager的weight设为1
     已发现问题： page position 在载入第一页的时候第二页也会在背后载出来，即index有问题  
       
+      
+  Cards  http://blog.csdn.net/u010498248/article/details/52524053
+  Dividers
   CoordinatorLayout
+  Bottom Navigation
+  Bottom sheets        http://www.jianshu.com/p/38af0cf77352
 
+:: Material Design 主要size规范
+    list 布局，左右边距16dp, 单行cell高度48dp, icon直径24dp, 顶底镶边宽度8dp
+    grid 布局，侧边边距16dp, icon直径48dp，icon文字说明高度16dp, 行距16dp， 左右侧边距24dp, 顶底镶边上16下24
 https://blog.leancloud.cn/3306/
