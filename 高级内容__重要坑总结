@@ -1,3 +1,7 @@
+:: be careful when refactoring id name of view in layout files, 如果某个view的id跟系统自带的view id重名， 两个都会被改，
+      然后就会出现 No static field xxxxx of type I in class Landroid/...... 的错误。
+      原因就是构建器找不到那个view了，因为view的id名被一起改了
+      
 1.  类的finalize方法的调用时机由系统而定，不能准确知道调用时机，可能会导致程序在使用过程中的异常。为避免这个问题，
       需要将与类释放资源相关的操作封装成一个共有方法供外部使用，而不是调用类的finalize方法释放与类相关的资源。
 2. TextView及其派生子类，调用 setText 方法设置一个 int 型的数据，千万要将该值转为String，否则在某些设备中它会默认
