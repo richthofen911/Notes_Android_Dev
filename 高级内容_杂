@@ -1,3 +1,6 @@
+:: 冷启动白屏问题
+    设置一个专门的style，里面用自定义的图片， 用一个专门的activity，windowbackground用这个style，从而来做splash
+    
 :: com.android.builder 包
     DefaultManifestParser 可以用来在build时获取manifestfile里的信息
 
