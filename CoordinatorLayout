@@ -1,0 +1,4 @@
+这个是个大坑
+
+1. 内部子元素相对位置由behavior决定，nestedScrollView的behavior就包含了below actionbar
+2. toolbar会和statusbar重叠，要改变需要appbarlayout里 android:fitsSystemWindows="false"
