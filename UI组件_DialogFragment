@@ -1,1 +1,11 @@
 http://blog.csdn.net/lmj623565791/article/details/37815413/
+
+dialog 按钮的颜色，background圆角之类的，都在onStart()里修改
+@Override
+    public void onStart() {
+        super.onStart();
+        ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        ((AlertDialog) getDialog()).getWindow().setBackgroundDrawableResource(R.drawable.round_corners_bg);
+    }
+}
