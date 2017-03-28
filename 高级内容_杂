@@ -1,3 +1,6 @@
+::软件盘遮挡输入框问题 ref  http://www.cnblogs.com/jerehedu/p/4194125.html
+    　在相关的activity中的oncreate中setContentView之前加上
+         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 :: 冷启动白屏问题
     设置一个专门的style，里面用自定义的图片， 用一个专门的activity，windowbackground用这个style，从而来做splash
     
