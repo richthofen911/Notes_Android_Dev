@@ -45,6 +45,6 @@ http://blog.csdn.net/dai_zhenliang/article/details/38554273
     一些需要外部传入的参数来决定的初始化就没有办法完成。使用静态工厂方法，将外部传入的参数可以通过Fragment.setArgument保存在它自己身上，
     这样我们可以在Fragment.onCreate(...)调用的时候将这些参数取出来。
     
- :: fragment的生命周期可能会被打断，尤其是在用viewpager翻页的时候   
+:: fragment的生命周期可能会被打断，尤其是在用viewpager翻页的时候   
 
-
+:: fragment里没有onBackPressed(), onKeyDown()这些方法，只能在Activity中override，然后findFragment if isVisible
