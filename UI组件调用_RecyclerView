@@ -4,7 +4,10 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
 
 ::大坑： reycycler view's data may be messed up when scolling back up
    原因:https://github.com/bumptech/glide/issues/1001
-   solution: 待考
+        总得来说就是item因为回收的原因，再出现时某些status跟data对不上
+   solution: dirty solution:  在adapter的onBindViewHolder一开始就viewholder.setIsrecyclable(false)，阻止viewholder被回收
+                              but 这违反了recyclerview的初衷
+             更合理的方法因该是只保留item的某些数据状态，具体实现待研究
    
 需要
 1.ViewHolder    https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java
