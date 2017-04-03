@@ -2,3 +2,5 @@
 
 1. 内部子元素相对位置由behavior决定，nestedScrollView的behavior就包含了below actionbar
 2. toolbar会和statusbar重叠，要改变需要appbarlayout里 android:fitsSystemWindows="false"
+3.  CoordinatorLayout aligns its child views based on the view's borders. 
+    So adding margin between elements wouldn't help at all in motion. It will look fine in the layout, but give up in motion.
