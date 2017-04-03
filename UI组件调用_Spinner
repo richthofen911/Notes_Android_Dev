@@ -1,3 +1,8 @@
+::修改下拉箭头颜色 wow
+   spinner.getBackground().setColorFilter(getResources().getColor(R.color.red), PorterDuff.Mode.SRC_ATOP);
+   
+::spinner selected显示的textcolor以及dropdown时候的style可以用自己的
+
 ::常用的一种是简单的以xml里的数据为数据源，另一种是结合数据库
  -------------layout声明---------
   <TextView 
@@ -22,7 +27,7 @@
         view = (TextView) findViewById(R.id.spinnerText);  
         spinner = (Spinner) findViewById(R.id.Spinner01);  
         //将可选内容与ArrayAdapter连接起来  
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);  
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);  // 可以自己declare一个textview
         //设置下拉列表的风格  
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);  
         //将adapter 添加到spinner中  
