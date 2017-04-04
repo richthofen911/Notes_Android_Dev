@@ -7,7 +7,22 @@ RecyclerView与ListView的原理差不多，本质上都是以适配器为核心
         总得来说就是item因为回收的原因，再出现时某些status跟data对不上
    solution: dirty solution:  在adapter的onBindViewHolder一开始就viewholder.setIsrecyclable(false)，阻止viewholder被回收
                               but 这违反了recyclerview的初衷
-             更合理的方法因该是只保留item的某些数据状态，具体实现待研究
+             更合理的方法因该是只保留item的某些数据状态，具体实现:
+             在onBindViewHolder里把满足触发条件的position存到比如list里，然后每次判断position的值是否在list里，如果在的话
+             继续写出发结果，如果不再，需要把用于显示的view手动set到初始状态。 例:
+             @Override
+             public void onBindViewHolder(VHBeaconAdmin viewHolder, int position){
+               Bean bean = dataset.get(position);
+               if(bean meets some conditions){
+                  if(!list.contains(position))
+                     list.add(position)
+                  if(list.contains(position){
+                     imageview.setImageResource(the icon id);
+                  }else
+                     imageview.setImageResource(android.R.color.transparent);    //  ****** set back to default      
+               }else
+                  imageview.setImageResource(android.R.color.transparent);     //  *******  set back to default 
+                  
    
 需要
 1.ViewHolder    https://github.com/richthofen911/SalesDemo/blob/master/app/src/main/java/ap1/com/demo/ViewHolderMessage.java
