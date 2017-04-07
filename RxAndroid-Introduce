@@ -4,3 +4,19 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
 
 进阶例子　　　http://www.infoq.com/cn/articles/rxandroid-basics-2
 
+::简述
+  1.  基础来说 创建 Observer, 实现 onComplete, onError, onNext方法
+    1.1.Observer有个扩展版叫Subscriber，比Observer多了一个onStart方法，在subscribe刚开始而事件还未发送之前被调用，做些准备工作例如
+        数据清零或重置。这是一个可选方法，默认情况下它的实现为空。
+        注**: 如果对准备工作的线程有要求（例如弹出一个显示进度的对话框，这必须在主线程执行）， onStart() 就不适用了，因为它总是在subscribe所发生的
+        线程被调用，而不能指定线程。要在指定的线程来做准备工作，可以使用 doOnSubscribe() 方法
+  
+  2. 创建被观察者 Observable
+      Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>(){
+      })
+  
+  3. subscribe
+     由于observer有observer和subscriber，所以订阅的方式可以分别是
+     observerble.subscribe(observer);
+     observerble.subscribe(subscriber);
+  
