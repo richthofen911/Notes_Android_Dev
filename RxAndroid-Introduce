@@ -27,13 +27,21 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
           
       2.3 from方式
           Observerble<String> observable = Observable.from(一个集合或array)
+          
+      以上都是同步的情况，异步的情况要用 fromCallable\
+      Observable.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String result = /* a async api call */
+                return result;
+            }
+        });
       
       当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用(onStart之后)，事件序列就会依照设定依次触发
   
   3. subscribe
      由于observer有observer和subscriber，所以订阅的方式可以分别是
      observerble.subscribe(observer);
-     observerble.subscribe(subscriber);
      
      核心逻辑代码
      public Subscription subscribe(Subscriber subscriber) {
@@ -46,4 +54,10 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
      最后调用 onCompleted(). 所以subscribe() 方法其实相当于依次执行了：onStart() --> onNext（）--> onCompleted（）
      从这也可以看出，在 RxJava 中，Observable 并不是在创建的时候就立即开始发送事件，而是在它被订阅的时候，即当 subscribe() 方法执行的时候。
      Observer 和 Subscriber 具有相同的角色，而且 Observer 在 subscribe() 过程中最终会被转换成 Subscriber对象
+     
+     在异步的情况下
+             observerble
+                .subscribeOn(Schedulers.io())  // 实现在非UI线程工作
+                .observeOn(AndroidSchedulers.mainThread()) // 实现onNext在UI线程被调用，从而方便更新UI
+                .subscribe(observer);
      
