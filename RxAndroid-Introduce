@@ -60,4 +60,28 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
                 .subscribeOn(Schedulers.io())  // 实现在非UI线程工作
                 .observeOn(AndroidSchedulers.mainThread()) // 实现onNext在UI线程被调用，从而方便更新UI
                 .subscribe(observer);
-     
+                
+   特别的， Observable有一个精简版的叫Single，只用onSuccess和onError两个方法
+        Single<List<String>> tvShowSingle = Single.fromCallable(new Callable<List<String>>() { 
+            @Override
+            public List<String> call() throws Exception {
+                mRestClient.getFavoriteTvShows(); 
+            }
+        });
+        
+        mTvShowSubscription = tvShowSingle
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(new SingleSubscriber<List<String>>() {
+
+                  @Override 
+                  public void onSuccess(List<String> tvShows) {
+                      displayTvShows(tvShows); 
+                  }
+
+                  @Override 
+                  public void onError(Throwable error) {
+                      displayErrorMessage(); 
+                  } 
+              });
+注意** 一定要在Activity onDestroy()中 unsubscribe，否则内存泄漏
