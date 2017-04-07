@@ -11,12 +11,39 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
         注**: 如果对准备工作的线程有要求（例如弹出一个显示进度的对话框，这必须在主线程执行）， onStart() 就不适用了，因为它总是在subscribe所发生的
         线程被调用，而不能指定线程。要在指定的线程来做准备工作，可以使用 doOnSubscribe() 方法
   
-  2. 创建被观察者 Observable
-      Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>(){
-      })
+  2. 创建被观察者 Observable 有三种方式
+      2.1 create方式
+          Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>(){
+              @Override
+              public void call(Subscriber<? super String> subscriber){
+                  subscriber.onNext("aa");
+                  subscriber.onNext("bb");
+                  subscriber.onNext("cc");
+                  subscriber.onCompleted();
+              }
+          });
+      2.2 just方式（最多支持10个数据)
+          Observable<String> observable = Observable.just("aa", "bb". "cc");
+          
+      2.3 from方式
+          Observerble<String> observable = Observable.from(一个集合或array)
+      
+      当 Observable 被订阅的时候，OnSubscribe 的 call() 方法会自动被调用(onStart之后)，事件序列就会依照设定依次触发
   
   3. subscribe
      由于observer有observer和subscriber，所以订阅的方式可以分别是
      observerble.subscribe(observer);
      observerble.subscribe(subscriber);
-  
+     
+     核心逻辑代码
+     public Subscription subscribe(Subscriber subscriber) {
+        subscriber.onStart();
+        onSubscribe.call(subscriber);
+        return subscriber; //将传入的 Subscriber 作为 Subscription 返回。这是为了方便 unsubscribe().   
+     }
+        
+     在subscribe() 中，首先会调用 onStart() 方法，这个方法前文已经介绍了，是可选的。接着会调用 call()方法，call()方法中会调用多次 onNext() 
+     最后调用 onCompleted(). 所以subscribe() 方法其实相当于依次执行了：onStart() --> onNext（）--> onCompleted（）
+     从这也可以看出，在 RxJava 中，Observable 并不是在创建的时候就立即开始发送事件，而是在它被订阅的时候，即当 subscribe() 方法执行的时候。
+     Observer 和 Subscriber 具有相同的角色，而且 Observer 在 subscribe() 过程中最终会被转换成 Subscriber对象
+     
