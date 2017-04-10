@@ -1,5 +1,7 @@
 RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致callback hell， Rx能将它们转化成链式流，逻辑上更清晰易读
 
+****注意** 一定要在Activity onDestroy()中 unsubscribe，否则内存泄漏****
+
 入门基础例子　http://www.infoq.com/cn/articles/RxAndroid-basics
 
 进阶例子　　　http://www.infoq.com/cn/articles/rxandroid-basics-2
@@ -84,4 +86,33 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
                       displayErrorMessage(); 
                   } 
               });
-注意** 一定要在Activity onDestroy()中 unsubscribe，否则内存泄漏
+              
+           
+::Subject类
+  最简单的：PublishSubject。使用PublishSubject时，一旦数据从一端注入，结果会立即从另一端输出。它既是observer也是observable
+  
+
+::map()方法
+  它接收一个数据，然后输出另一个数据，当然输入输出的两个数据之间是有联系的。例
+  Single.just(4).map(new Function<Integer, String>() { 
+      @Override 
+      public String apply(Integer integer) {  //此处只是取Integer转String作为例子，实际可以很复杂
+          return String.valueOf(integer); 
+      } 
+  }).subscribe(new SingleSubscriber<String>() { 
+
+      @Override 
+      public void onSuccess(String value) { 
+          mValueDisplay.setText(value); 
+      } 
+
+      @Override 
+      public void onError(Throwable error) { } 
+  }); 
+  
+
+::deboundce()方法
+  比如希望用户在搜索栏type in时就有自动显示结果，但又不能一直发送request, debounce()方法就是做这个的。
+  这个方法告诉在没有数据传入长达比如400毫秒时才发送数据。意思就是，仅当用户400ms都没有改变输入内容时，Subject才会发送最新的搜索字符串。
+  这样以来我们就不会进行无意义的网络请求了，UI也不会每输入一个字符都更新
+
