@@ -55,7 +55,8 @@
   
 ::关于防止Service并干掉
    这个topic包含很多知识点，参考这个链接 http://blog.csdn.net/dfskhgalshgkajghljgh/article/details/51374175
-
+   0. 最最现实有用的方案，就是两个进程互相轮询查看另一个是否被干掉，如果被干掉了就把它拉起，
+      具体实现 http://chenglei1986.github.io/android_app_daemon_process.html
    1. 在manifest中设置android:persistent="true"属性，但是需要权限，对第三方应用意义不大
    2. onStartCommand()返回值设为START_REDELIEVER_INTENT 或 START_STICKY
    3. 提高Service的进程等级
