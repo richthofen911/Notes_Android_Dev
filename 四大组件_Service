@@ -54,6 +54,8 @@
   5）默认实现的onStartCommand()的目的是将intent插入到工作队列中
   
 ::关于防止Service并干掉
+   这个topic包含很多知识点，参考这个链接 http://blog.csdn.net/dfskhgalshgkajghljgh/article/details/51374175
+
    1. 在manifest中设置android:persistent="true"属性，但是需要权限，对第三方应用意义不大
    2. onStartCommand()返回值设为START_REDELIEVER_INTENT 或 START_STICKY
    3. 提高Service的进程等级
