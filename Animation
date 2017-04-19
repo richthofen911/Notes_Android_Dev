@@ -23,6 +23,7 @@ Android上动画的分类
                             比如，你有一个Button，坐标（100,100），Width:100,Height:100，而你有一个动画使其移动（200，200），
                             你会发现动画过程中触发按钮点击的区域仍是(100,100)-(200,200)。 
      ｜－　Frame（逐帧动画，也叫Drawable Animation，就是按帧播放的动画)　文件路径是　res/drawable/filename.xml
+                          对应的Java类是 AnimationDrawable. 注*要打断这种动画要用setVisible而不是stop，详见doc
   |
   |--Property Animation 属性动画（Android 3.0之后）　这些xml文件定义的文件路径是res/animator/filename.xml
       相对于View Animation的进步在于
