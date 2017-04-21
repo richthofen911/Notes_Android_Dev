@@ -1,6 +1,8 @@
 Legacy javac toolchain:
   javac (.java --> .class) --> dx (.class --> .dex)
 
+
+------Android Studio 2.4 和 Android O 将原生支持 Java 8, 且弃用Jack toolchain，固以下可能作废-----
 New Jack toolchain:
   Jack (.java --> .jack --> .dex)
 
@@ -18,6 +20,8 @@ Configuring Gradle:
       targetCompatibility JavaVersion.VERSION_1_8
     }
   }
+---------------------------------
+
 
 ::important features of Java 8
    - 针对interface 的 default方法（不强制需要override) 和static方法
