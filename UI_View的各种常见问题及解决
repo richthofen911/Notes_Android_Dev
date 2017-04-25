@@ -31,3 +31,6 @@ protected void postAndNotifyAdapter(final Handler handler, final RecyclerView re
   有了AlphabetIndexer，我们就可以通过它的getPositionForSection和getSectionForPosition方法，找出当前位置所在的分组，
   和当前分组所在的位置，从而实现类似于系统联系人的分组导航和挤压动画效果。更详细内容见链接
     
+    
+::类似 ImageView 这种view, 就算已经setImageResouce(Drawable)了，也无法getDrawable()并获得当前drawable的id，
+  如遇此种情况可以考虑 ImageView.setTag() 和 getTag() 来跟踪当前状态
