@@ -136,4 +136,24 @@
           super.onPause();
         }
   
-
+::Service flags
+    
+    FLAG_EXTERNAL_SERVICE   
+        If set, the service can be bound and run in the calling application's package, 
+        rather than the package in which it is declared.
+    FLAG_ISOLATED_PROCESS
+        If set, the service will run in its own isolated process.
+        But it causes Insecure Exception
+    FLAG_SINGLE_USER
+        If set, a single instance of the service will run for all users on the device.
+    FLAG_STOP_WITH_TASK
+        If set, the service will automatically be stopped by the system if the user removes a task that is rooted in
+        one of the application's activities. There is a method in Service class --- onTaskRemoved(). If this flag
+        is set true, the onTaskRemoved() won't be called
+        
+    these flags can be set in the manifest file, like
+    <service
+    android:enabled="true"
+    android:name=".MyService"
+    android:exported="false"
+    android:stopWithTask="false" />
