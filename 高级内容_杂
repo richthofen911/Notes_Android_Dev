@@ -1,3 +1,5 @@
+::如果在某些老旧机型上运行不正常，除了安卓本身系统版本之外，还要考虑开发使用的Google Play Service版本是不是过高
+
 ::软件盘遮挡输入框问题 ref  http://www.cnblogs.com/jerehedu/p/4194125.html
     　在相关的activity中的oncreate中setContentView之前加上
          getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
