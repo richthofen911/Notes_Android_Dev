@@ -1,0 +1,2 @@
+:: 创建Project的时候，init 后面的Project名字要如下AppRegistry.registerComponent的参数一致，引号里的名字要一致，后面的可以指向别的
+   AppRegistry.registerComponent('AwesomeProject', () => PizzaTranslator)
