@@ -1,2 +1,12 @@
 :: 创建Project的时候，init 后面的Project名字要如下AppRegistry.registerComponent的参数一致，引号里的名字要一致，后面的可以指向别的
    AppRegistry.registerComponent('AwesomeProject', () => PizzaTranslator)
+
+:: 几个ES6/ES7 重要变化在react-native里都可以用 
+   http://www.html-js.com/article/The-new-characteristics-of-8-ES6-JavaScript-every-day-to-learn
+   Generator函数
+   async/await
+   lambda 表达式
+   for-of 循环， 相比于for-in ，它可以只迭代值而不迭代键
+   类
+   Map类
+   字符串模板
