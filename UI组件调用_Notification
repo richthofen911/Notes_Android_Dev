@@ -43,3 +43,6 @@ http://www.itnose.net/detail/6169442.html
     @Override  
     public void onNotificationRemoved(StatusBarNotification sbn) {  }
     
+3. Notification icon 在API level 21 以上和以下有区别，21及以上，需要透明背景的icon，用来兼容material design
+    如果全level想显示自己的single color icon， 需要gradle 的 targetSDKVersion 设成 21 以下
+    
