@@ -1,3 +1,6 @@
+:: TextView 如果需要用image做background，且需要比TextView实际尺寸小的话，可以用 inset drawable，把需要的image套进去再设inset距离
+   https://developer.android.com/guide/topics/resources/drawable-resource.html#Inset
+
 ::关于在单个TextView中实现多样化的styling,　要用到Span.
   详见　http://wiki.jikexueyuan.com/project/android-weekly/issue-146/custom-color-spans.html
   
