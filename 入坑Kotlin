@@ -9,3 +9,36 @@
                   -自定义
                   -lazy
                   -Observable
+                 
+       when 用法类似switch
+            when(x){
+                1 -> println("x == 1")
+                2 -> println("x == 2")
+                else -> { println("x is neither 1 nor 2") }
+            }
+        
+:: Kotlin中广泛使用的语法习惯
+      - 函数可提供默认参数 fun foo(a: Int = 0, b: String = "){...}
+      - 过滤list
+            val positives = list.filter{x -> x > 0} //有点像ruby block的用法
+            或者更简短 val positivies = list.filter{it > 0}
+      - 字符串模板 println("Name: $name")
+      - 遍历 map/list中的键值对
+            for((k, v) in map){ println("$k -> $v") }
+      - 使用区间 ranges
+            for(i in 1..100) {...}
+      - 只读list/map
+            val list = listOf("a", "b", "c")
+            val map = mapOf("a" to 1, "b" to 2, "c" to 3)
+      
+      - if null 写法
+            val data = ...
+            val email = data["email"] ?: throw IllegalStateException("Email is missing!")
+        
+      - if not null 写法
+            val files = File("Test").listFiles()
+            println(files?.size)
+            
+      - if not null and else 写法
+            val files = File("Test").listFiles()
+            println(files?.size ?: "empty")
