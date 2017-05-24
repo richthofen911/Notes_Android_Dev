@@ -21,6 +21,10 @@
        比如 return inflater!!.inflate(R.layout.fragment_notifications, container, false)
        This is unsafe nullable type(T?) conversion to a non-nullable type(T). It will throw NullPointerException 
        if the value is null  
+      
+      无名临时变量的用法
+            val (_, title, content, icon) = DataHolder.notifications[position]
+            然后就可以直接用icon, content, title。 下划线表示没有被用到的属性
         
 :: Kotlin中广泛使用的语法习惯
       - 函数可提供默认参数 fun foo(a: Int = 0, b: String = "){...}
