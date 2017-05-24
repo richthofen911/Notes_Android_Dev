@@ -16,6 +16,11 @@
                 2 -> println("x == 2")
                 else -> { println("x is neither 1 nor 2") }
             }
+            
+      double-bang, 也就是!!
+       比如 return inflater!!.inflate(R.layout.fragment_notifications, container, false)
+       This is unsafe nullable type(T?) conversion to a non-nullable type(T). It will throw NullPointerException 
+       if the value is null  
         
 :: Kotlin中广泛使用的语法习惯
       - 函数可提供默认参数 fun foo(a: Int = 0, b: String = "){...}
