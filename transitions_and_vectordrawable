@@ -1,0 +1,20 @@
+vectordrawble下面的<group>标签可以把<path>包起来，并实现一些变换，
+比如围绕中心点旋转45度就是
+  <vector xmlns:android="http://schemas.android.com/apk/res/android"
+          android:width="24dp"
+          android:height="24dp"
+          android:viewportWidth="24.0"
+          android:viewportHeight="24.0">
+      <group
+          android:rotation="45"
+          android:pivotX="12" // 因为横向总长24
+          android:pivotY="12" // 同上
+          >
+          <path
+              android:fillColor="#FFffff"
+              android:pathData="M13,7h-2v4L7,11v2h4v4h2v-4h4v-2h-4L13,7zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8z"/>
+      </group>
+  </vector>
+
+一个fancy的动画效果
+https://blog.neteril.org/blog/2015/04/09/advanced-transitions-with-vector-drawable/
