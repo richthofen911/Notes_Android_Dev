@@ -25,6 +25,16 @@
       无名临时变量的用法
             val (_, title, content, icon) = DataHolder.notifications[position]
             然后就可以直接用icon, content, title。 下划线表示没有被用到的属性
+            
+      对只有一个function的匿名类的优化，常见的也就是　
+            view.setOnClickListener(object : OnClickListener{
+                  override fun onClick(v: View){ toast("Click")
+            })
+      Kotlin里允许这个实现匿名类用一个函数替代，再lambda化之后 view.setOnClickListener({view ->　toast("Click")})
+      如果左边参数view没用到，还可以省略，即　                    view.setOnClickListener({ toast("Click") })
+      如果这个函数最后一个参数是个函数，可以把这个函数移到括号外，即　view.setOnClickListener(){ toast("Click") }
+      最后，如果这个函数只有一个参数，则可以省略括号，即　          view.setOnClickListener{ toast("Click") }
+      综上，　so flexible
         
 :: Kotlin中广泛使用的语法习惯
       - 函数可提供默认参数 fun foo(a: Int = 0, b: String = "){...}
