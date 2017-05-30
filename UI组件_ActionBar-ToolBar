@@ -33,4 +33,9 @@ http://www.cnblogs.com/ct2011/p/4493439.html
       }
   }
   然后让那些需要显示的fragment继承这个fragment即可 （注*, 不需要改viewpager的setOffScreenLimit）
+  
+::缩短toolbar Navigation icon和title的距离
+  在toolbar属性里添加
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp"
 
