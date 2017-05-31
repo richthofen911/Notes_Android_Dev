@@ -1,0 +1,2 @@
+In order to optimize for Doze and App Standby, all push services are encouraged to go through Firebase Cloud Messaging(FCM)
+https://firebase.google.com/docs/cloud-messaging/
