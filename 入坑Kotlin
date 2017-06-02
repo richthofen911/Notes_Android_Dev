@@ -6,37 +6,43 @@
       https://www.gitbook.com/book/hltj/kotlin-reference-chinese/details
 
 :: Kotlin一些特别的保留字/重要概念
-      operator 用于委托属性定义
+     - operator 用于委托属性定义
             委托属性常用用法 http://tanfujun.com/kotlin-web-site-cn/docs/reference/delegated-properties.html
                   -自定义
                   -lazy
                   -Observable
                  
-       when 用法类似switch
+      - when 用法类似switch
             when(x){
                 1 -> println("x == 1")
                 2 -> println("x == 2")
                 else -> { println("x is neither 1 nor 2") }
             }
             
-      double-bang, 也就是!!
+      - double-bang, 也就是!!
        比如 return inflater!!.inflate(R.layout.fragment_notifications, container, false)
        This is unsafe nullable type(T?) conversion to a non-nullable type(T). It will throw NullPointerException 
        if the value is null  
       
-      无名临时变量的用法
-            val (_, title, content, icon) = DataHolder.notifications[position]
-            然后就可以直接用icon, content, title。 下划线表示没有被用到的属性
+      - 无名临时变量的用法
+              val (_, title, content, icon) = DataHolder.notifications[position]
+              然后就可以直接用icon, content, title。 下划线表示没有被用到的属性
             
-      对只有一个function的匿名类的优化，常见的也就是　
+      - 对只有一个function的匿名类的优化，常见的也就是　
             view.setOnClickListener(object : OnClickListener{
                   override fun onClick(v: View){ toast("Click")
             })
-      Kotlin里允许这个实现匿名类用一个函数替代，再lambda化之后 view.setOnClickListener({view ->　toast("Click")})
-      如果左边参数view没用到，还可以省略，即　                    view.setOnClickListener({ toast("Click") })
-      如果这个函数最后一个参数是个函数，可以把这个函数移到括号外，即　view.setOnClickListener(){ toast("Click") }
-      最后，如果这个函数只有一个参数，则可以省略括号，即　          view.setOnClickListener{ toast("Click") }
-      综上，　so flexible
+            Kotlin里允许这个实现匿名类用一个函数替代，再lambda化之后 view.setOnClickListener({view ->　toast("Click")})
+            如果左边参数view没用到，还可以省略，即　                    view.setOnClickListener({ toast("Click") })
+            如果这个函数最后一个参数是个函数，可以把这个函数移到括号外，即　view.setOnClickListener(){ toast("Click") }
+            最后，如果这个函数只有一个参数，则可以省略括号，即　          view.setOnClickListener{ toast("Click") }
+            综上，　so flexible
+            
+       -　反射
+            对于Kotlin类的引用，val k = MyKotlinClass::class
+            对于Java类的引用  　val j = MyJavaClass::class.java
+                  注：引用是一种 KClass类型的值。可以使用 KClass.properties 和 KClass.extensionProperties 获取类和父类的所有属性引用的
+                  列表，这与 java 类的引用是不一样的
         
 :: Kotlin中广泛使用的语法习惯
       - 函数可提供默认参数 fun foo(a: Int = 0, b: String = "){...}
