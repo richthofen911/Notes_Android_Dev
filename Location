@@ -94,3 +94,5 @@ locationListener = new LocationListener() {
     solution:
         Settings > Personal > Location access > Wi-Fi & mobile network location
 
+::　直接fusedlocationapi.getLastLocation　只能获得一次location,　如果每次location变化要用onLocationChanged这个listener才行，如果
+    不想一直监听，只要在onLocationChanged里removeLocationUpdates即可，这样当第一次location更新之后就会自动断开
