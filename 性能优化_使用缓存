@@ -33,3 +33,7 @@
   这个类是3.1版本中提供的，如果在更早的Android版本中开发，则需要导入android-support-v4的jar包。
   
   具体步骤 http://blog.chinaunix.net/uid-26930580-id-4138306.html
+  大体上１．先设置用来缓存图片的内存大小，比如设置为runtime内存的１/8
+       2. LruCache里key时图片Uri，　value是bitmap
+       3. 实现一下　清空缓存、添加图片到缓存、从缓存中取得图片、从缓存中移除　几个函数
+          注意　remove方法需要同步锁
