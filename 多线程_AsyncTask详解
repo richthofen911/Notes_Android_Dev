@@ -43,3 +43,5 @@
 
 参考链接: http://blog.csdn.net/liuhe688/article/details/6532519
 
+::AsyncTask里默认只有一个线程在顺序工作，但是开发者可以手动设定unlimited的可并发线程池
+
