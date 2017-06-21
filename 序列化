@@ -1,0 +1,15 @@
+Java中的Serializable 和安卓中的Parcelable
+  http://blog.csdn.net/u012702547/article/details/47151001
+将需要被序列化的类实现Serializable接口，该接口没有需要实现的方法，implements Serializable只是为了标注该对象是可被序列化 的，
+然后使用一个输出流(如：FileOutputStream)来构造一个ObjectOutputStream(对象流)对象，接着，
+使用ObjectOutputStream对象的 writeObject(Object obj)方法就可以将参数为obj的对象写出(即保存其状态)，要恢复的话则用输入流
+	
+而Parcelable的效率要高于Serializable, 实现Parcelable需要实现两个接口方法
+		Public int describeContents();
+		Public void writeToParcel(Parcel dest, int flags);
+	第一个方法是内容接口描述，默认返回０即可
+	第二个方法是将一个对象序列化成一个Parcel对象，也就是存入Parcel中
+实例化静态内部对象Creator实现接口Parcelable.Creator. 实例化Creator时要实现其中两个方法，其中createFromParcel的功能就是从Parcel中读取对象
+Parcelable is significantly faster than Serializable
+Any data type can be passed to another intent through the Parcelable interface
+Parcelable并不时依赖于Java Reflection API的，而Java Serializable是依赖反射的，所以Serializable会产生大量临时变量，所以慢于Parcelable 
