@@ -1,0 +1,72 @@
+ref: http://www.jianshu.com/p/b037249e6d31
+
+Android中提供了View进行绘图处理，View可以满足大部分的绘图需求，但是有时候并不够用，
+所以Android还提供了SurfaceView以满足更多的绘图需求
+
+View和SurfaceView 区别
+1. View适用于主动更新的情况，而SurfaceView则适用于被动更新的情况，比如频繁刷新界面。
+2. View在主线程中对页面进行刷新，而SurfaceView则开启一个子线程来对页面进行刷新。
+3. View在绘图时没有实现双缓冲机制，SurfaceView在底层机制中就实现了双缓冲机制(另外看)。
+
+使用SurfaceView基础
+1. 构造
+  需要自定义一个类继承SurfaceView，并且实现两个接口，另外与自定义View类似，还要重写三个constructor。
+    public class SurfaceViewTemplate extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+        public SurfaceViewTemplate(Context context) {
+            this(context, null);
+        }
+
+        public SurfaceViewTemplate(Context context, AttributeSet attrs) {
+            this(context, attrs, 0);
+        }
+
+        public SurfaceViewTemplate(Context context, AttributeSet attrs, int defStyleAttr) {
+            super(context, attrs, defStyleAttr);
+        }
+
+        @Override
+        public void surfaceCreated(SurfaceHolder holder) {
+        }
+
+        @Override
+        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        }
+
+        @Override
+        public void surfaceDestroyed(SurfaceHolder holder) {
+        }
+
+        @Override
+        public void run() {
+            // put the draw logic code in child thread here
+        }
+    }
+
+2. 初始化
+    这一步主要是定义三个成员变量
+        private SurfaceHolder mSurfaceHolder;
+        private Canvas mCanvas; //绘图的Canvas
+        private boolean mIsDrawing; //子线程标志位
+    以备后面绘图时使用，然后初始化这三个成员变量并且注册对应的回调方法
+        private void initView(){
+            mSurfaceHolder = getHolder();
+            //注册回调方法
+            mSurfaceHolder.addCallback(this);
+            //设置一些参数方便后面绘图
+            setFocusable(true);
+            setKeepScreenOn(true);
+            setFocusableInTouchMode(true);
+        }
+
+        public SurfaceViewSinFun(Context context, AttributeSet attrs, int defStyleAttr) {
+            super(context, attrs, defStyleAttr);
+            //在三个参数的构造方法中完成初始化操作
+            initView();
+        }
+        
+3. 使用SurfaceView
+    一般分3步
+      1. 通过 lockCanvas() 获得Canvas对象
+      2. 在子线程中使用Canvas对象进行绘制
+      3. 使用unlockCanvasAndPost 江画布内容进行提交
+          注： lockCanvas() 方法获得的Canvas对象仍然是上次绘制的对象，由于我们是不断进行绘制，但是每次得到的Canvas对象都是第一次创建的Canvas对象。
