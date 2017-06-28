@@ -39,6 +39,7 @@
 　　2. singleTop: 如果已经有一个实例位于Activity栈的顶部时，就不产生新的实例，而只是调用Activity中的
 　　   newInstance()方法。如果不位于栈顶，会产生一个新的实例。
 　　3. singleTask: 会在一个新的task中产生这个实例，以后每次调用都会使用这个，不会去产生新的实例了。
+                  这个通常用在启动用的Activity,这样如果程序处于后台状态，再重新唤醒的时候，就不用重新create activity
 　　4. singleInstance: 这个跟singleTask基本上是一样，只有一个区别：在这个模式下的Activity实例所处的task中，
 　　   只能有这个activity实例，不能有其他的实例。
 　　这些启动模式可以在功能清单文件AndroidManifest.xml中进行设置，中的launchMode属性。
