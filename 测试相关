@@ -1,5 +1,5 @@
 :: 先把官方的内容搞熟　https://developer.android.com/training/testing/start/index.html 
-
+:: 一个很详细的系列　http://chriszou.com/2016/04/13/android-unit-testing-start-from-what.html
 ::http://www.oschina.net/news/56142/open-source-android-testing-tools
 
 Android Test Kit:
@@ -7,8 +7,19 @@ Android Test Kit:
   
 AndroidJUnit4:
   是一个让 JUnit 4 可以直接运行在 Android 设备上的开源命令行工具。  
-  哪些需要测试？
-    一般时实现业务逻辑的model类需要测试，　Activity这种一般应该抽离出来作为controller,就没什么好测的了
+  哪些需要测试的点？
+    - 一般时实现业务逻辑的model类需要测试，for sure
+    - Activity对生命周期中的事件是否能够正确响应是一个测试点, 比如，你的
+        Activity在OnPause()事件和OnDestroy()事件中需要保存自身的状态，
+        然后在OnCreate(Bandle savedInstanceState)时恢复状态。那么，你应该重复执行并验证在这些条件下状态是否能够正确保存、是否能恢复正常。
+        在测Activity时，还需要验证配置项变化事件的响应。因为配置变化后，当前的Activity需要重新生成。此时，你要验证新生成的Activity对事件的响应
+        是否正常以及先前的状态是否恢复正常。定时循环事件也会触发配置的变化。因此，你还要看看应用是否能够正确处理这些事件。
+    - 数据库和文件系统操作也是一个测试点．数据库操作和文件的正确读写也是一个测试点。
+      对这些操作的测试应该在底层系统测试中完成，在ContentProviders中进行高层次的测试，需要跟应用本身隔离开。
+      要对这些部件进行独立的测试，Android提供了Mock对象的工具，在andriod.test.mock包中。
+
+    
+    
   怎样测试返回为void的函数
      没有返回值的方法，一定有一些可以被观测的地方，比如说一个对象的状态被改变，如果你实在找不出，那恭喜你这个就不需要测试了。
      因为这个方法根本没有用。所有你必须找到合适的断点。犹如调试程序那样设置断点。找出了断点那就也可以设置一个断言了。
