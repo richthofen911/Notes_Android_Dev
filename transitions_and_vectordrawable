@@ -18,3 +18,5 @@ vectordrawble下面的<group>标签可以把<path>包起来，并实现一些变
 
 一个fancy的动画效果
 https://blog.neteril.org/blog/2015/04/09/advanced-transitions-with-vector-drawable/
+
+::利用Android Scene和Transition框架实现的transition和shared element activity transition实现同一view跨activity的transition动画
