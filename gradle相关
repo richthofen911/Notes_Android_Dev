@@ -1,3 +1,5 @@
+::讲解　http://wiki.jikexueyuan.com/project/deep-android-gradle/two.html
+
 :: compile 和 provide 的区别
    provide作用是在编译时使用，但是jar不会打包到apk中，由Android或Android上安装的服务提供需要的内容 使用场景：
       1. 使用Android的framework-classes.jar中的一些隐藏的API。
