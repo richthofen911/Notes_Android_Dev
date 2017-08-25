@@ -1,3 +1,5 @@
+::概述　http://www.jianshu.com/p/f5ec75a9cfea
+
 ::ContentProvider主要用于对外共享数据，也就是通过ContentProvider把应用中的数据共享给其他应用访问
   其他应用可以通过ContentProvider对指定应用中的数据进行操作(通过ContentResolver)。
   ContentProvider分为系统的和自定义的，系统的也就是例如联系人，图片等数据。
