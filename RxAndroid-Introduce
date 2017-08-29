@@ -2,6 +2,8 @@ RxAndroid/RxJava 主要解决的问题: 多个相关的异步调用易导致call
 
 ****注意** 一定要在Activity onDestroy()中 unsubscribe，否则内存泄漏****
 
+一个对map()和flatMap()的重要讲解:　http://extremej.itscoder.com/how_to_use_rxjava/
+
 入门基础例子　http://www.infoq.com/cn/articles/RxAndroid-basics
 
 进阶例子　　　http://www.infoq.com/cn/articles/rxandroid-basics-2
