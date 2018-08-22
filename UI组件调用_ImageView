@@ -25,3 +25,15 @@ public class AsyncGetImage extends AsyncTask<String, String, Bitmap>
 BitmapDrawable bitDraw = new BitmapDrawable(res.openRawResource(R.drawable.lander_firing));  
 Bitmap bm = bitDraw.getBitmap();return bm;
 }
+
+Make imageView a circle
+<android.support.v7.widget.CardView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:elevation="12dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="40dp">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp />
+    </android.support.v7.widget.CardView>
